@@ -1,0 +1,6 @@
+http://www.sitemaps.org/schemas/sitemap/0.9">
+https://papartners.co/category-sitemap.xml]]>
+https://papartners.co/default-sitemap.xsl?sitemap=root"?>
+https://papartners.co/page-sitemap.xml]]>
+https://papartners.co/post-sitemap.xml]]>
+https://papartners.co/twbb_sg_preview-sitemap.xml]]>

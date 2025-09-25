@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+
+:root {
+  --background: #0a0f1e; /* deep navy for dark shells */
+  --foreground: #e6edf5;
+  --surface: rgba(255, 255, 255, 0.06);
+  --border: rgba(148, 163, 184, 0.18);
+  --muted: #94a3b8;
+  --accent: #d4af37; /* soft gold */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0f1e;
+    --foreground: #e6edf5;
+  }
+}
+
+body {
+  @apply bg-[var(--background)] text-[var(--foreground)] antialiased selection:bg-slate-200/30 selection:text-slate-900;
+  background-image: radial-gradient(800px 400px at 50% -10%, rgba(148,163,184,0.12), transparent 60%);
+}
+
+/* Subtle card and glass surfaces */
+.surface {
+  background: var(--surface);
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  border: 1px solid var(--border);
+}
