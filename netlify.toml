@@ -1,0 +1,12 @@
+[build]
+  base = "pa-partners-new"
+  command = "npm ci && npm run build"
+  publish = "pa-partners-new/.next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+
