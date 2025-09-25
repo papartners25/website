@@ -8,6 +8,11 @@ export const defaultMetadata: Metadata = {
   },
   description:
     "Navigating Tomorrow's Markets with Today's Investments. PA Partners focuses on value-add, cash-flowing real estate and practical AI solutions.",
+  icons: {
+    icon: "/logo/pa-favicon.ico",
+    shortcut: "/logo/pa-favicon.ico",
+    apple: "/logo/pa-favicon.ico",
+  },
   openGraph: {
     type: "website",
     siteName: "PA Partners",

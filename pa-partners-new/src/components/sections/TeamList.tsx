@@ -28,10 +28,12 @@ export default function TeamList({ showHiring = true }: { showHiring?: boolean }
               className="rounded-xl surface overflow-hidden"
             >
               <div className="relative aspect-[16/10]">
-                <Image src={m.image} alt={m.name} fill className={`object-cover ${
-                  // Allow per-member object positioning for better cropping
-                  (m as any).imageClassName ? (m as any).imageClassName : ""
-                }`} />
+                <Image
+                  src={m.image}
+                  alt={m.name}
+                  fill
+                  className={`object-cover ${m.imageClassName ? m.imageClassName : ""}`}
+                />
               </div>
               <div className="p-5">
                 <h3 className="text-white font-medium">{m.name}</h3>
