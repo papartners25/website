@@ -12,7 +12,7 @@ export default function Header() {
       <div className="mx-auto max-w-6xl px-4">
         <div className="surface mt-2.5 mb-3 rounded-xl px-4 py-2.5 flex items-center justify-between shadow-elevated">
           <Link href="/" className="flex items-center gap-2" aria-label="PA Partners Home">
-            <Image src="/logo/pa-favicon.ico" alt="PA Partners" width={200} height={50} priority className="h-9 md:h-10 w-auto" />
+            <Image src="/logo/pa-partners-logo.png" alt="PA Partners" width={200} height={50} priority className="h-9 md:h-10 w-auto" />
             <span className="sr-only">PA Partners</span>
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm text-slate-300" aria-label="Main navigation">
