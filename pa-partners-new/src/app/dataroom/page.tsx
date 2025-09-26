@@ -4,7 +4,7 @@ import { DEALS } from "@/lib/deals";
 import DealCard from "@/components/dataroom/DealCard";
 
 export const metadata = {
-  title: "Real Estate Dataroom",
+  title: "Real Estate Data Room",
   description: "Explore current opportunities with summaries and downloads.",
 };
 
@@ -12,7 +12,7 @@ export default function DataroomPage() {
   return (
     <Section>
       <Container>
-        <h1 className="text-2xl md:text-3xl font-medium text-white">Real Estate Dataroom</h1>
+        <h1 className="text-2xl md:text-3xl font-medium text-white">Real Estate Data Room</h1>
         <p className="mt-2 text-slate-300 max-w-2xl">
           Browse select opportunities. Expand a card to preview the PDF summary and download the pro forma.
         </p>
