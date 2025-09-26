@@ -5,6 +5,7 @@ import type { Deal } from "@/lib/deals";
 export default function DealCard({ deal }: { deal: Deal }) {
   const [open, setOpen] = useState(false);
   const [preview, setPreview] = useState<"summary" | "om">("summary");
+  const activeUrl = (preview === "om" && deal.omUrl) ? deal.omUrl : deal.pdfUrl;
   return (
     <article className="rounded-xl surface p-5">
       <div className="flex items-start justify-between gap-4">
@@ -48,11 +49,20 @@ export default function DealCard({ deal }: { deal: Deal }) {
             )}
           </div>
           <div className="rounded-lg overflow-hidden border border-white/10 bg-white/5">
-            <iframe
-              title={`${deal.name} ${preview === "om" ? "OM" : "Summary PDF"}`}
-              src={`${(preview === "om" && deal.omUrl) ? deal.omUrl : deal.pdfUrl}#view=FitH`}
-              className="w-full h-[420px]"
-            />
+            <div className="block md:hidden">
+              <iframe
+                title={`${deal.name} Mobile PDF Viewer`}
+                src={`https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(activeUrl)}`}
+                className="w-full h-[70vh]"
+              />
+            </div>
+            <div className="hidden md:block">
+              <iframe
+                title={`${deal.name} ${preview === "om" ? "OM" : "Summary PDF"}`}
+                src={`${activeUrl}#view=FitH`}
+                className="w-full h-[420px]"
+              />
+            </div>
           </div>
           <div className="flex items-center gap-2">
             <a
