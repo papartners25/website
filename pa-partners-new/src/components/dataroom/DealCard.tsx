@@ -4,6 +4,7 @@ import type { Deal } from "@/lib/deals";
 
 export default function DealCard({ deal }: { deal: Deal }) {
   const [open, setOpen] = useState(false);
+  const [preview, setPreview] = useState<"summary" | "om">("summary");
   return (
     <article className="rounded-xl surface p-5">
       <div className="flex items-start justify-between gap-4">
@@ -26,10 +27,30 @@ export default function DealCard({ deal }: { deal: Deal }) {
       </div>
       {open && (
         <div className="mt-5 grid gap-4">
+          <div className="flex items-center gap-2">
+            <button
+              className={`inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm ${
+                preview === "summary" ? "bg-white text-slate-900" : "text-slate-200 hover:text-white hover:bg-white/5"
+              }`}
+              onClick={() => setPreview("summary")}
+            >
+              PDF Summary
+            </button>
+            {deal.omUrl && (
+              <button
+                className={`inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm ${
+                  preview === "om" ? "bg-white text-slate-900" : "text-slate-200 hover:text-white hover:bg-white/5"
+                }`}
+                onClick={() => setPreview("om")}
+              >
+                Offering Memorandum (OM)
+              </button>
+            )}
+          </div>
           <div className="rounded-lg overflow-hidden border border-white/10 bg-white/5">
             <iframe
-              title={`${deal.name} Summary PDF`}
-              src={`${deal.pdfUrl}#view=FitH`}
+              title={`${deal.name} ${preview === "om" ? "OM" : "Summary PDF"}`}
+              src={`${(preview === "om" && deal.omUrl) ? deal.omUrl : deal.pdfUrl}#view=FitH`}
               className="w-full h-[420px]"
             />
           </div>
@@ -39,8 +60,17 @@ export default function DealCard({ deal }: { deal: Deal }) {
               download
               className="inline-flex items-center rounded-lg bg-white text-slate-900 px-3 py-1.5 text-sm font-medium hover:bg-slate-100"
             >
-              Download PDF
+              Download PDF Summary
             </a>
+            {deal.omUrl && (
+              <a
+                href={deal.omUrl}
+                download
+                className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:bg-white/5"
+              >
+                Download OM (PDF)
+              </a>
+            )}
             <a
               href={deal.excelUrl}
               download

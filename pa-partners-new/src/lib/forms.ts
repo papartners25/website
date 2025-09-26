@@ -16,3 +16,4 @@ export async function submitContactToNetlify(payload: ContactPayload) {
   if (!res.ok) throw new Error("Form submission failed");
 }
 
+
