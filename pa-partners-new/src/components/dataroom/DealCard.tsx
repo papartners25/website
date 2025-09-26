@@ -6,9 +6,6 @@ export default function DealCard({ deal }: { deal: Deal }) {
   const [open, setOpen] = useState(false);
   const [preview, setPreview] = useState<"summary" | "om">("summary");
   const activeUrl = (preview === "om" && deal.omUrl) ? deal.omUrl : deal.pdfUrl;
-  const absoluteUrl = typeof window !== "undefined"
-    ? new URL(activeUrl, window.location.origin).toString()
-    : activeUrl;
   return (
     <article className="rounded-xl surface p-5">
       <div className="flex items-start justify-between gap-4">
@@ -53,11 +50,17 @@ export default function DealCard({ deal }: { deal: Deal }) {
           </div>
           <div className="rounded-lg overflow-hidden border border-white/10 bg-white/5">
             <div className="block md:hidden">
-              <iframe
-                title={`${deal.name} Mobile PDF Viewer`}
-                src={`https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(absoluteUrl)}`}
-                className="w-full h-[70vh]"
-              />
+              <div className="p-3">
+                <p className="text-slate-300 text-sm mb-2">Preview opens in your device’s PDF viewer.</p>
+                <a
+                  href={activeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-lg bg-white text-slate-900 px-3 py-1.5 text-sm font-medium hover:bg-slate-100"
+                >
+                  Preview PDF
+                </a>
+              </div>
             </div>
             <div className="hidden md:block">
               <iframe
