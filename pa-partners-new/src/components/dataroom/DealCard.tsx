@@ -116,6 +116,11 @@ export default function DealCard({ deal }: { deal: Deal }) {
               Download Pro Forma (XLSX)
             </a>
           </div>
+          <p className="text-slate-400 text-xs mt-1">
+            For the full Executive Summary, email
+            {" "}
+            <a href="mailto:info@papartners.co" className="underline hover:text-slate-300">info@papartners.co</a>.
+          </p>
         </div>
       )}
     </article>
