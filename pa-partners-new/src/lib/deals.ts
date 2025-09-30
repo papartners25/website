@@ -15,8 +15,8 @@ export const DEALS: Deal[] = [
     name: "Broadway Court",
     location: "Columbus, OH",
     summary:
-      "This 30-unit value-add investment sits along Columbus's multi-billion-dollar LinkUS mobility corridor, offering immediate upside potential.",
-    metrics: { irr: "20%+", equityMultiple: "3.07x", hold: "2-5 yrs" },
+      "This 30-unit value-add investment sits along Columbus's multi-billion-dollar LinkUS mobility corridor, offering immediate upside potential and a high cash-on-cash profile.",
+    metrics: { irr: "20%+", equityMultiple: "3.02x", hold: "2-5 yrs" },
     omUrl: "/deals/broadway-court-om.pdf",
     pdfUrl: "/deals/broadway-court-summary.pdf",
     excelUrl: "/deals/broadway-court-pro-forma.xlsx",
