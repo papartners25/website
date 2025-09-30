@@ -1,4 +1,7 @@
 import PortfolioGrid from "@/components/sections/PortfolioGrid";
+import PortalPreview from "@/components/common/PortalPreview";
+import Container from "@/components/layout/Container";
+import Section from "@/components/layout/Section";
 
 export const metadata = {
   title: "Portfolio",
@@ -6,7 +9,18 @@ export const metadata = {
 };
 
 export default function PortfolioPage() {
-  return <PortfolioGrid withHeader={false} />;
+  return (
+    <>
+      {/* Portal Preview Section */}
+      <Section>
+        <Container>
+          <PortalPreview />
+        </Container>
+      </Section>
+
+      <PortfolioGrid withHeader={false} />
+    </>
+  );
 }
 
 

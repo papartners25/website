@@ -1,12 +1,27 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-
-export const metadata = {
-  title: "Investor Login",
-  description: "Secure access for investors and stakeholders.",
-};
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    // Simulate login - Replace with actual Supabase auth later
+    setTimeout(() => {
+      // For now, any login attempt succeeds and routes to dashboard
+      router.push("/dashboard");
+    }, 800);
+  };
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 md:py-24">
       <div className="mx-auto max-w-md">
@@ -16,11 +31,7 @@ export default function LoginPage() {
             <h1 className="text-2xl md:text-3xl font-medium text-white tracking-tight">Investor Portal</h1>
             <p className="mt-2 text-sm text-slate-300">Sign in to view your profile, holdings, and reports.</p>
           </div>
-          <form
-            action={"/api/auth/login"}
-            method="post"
-            className="grid gap-4"
-          >
+          <form onSubmit={handleSubmit} className="grid gap-4">
             <div>
               <label className="block text-sm text-slate-300">Email</label>
               <input
@@ -44,15 +55,21 @@ export default function LoginPage() {
                 placeholder="••••••••"
               />
             </div>
+            {error && (
+              <div className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-lg px-3 py-2">
+                {error}
+              </div>
+            )}
             <button
               type="submit"
-              className="mt-2 inline-flex items-center justify-center rounded-lg bg-white text-slate-900 px-4 py-2 text-sm font-medium hover:bg-slate-100"
+              disabled={loading}
+              className="mt-2 inline-flex items-center justify-center rounded-lg bg-white text-slate-900 px-4 py-2 text-sm font-medium hover:bg-slate-100 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Sign in
+              {loading ? 'Signing in...' : 'Sign in'}
             </button>
           </form>
           <p className="mt-6 text-center text-sm text-slate-300">
-            Don’t have access? <Link href="/contact" className="text-white hover:opacity-90">Request an invite</Link>
+            Don't have access? <Link href="/contact" className="text-white hover:opacity-90">Request an invite</Link>
           </p>
         </div>
       </div>

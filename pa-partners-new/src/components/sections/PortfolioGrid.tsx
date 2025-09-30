@@ -9,8 +9,8 @@ const items = [
     src: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?q=80&w=1600&auto=format&fit=crop",
   },
   {
-    title: "Urban Infill",
-    src: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1600&auto=format&fit=crop",
+    title: "Ground Up Development",
+    src: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1600&auto=format&fit=crop",
   },
   {
     title: "Agentic AI",
