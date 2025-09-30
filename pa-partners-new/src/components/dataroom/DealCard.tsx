@@ -4,8 +4,10 @@ import type { Deal } from "@/lib/deals";
 
 export default function DealCard({ deal }: { deal: Deal }) {
   const [open, setOpen] = useState(false);
-  const [preview, setPreview] = useState<"summary" | "om">("summary");
-  const activeUrl = (preview === "om" && deal.omUrl) ? deal.omUrl : deal.pdfUrl;
+  const [preview, setPreview] = useState<"summary" | "om" | "exec">("summary");
+  const activeUrl = preview === "exec" && deal.execSummaryUrl
+    ? deal.execSummaryUrl
+    : (preview === "om" && deal.omUrl ? deal.omUrl : deal.pdfUrl);
   return (
     <article className="rounded-xl surface p-5">
       <div className="flex items-start justify-between gap-4">
@@ -37,6 +39,16 @@ export default function DealCard({ deal }: { deal: Deal }) {
             >
               PDF Summary
             </button>
+            {deal.execSummaryUrl && (
+              <button
+                className={`inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm ${
+                  preview === "exec" ? "bg-white text-slate-900" : "text-slate-200 hover:text-white hover:bg-white/5"
+                }`}
+                onClick={() => setPreview("exec")}
+              >
+                Executive Summary
+              </button>
+            )}
             {deal.omUrl && (
               <button
                 className={`inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm ${
@@ -78,6 +90,15 @@ export default function DealCard({ deal }: { deal: Deal }) {
             >
               Download PDF Summary
             </a>
+            {deal.execSummaryUrl && (
+              <a
+                href={deal.execSummaryUrl}
+                download
+                className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:bg-white/5"
+              >
+                Download Executive Summary (PDF)
+              </a>
+            )}
             {deal.omUrl && (
               <a
                 href={deal.omUrl}

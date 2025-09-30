@@ -5,6 +5,7 @@ export type Deal = {
   summary: string;
   metrics: { irr?: string; equityMultiple?: string; hold?: string };
   omUrl?: string;
+  execSummaryUrl?: string;
   pdfUrl: string;
   excelUrl: string;
 };
@@ -18,6 +19,7 @@ export const DEALS: Deal[] = [
       "This 30-unit value-add investment sits along Columbus's multi-billion-dollar LinkUS mobility corridor, offering immediate upside potential and a high cash-on-cash profile.",
     metrics: { irr: "20%+", equityMultiple: "2.83x", hold: "2-5 yrs" },
     omUrl: "/deals/broadway-court-om.pdf",
+    execSummaryUrl: "/deals/broadway-court-executive-summary.pdf",
     pdfUrl: "/deals/broadway-court-summary.pdf",
     excelUrl: "/deals/broadway-court-pro-forma.xlsx",
   },
