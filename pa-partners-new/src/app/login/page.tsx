@@ -27,7 +27,7 @@ export default function LoginPage() {
       <div className="mx-auto max-w-md">
         <div className="surface rounded-2xl p-6 md:p-8 shadow-card">
           <div className="mb-6 text-center">
-              <Image src="/logo/pa-favicon.ico" alt="PA Partners" width={96} height={96} className="mx-auto mb-3 h-12 md:h-14 w-auto opacity-90" />
+              <Image src="/logo/pap-logo-gold.png" alt="PA Partners" width={200} height={50} className="mx-auto mb-3 h-10 md:h-12 w-auto opacity-90" />
             <h1 className="text-2xl md:text-3xl font-medium text-white tracking-tight">Investor Portal</h1>
             <p className="mt-2 text-sm text-slate-300">Sign in to view your profile, holdings, and reports.</p>
           </div>
