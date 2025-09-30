@@ -133,7 +133,7 @@ export default function TaxDocuments({ documents }: TaxDocumentsProps) {
           <div className="flex-1">
             <h4 className="text-sm font-medium text-white mb-1">Tax Document Schedule</h4>
             <p className="text-sm text-slate-400 leading-relaxed">
-              Schedule K-1 forms are typically available by March 15th. We'll send you an email notification 
+              Schedule K-1 forms are typically available by March 15th. We&apos;ll send you an email notification 
               when your documents are ready to download. If you need assistance with tax preparation, 
               please contact our investor relations team.
             </p>

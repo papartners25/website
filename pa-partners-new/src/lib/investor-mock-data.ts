@@ -18,13 +18,13 @@ import {
  * Simulates fetching investor profile
  * Replace with: GET /api/investor/profile or Lindy AI aggregated data
  */
-export async function getInvestorProfile(investorId: string): Promise<Investor | null> {
+export async function getInvestorProfile(_investorId: string): Promise<Investor | null> {
   // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, 300));
   
   // Mock data - replace with actual API call
   return {
-    id: investorId,
+    id: _investorId,
     name: 'John Investor',
     email: 'john@example.com',
     phone: '+1 (555) 123-4567',
@@ -41,7 +41,7 @@ export async function getInvestorProfile(investorId: string): Promise<Investor |
  * Fetches all investments for an investor
  * Replace with: AppFolio API + QuickBooks for financials
  */
-export async function getInvestments(investorId: string): Promise<Investment[]> {
+export async function getInvestments(_investorId: string): Promise<Investment[]> {
   await new Promise(resolve => setTimeout(resolve, 400));
   
   return [
@@ -85,7 +85,7 @@ export async function getInvestments(investorId: string): Promise<Investment[]> 
  * Fetches distribution history
  * Replace with: Stripe API or QuickBooks for payment data
  */
-export async function getDistributions(investorId: string): Promise<Distribution[]> {
+export async function getDistributions(_investorId: string): Promise<Distribution[]> {
   await new Promise(resolve => setTimeout(resolve, 350));
   
   return [
@@ -140,7 +140,7 @@ export async function getDistributions(investorId: string): Promise<Distribution
  * Calculates portfolio metrics
  * Replace with: Aggregated data from Lindy AI or custom calculation service
  */
-export async function getPortfolioMetrics(investorId: string): Promise<PortfolioMetrics> {
+export async function getPortfolioMetrics(_investorId: string): Promise<PortfolioMetrics> {
   await new Promise(resolve => setTimeout(resolve, 300));
   
   return {
@@ -161,7 +161,7 @@ export async function getPortfolioMetrics(investorId: string): Promise<Portfolio
  * Fetches tax documents
  * Replace with: Document storage API or QuickBooks document export
  */
-export async function getTaxDocuments(investorId: string): Promise<TaxDocument[]> {
+export async function getTaxDocuments(_investorId: string): Promise<TaxDocument[]> {
   await new Promise(resolve => setTimeout(resolve, 300));
   
   return [
@@ -214,7 +214,7 @@ export async function getPropertyPerformance(propertyId: string): Promise<Proper
   return {
     propertyId,
     propertyName: 'Broadway Court Apartments',
-    monthlyData: months.map((month, idx) => ({
+    monthlyData: months.map((month) => ({
       month: `${month} '25`,
       occupancy: 92 + Math.random() * 6,
       revenue: 48000 + Math.random() * 8000,
@@ -228,7 +228,7 @@ export async function getPropertyPerformance(propertyId: string): Promise<Proper
  * Fetches account activity
  * Replace with: Combined data from Stripe + QuickBooks
  */
-export async function getAccountActivity(investorId: string): Promise<AccountActivity[]> {
+export async function getAccountActivity(_investorId: string): Promise<AccountActivity[]> {
   await new Promise(resolve => setTimeout(resolve, 350));
   
   return [

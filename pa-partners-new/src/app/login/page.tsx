@@ -69,7 +69,7 @@ export default function LoginPage() {
             </button>
           </form>
           <p className="mt-6 text-center text-sm text-slate-300">
-            Don't have access? <Link href="/contact" className="text-white hover:opacity-90">Request an invite</Link>
+            Don&apos;t have access? <Link href="/contact" className="text-white hover:opacity-90">Request an invite</Link>
           </p>
         </div>
       </div>

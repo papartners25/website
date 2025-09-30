@@ -29,7 +29,7 @@ export default function ContactForm() {
         body,
       });
       reset();
-    } catch (e) {
+    } catch {
       // no-op for demo
     }
   };
