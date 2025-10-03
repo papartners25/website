@@ -91,8 +91,7 @@ export default function AboutPage() {
             >
               <h3 className="text-white font-medium">Betterlink.help</h3>
               <p className="text-slate-300 text-sm mt-2 leading-relaxed">
-                Agentic support workflows that connect customers to the right answers faster—reducing
-                ticket volume and improving CSAT.
+                Registrations, QR check‑in, donor tools, and an AI copilot that helps your team show up for families. Set up in minutes, keep data secure, and see live results across your programs.
               </p>
             </a>
             <a
