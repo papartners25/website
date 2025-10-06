@@ -60,7 +60,7 @@ export async function GET(request: Request) {
         const fullName = typeof meta.full_name === 'string' ? meta.full_name : 'New Investor';
         profile = {
           id: authUser.user.id,
-          email: authUser.user.email,
+          email: authUser.user.email ?? null,
           full_name: fullName,
         };
       }
@@ -159,7 +159,7 @@ export async function POST(request: Request) {
       const fullName = typeof meta.full_name === 'string' ? meta.full_name : 'New Investor';
       const { data: inserted } = await supabase
         .from('investor_profiles')
-        .insert({ id: authUser.id, email: authUser.email, full_name: fullName, approval_status: 'pending' })
+        .insert({ id: authUser.id, email: (authUser.email as string), full_name: fullName, approval_status: 'pending' })
         .select('*')
         .single();
       profile = inserted as InvestorProfile;
