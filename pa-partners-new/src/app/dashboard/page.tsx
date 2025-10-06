@@ -102,14 +102,15 @@ export default function DashboardPage() {
     checkAuthAndLoadData();
   }, [router, supabase.auth]);
 
-  // Timed glass popup to promote the data room (once per session)
+  // Timed glass popup to promote new deals (once per session for investors)
   useEffect(() => {
     if (typeof window === 'undefined') return;
     if (loading) return;
-    if (sessionStorage.getItem('newDealsModalShown') === 'true') return;
+    const storageKey = 'investorDealsModalShown_v1';
+    if (sessionStorage.getItem(storageKey) === 'true') return;
     const timer = setTimeout(() => {
       setShowDealsModal(true);
-      sessionStorage.setItem('newDealsModalShown', 'true');
+      sessionStorage.setItem(storageKey, 'true');
     }, 4500);
     return () => clearTimeout(timer);
   }, [loading]);
@@ -279,24 +280,24 @@ export default function DashboardPage() {
                   />
                 </div>
 
-                {/* New Deals / Data Room CTA - moved higher */}
+                {/* New Deals CTA - moved higher */}
                 <div className="surface rounded-xl p-8 shadow-card border border-amber-400/20 bg-gradient-to-br from-amber-400/5 to-transparent">
                   <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                     <div className="flex-1">
                       <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 text-xs font-medium mb-3">
                         <Sparkles size={14} />
-                        <span>New Deal Access</span>
+                        <span>New Opportunities</span>
                       </div>
-                      <h3 className="text-xl font-semibold text-white mb-2">Visit the Data Room</h3>
+                      <h3 className="text-xl font-semibold text-white mb-2">Explore the Latest Deals</h3>
                       <p className="text-slate-300 leading-relaxed max-w-2xl">
-                        Access documents, models, and details for the latest offerings in our data room.
+                        Browse current opportunities and review documents and models for active offerings.
                       </p>
                     </div>
                     <Link
-                      href="/dataroom"
+                      href="/opportunities"
                       className="flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-slate-900 font-medium hover:bg-slate-100 transition-all shadow-lg hover:shadow-xl whitespace-nowrap"
                     >
-                      Go to Data Room
+                      Browse New Deals
                       <ArrowRight size={16} />
                     </Link>
                   </div>
