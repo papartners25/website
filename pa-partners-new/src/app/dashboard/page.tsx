@@ -51,6 +51,7 @@ export default function DashboardPage() {
   const [metrics, setMetrics] = useState<PortfolioMetrics | null>(null);
   const [taxDocuments, setTaxDocuments] = useState<TaxDocument[]>([]);
   const [performanceData, setPerformanceData] = useState<PropertyPerformance | null>(null);
+  const [showDealsModal, setShowDealsModal] = useState(false);
 
   useEffect(() => {
     async function checkAuthAndLoadData() {
@@ -101,6 +102,18 @@ export default function DashboardPage() {
     checkAuthAndLoadData();
   }, [router, supabase.auth]);
 
+  // Timed glass popup to promote the data room (once per session)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (loading) return;
+    if (sessionStorage.getItem('newDealsModalShown') === 'true') return;
+    const timer = setTimeout(() => {
+      setShowDealsModal(true);
+      sessionStorage.setItem('newDealsModalShown', 'true');
+    }, 4500);
+    return () => clearTimeout(timer);
+  }, [loading]);
+
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -130,6 +143,26 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-6">
+        {/* Timed Glass Popup for New Deals */}
+        {showDealsModal && (
+          <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => setShowDealsModal(false)}>
+            <div className="surface relative rounded-2xl p-6 md:p-8 shadow-card border border-white/10 max-w-md w-[92%] text-center" onClick={(e) => e.stopPropagation()}>
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-400/10 border border-amber-400/20 mb-4">
+                <Sparkles className="text-amber-400" size={28} />
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">New Deal Documents</h3>
+              <p className="text-slate-300 mb-5">Jump into the data room to review the latest offering materials.</p>
+              <div className="flex items-center justify-center gap-3">
+                <Link href="/dataroom" className="px-5 py-2.5 rounded-lg bg-white text-slate-900 font-medium hover:bg-slate-100 transition-colors">
+                  Open Data Room
+                </Link>
+                <button onClick={() => setShowDealsModal(false)} className="px-5 py-2.5 rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-white/20 transition-colors">
+                  Not now
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
         {/* Dashboard Header */}
         <div className="surface rounded-xl p-5 shadow-card mb-6">
           <div className="flex items-center justify-between">
@@ -246,6 +279,29 @@ export default function DashboardPage() {
                   />
                 </div>
 
+                {/* New Deals / Data Room CTA - moved higher */}
+                <div className="surface rounded-xl p-8 shadow-card border border-amber-400/20 bg-gradient-to-br from-amber-400/5 to-transparent">
+                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                    <div className="flex-1">
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 text-xs font-medium mb-3">
+                        <Sparkles size={14} />
+                        <span>New Deal Access</span>
+                      </div>
+                      <h3 className="text-xl font-semibold text-white mb-2">Visit the Data Room</h3>
+                      <p className="text-slate-300 leading-relaxed max-w-2xl">
+                        Access documents, models, and details for the latest offerings in our data room.
+                      </p>
+                    </div>
+                    <Link
+                      href="/dataroom"
+                      className="flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-slate-900 font-medium hover:bg-slate-100 transition-all shadow-lg hover:shadow-xl whitespace-nowrap"
+                    >
+                      Go to Data Room
+                      <ArrowRight size={16} />
+                    </Link>
+                  </div>
+                </div>
+
                 {/* Performance Chart */}
                 {performanceData && (
                   <PortfolioChart
@@ -293,29 +349,7 @@ export default function DashboardPage() {
                   <DistributionHistory distributions={distributions.slice(0, 5)} />
                 </div>
 
-                {/* New Opportunities CTA */}
-                <div className="surface rounded-xl p-8 shadow-card border border-amber-400/20 bg-gradient-to-br from-amber-400/5 to-transparent">
-                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                    <div className="flex-1">
-                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 text-xs font-medium mb-3">
-                        <Sparkles size={14} />
-                        <span>New Opportunities Available</span>
-                      </div>
-                      <h3 className="text-xl font-semibold text-white mb-2">Explore Investment Opportunities</h3>
-                      <p className="text-slate-300 leading-relaxed max-w-2xl">
-                        Review current deals, access detailed financial models, and expand your portfolio with 
-                        our latest value-add real estate opportunities.
-                      </p>
-                    </div>
-                    <Link
-                      href="/opportunities"
-                      className="flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-slate-900 font-medium hover:bg-slate-100 transition-all shadow-lg hover:shadow-xl whitespace-nowrap"
-                    >
-                      Browse Deals
-                      <ArrowRight size={16} />
-                    </Link>
-                  </div>
-                </div>
+                {/* New Opportunities CTA moved above; section removed here */}
               </div>
             )}
           </>
