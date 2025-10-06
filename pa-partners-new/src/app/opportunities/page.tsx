@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
 import { DEALS } from "@/lib/deals";
@@ -11,27 +12,31 @@ import { ArrowLeft, TrendingUp, Building2 } from "lucide-react";
 
 export default function OpportunitiesPage() {
   const router = useRouter();
+  const supabase = createClient();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check authentication status
-    // Replace with actual auth check when Supabase is integrated
-    const checkAuth = () => {
-      if (typeof window !== "undefined") {
-        const isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
-        setIsAuthenticated(isLoggedIn);
+    async function checkAuth() {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
         
-        if (!isLoggedIn) {
-          // Redirect to login if not authenticated
+        if (!session) {
           router.push("/login");
+          return;
         }
+        
+        setIsAuthenticated(true);
+      } catch (error) {
+        console.error("Auth check error:", error);
+        router.push("/login");
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
-    };
+    }
 
     checkAuth();
-  }, [router]);
+  }, [router, supabase.auth]);
 
   if (loading) {
     return (

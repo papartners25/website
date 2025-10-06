@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { createClient } from '@/lib/supabase/client';
 import { 
   getInvestorProfile, 
   getInvestments, 
@@ -39,6 +41,8 @@ import {
 import Link from 'next/link';
 
 export default function DashboardPage() {
+  const router = useRouter();
+  const supabase = createClient();
   const [activeTab, setActiveTab] = useState<'overview' | 'investments' | 'distributions' | 'tax-documents'>('overview');
   const [loading, setLoading] = useState(true);
   const [investor, setInvestor] = useState<Investor | null>(null);
@@ -49,11 +53,20 @@ export default function DashboardPage() {
   const [performanceData, setPerformanceData] = useState<PropertyPerformance | null>(null);
 
   useEffect(() => {
-    async function loadDashboardData() {
-      setLoading(true);
+    async function checkAuthAndLoadData() {
       try {
-        // Mock investor ID - replace with actual auth
-        const investorId = 'investor-123';
+        // Check if user is authenticated
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!session) {
+          router.push('/login');
+          return;
+        }
+
+        setLoading(true);
+
+        // Use user ID from Supabase session
+        const investorId = session.user.id;
 
         const [
           investorData,
@@ -79,13 +92,14 @@ export default function DashboardPage() {
         setPerformanceData(performanceDataResult);
       } catch (error) {
         console.error('Error loading dashboard data:', error);
+        router.push('/login');
       } finally {
         setLoading(false);
       }
     }
 
-    loadDashboardData();
-  }, []);
+    checkAuthAndLoadData();
+  }, [router, supabase.auth]);
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -129,11 +143,9 @@ export default function DashboardPage() {
                 <span className="hidden sm:inline">Support</span>
               </Link>
               <button
-                onClick={() => {
-                  if (typeof window !== "undefined") {
-                    sessionStorage.removeItem("isLoggedIn");
-                  }
-                  window.location.href = "/";
+                onClick={async () => {
+                  await supabase.auth.signOut();
+                  router.push('/');
                 }}
                 className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-sm text-slate-300 hover:text-white hover:border-white/20 transition-colors"
               >

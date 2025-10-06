@@ -4,26 +4,44 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const supabase = createClient();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
-    // Simulate login - Replace with actual Supabase auth later
-    setTimeout(() => {
-      // Set authentication flag in sessionStorage
-      if (typeof window !== "undefined") {
-        sessionStorage.setItem("isLoggedIn", "true");
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    try {
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (signInError) {
+        setError(signInError.message);
+        setLoading(false);
+        return;
       }
-      // Route to dashboard
-      router.push("/dashboard");
-    }, 800);
+
+      if (data.session) {
+        // Successfully logged in
+        router.push("/dashboard");
+        router.refresh();
+      }
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.");
+      setLoading(false);
+    }
   };
 
   return (
