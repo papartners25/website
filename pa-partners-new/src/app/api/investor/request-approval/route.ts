@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/server';
 import crypto from 'crypto';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -9,7 +9,7 @@ export async function POST(request: Request) {
   try {
     const { userId, email, fullName, phone, companyName, notes } = await request.json();
 
-    const supabase = await createClient();
+    const supabase = createAdminClient();
 
     // Generate approval tokens
     const approveToken = crypto.randomBytes(32).toString('hex');
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     expiresAt.setDate(expiresAt.getDate() + 7); // Expires in 7 days
 
     // Store tokens in database
-    await supabase.from('approval_tokens').insert([
+    const { error: insertError } = await supabase.from('approval_tokens').insert([
       {
         investor_id: userId,
         token: approveToken,
@@ -32,6 +32,11 @@ export async function POST(request: Request) {
         expires_at: expiresAt.toISOString(),
       },
     ]);
+
+    if (insertError) {
+      console.error('Failed to store approval tokens:', insertError);
+      return NextResponse.json({ error: 'Could not create approval tokens' }, { status: 500 });
+    }
 
     // Send approval request email to admin
     const approveUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://papartners.co'}/api/investor/approve?token=${approveToken}`;

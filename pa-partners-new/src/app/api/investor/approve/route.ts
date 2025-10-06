@@ -13,7 +13,7 @@ export async function GET(request: Request) {
       return new NextResponse('Invalid token', { status: 400 });
     }
 
-    const supabase = await createClient();
+    const supabase = createAdminClient();
 
     // Verify token without consuming it
     const { data: tokenData, error: tokenError } = await supabase
@@ -102,7 +102,7 @@ export async function POST(request: Request) {
       return new NextResponse('Invalid token', { status: 400 });
     }
 
-    const supabase = await createClient();
+    const supabase = createAdminClient();
 
     // Verify token again and consume it
     const { data: tokenData } = await supabase

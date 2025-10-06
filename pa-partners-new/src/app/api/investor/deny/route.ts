@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/server';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -13,7 +13,7 @@ export async function GET(request: Request) {
       return new NextResponse('Invalid token', { status: 400 });
     }
 
-    const supabase = await createClient();
+    const supabase = createAdminClient();
 
     // Verify token
     const { data: tokenData, error: tokenError } = await supabase
