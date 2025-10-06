@@ -32,7 +32,9 @@ import {
   FileText,
   Building2,
   User,
-  LogOut
+  LogOut,
+  Sparkles,
+  ArrowRight
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -126,10 +128,18 @@ export default function DashboardPage() {
                 <User size={16} />
                 <span className="hidden sm:inline">Support</span>
               </Link>
-              <Link href="/" className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-sm text-slate-300 hover:text-white hover:border-white/20 transition-colors">
+              <button
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    sessionStorage.removeItem("isLoggedIn");
+                  }
+                  window.location.href = "/";
+                }}
+                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-sm text-slate-300 hover:text-white hover:border-white/20 transition-colors"
+              >
                 <LogOut size={16} />
                 <span className="hidden sm:inline">Logout</span>
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -269,6 +279,30 @@ export default function DashboardPage() {
                 <div>
                   <h2 className="text-xl font-semibold text-white mb-4">Recent Distributions</h2>
                   <DistributionHistory distributions={distributions.slice(0, 5)} />
+                </div>
+
+                {/* New Opportunities CTA */}
+                <div className="surface rounded-xl p-8 shadow-card border border-amber-400/20 bg-gradient-to-br from-amber-400/5 to-transparent">
+                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                    <div className="flex-1">
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 text-xs font-medium mb-3">
+                        <Sparkles size={14} />
+                        <span>New Opportunities Available</span>
+                      </div>
+                      <h3 className="text-xl font-semibold text-white mb-2">Explore Investment Opportunities</h3>
+                      <p className="text-slate-300 leading-relaxed max-w-2xl">
+                        Review current deals, access detailed financial models, and expand your portfolio with 
+                        our latest value-add real estate opportunities.
+                      </p>
+                    </div>
+                    <Link
+                      href="/opportunities"
+                      className="flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-slate-900 font-medium hover:bg-slate-100 transition-all shadow-lg hover:shadow-xl whitespace-nowrap"
+                    >
+                      Browse Deals
+                      <ArrowRight size={16} />
+                    </Link>
+                  </div>
                 </div>
               </div>
             )}

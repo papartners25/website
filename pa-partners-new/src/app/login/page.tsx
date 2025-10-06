@@ -17,7 +17,11 @@ export default function LoginPage() {
 
     // Simulate login - Replace with actual Supabase auth later
     setTimeout(() => {
-      // For now, any login attempt succeeds and routes to dashboard
+      // Set authentication flag in sessionStorage
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("isLoggedIn", "true");
+      }
+      // Route to dashboard
       router.push("/dashboard");
     }, 800);
   };
