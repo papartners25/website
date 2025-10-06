@@ -38,12 +38,24 @@ export async function GET(request: Request) {
       );
     }
 
-    // Fetch profile for display
-    const { data: profile } = await supabase
+    // Fetch profile for display, fallback to auth.users if profile missing
+    let profile: any = null;
+    const { data: profileData } = await supabase
       .from('investor_profiles')
       .select('*')
       .eq('id', tokenData.investor_id)
       .single();
+    profile = profileData;
+    if (!profile) {
+      const { data: authUser } = await supabase.auth.admin.getUserById(tokenData.investor_id);
+      if (authUser?.user) {
+        profile = {
+          id: authUser.user.id,
+          email: authUser.user.email,
+          full_name: (authUser.user.user_metadata as any)?.full_name || 'New Investor',
+        };
+      }
+    }
 
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://papartners.co';
 
@@ -71,7 +83,7 @@ export async function GET(request: Request) {
         <body>
           <div class="card">
             <h1>Approve Investor?</h1>
-            <p>You're about to approve access for <strong>${profile?.full_name ?? ''}</strong> (${profile?.email ?? ''}).</p>
+            <p>You're about to approve access for <strong>${profile?.full_name ?? 'Investor'}</strong> (${profile?.email ?? 'unknown email'}).</p>
             <div class="details">
               <p>This action will notify the investor and grant them portal access.</p>
             </div>
@@ -120,13 +132,37 @@ export async function POST(request: Request) {
       );
     }
 
+    // Ensure profile exists; if not, create it from auth user metadata
+    const { data: existingProfile } = await supabase
+      .from('investor_profiles')
+      .select('*')
+      .eq('id', tokenData.investor_id)
+      .single();
+
+    let profile: any = existingProfile;
+    if (!existingProfile) {
+      const { data: authUserRes } = await supabase.auth.admin.getUserById(tokenData.investor_id);
+      const authUser = authUserRes?.user;
+      if (!authUser) {
+        return new NextResponse('User not found', { status: 404 });
+      }
+      const fullName = (authUser.user_metadata as any)?.full_name || 'New Investor';
+      const { data: inserted } = await supabase
+        .from('investor_profiles')
+        .insert({ id: authUser.id, email: authUser.email, full_name: fullName, approval_status: 'pending' })
+        .select('*')
+        .single();
+      profile = inserted;
+    }
+
     // Approve investor
-    const { data: profile } = await supabase
+    const { data: updatedProfile } = await supabase
       .from('investor_profiles')
       .update({ approval_status: 'approved', approved_at: new Date().toISOString() })
       .eq('id', tokenData.investor_id)
       .select('*')
       .single();
+    profile = updatedProfile ?? profile;
 
     // Mark token as used
     await supabase
