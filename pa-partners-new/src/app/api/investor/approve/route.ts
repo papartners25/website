@@ -1,8 +1,15 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { createClient, createAdminClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/server';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+type InvestorProfile = {
+  id: string;
+  email: string | null;
+  full_name: string;
+  approval_status?: string;
+};
 
 export async function GET(request: Request) {
   try {
@@ -39,7 +46,7 @@ export async function GET(request: Request) {
     }
 
     // Fetch profile for display, fallback to auth.users if profile missing
-    let profile: any = null;
+    let profile: InvestorProfile | null = null;
     const { data: profileData } = await supabase
       .from('investor_profiles')
       .select('*')
@@ -49,10 +56,12 @@ export async function GET(request: Request) {
     if (!profile) {
       const { data: authUser } = await supabase.auth.admin.getUserById(tokenData.investor_id);
       if (authUser?.user) {
+        const meta = (authUser.user.user_metadata ?? {}) as Record<string, unknown>;
+        const fullName = typeof meta.full_name === 'string' ? meta.full_name : 'New Investor';
         profile = {
           id: authUser.user.id,
           email: authUser.user.email,
-          full_name: (authUser.user.user_metadata as any)?.full_name || 'New Investor',
+          full_name: fullName,
         };
       }
     }
@@ -139,20 +148,21 @@ export async function POST(request: Request) {
       .eq('id', tokenData.investor_id)
       .single();
 
-    let profile: any = existingProfile;
+    let profile: InvestorProfile | null = existingProfile as InvestorProfile | null;
     if (!existingProfile) {
       const { data: authUserRes } = await supabase.auth.admin.getUserById(tokenData.investor_id);
       const authUser = authUserRes?.user;
       if (!authUser) {
         return new NextResponse('User not found', { status: 404 });
       }
-      const fullName = (authUser.user_metadata as any)?.full_name || 'New Investor';
+      const meta = (authUser.user_metadata ?? {}) as Record<string, unknown>;
+      const fullName = typeof meta.full_name === 'string' ? meta.full_name : 'New Investor';
       const { data: inserted } = await supabase
         .from('investor_profiles')
         .insert({ id: authUser.id, email: authUser.email, full_name: fullName, approval_status: 'pending' })
         .select('*')
         .single();
-      profile = inserted;
+      profile = inserted as InvestorProfile;
     }
 
     // Approve investor
@@ -162,7 +172,7 @@ export async function POST(request: Request) {
       .eq('id', tokenData.investor_id)
       .select('*')
       .single();
-    profile = updatedProfile ?? profile;
+    profile = (updatedProfile as InvestorProfile) ?? profile;
 
     // Mark token as used
     await supabase
