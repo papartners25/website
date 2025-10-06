@@ -145,16 +145,16 @@ export default function DashboardPage() {
       <div className="mx-auto max-w-7xl px-4 py-6">
         {/* Timed Glass Popup for New Deals */}
         {showDealsModal && (
-          <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => setShowDealsModal(false)}>
-            <div className="surface relative rounded-2xl p-6 md:p-8 shadow-card border border-white/10 max-w-md w-[92%] text-center" onClick={(e) => e.stopPropagation()}>
+          <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/60" onClick={() => setShowDealsModal(false)}>
+            <div className="surface relative rounded-2xl p-6 md:p-8 shadow-card border border-white/25 max-w-md w-[92%] text-center backdrop-blur-2xl saturate-150" onClick={(e) => e.stopPropagation()}>
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-400/10 border border-amber-400/20 mb-4">
                 <Sparkles className="text-amber-400" size={28} />
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">New Deal Documents</h3>
               <p className="text-slate-300 mb-5">Jump into the data room to review the latest offering materials.</p>
               <div className="flex items-center justify-center gap-3">
-                <Link href="/dataroom" className="px-5 py-2.5 rounded-lg bg-white text-slate-900 font-medium hover:bg-slate-100 transition-colors">
-                  Open Data Room
+                <Link href="/opportunities" className="px-5 py-2.5 rounded-lg bg-white text-slate-900 font-medium hover:bg-slate-100 transition-colors">
+                  Browse New Deals
                 </Link>
                 <button onClick={() => setShowDealsModal(false)} className="px-5 py-2.5 rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-white/20 transition-colors">
                   Not now
