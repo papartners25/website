@@ -90,9 +90,27 @@ export default function LoginPage() {
               {loading ? 'Signing in...' : 'Sign in'}
             </button>
           </form>
-          <p className="mt-6 text-center text-sm text-slate-300">
-            Don&apos;t have access? <Link href="/signup" className="text-white hover:opacity-90 font-medium">Request Access</Link>
-          </p>
+          <div className="mt-6 space-y-4">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-white/10"></div>
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-[#1e293b] px-2 text-slate-500">or</span>
+              </div>
+            </div>
+
+            <Link
+              href="/signup"
+              className="w-full inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-medium text-white hover:bg-white/10 hover:border-white/30 transition-all"
+            >
+              Request Investor Access
+            </Link>
+
+            <p className="text-center text-xs text-slate-400">
+              New investors must be approved before accessing the portal
+            </p>
+          </div>
         </div>
       </div>
     </div>

@@ -233,12 +233,23 @@ export default function SignUpPage() {
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-slate-300">
-            Already have an account?{" "}
-            <Link href="/login" className="text-white hover:opacity-90 font-medium">
-              Sign in
+          <div className="mt-6 space-y-4">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-white/10"></div>
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-[#1e293b] px-2 text-slate-500">Already approved?</span>
+              </div>
+            </div>
+
+            <Link
+              href="/login"
+              className="w-full inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-medium text-white hover:bg-white/10 hover:border-white/30 transition-all"
+            >
+              Sign In to Portal
             </Link>
-          </p>
+          </div>
         </div>
       </div>
     </div>
