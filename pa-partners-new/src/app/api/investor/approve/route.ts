@@ -126,13 +126,18 @@ export async function POST(request: Request) {
     const supabase = createAdminClient();
 
     // Verify token again and consume it
-    const { data: tokenData } = await supabase
+    const { data: tokenData, error: tokenLookupError } = await supabase
       .from('approval_tokens')
       .select('*')
       .eq('token', token)
       .eq('action', 'approve')
       .eq('used', false)
       .single();
+
+    if (tokenLookupError) {
+      console.error('approve: token lookup error', tokenLookupError);
+      return new NextResponse('<html><body style="font-family:sans-serif;text-align:center;padding:50px;"><h1>Invalid link</h1><p>Token not found.</p></body></html>', { status: 400, headers: { 'Content-Type': 'text/html' } });
+    }
 
     if (!tokenData || new Date(tokenData.expires_at) < new Date()) {
       return new NextResponse(
@@ -142,7 +147,7 @@ export async function POST(request: Request) {
     }
 
     // Ensure profile exists; if not, create it from auth user metadata
-    const { data: existingProfile } = await supabase
+    const { data: existingProfile, error: fetchProfileError } = await supabase
       .from('investor_profiles')
       .select('*')
       .eq('id', tokenData.investor_id)
@@ -157,28 +162,39 @@ export async function POST(request: Request) {
       }
       const meta = (authUser.user_metadata ?? {}) as Record<string, unknown>;
       const fullName = typeof meta.full_name === 'string' ? meta.full_name : 'New Investor';
-      const { data: inserted } = await supabase
+      const { data: inserted, error: insertProfileError } = await supabase
         .from('investor_profiles')
         .insert({ id: authUser.id, email: (authUser.email as string), full_name: fullName, approval_status: 'pending' })
         .select('*')
         .single();
+      if (insertProfileError) {
+        console.error('approve: insert profile error', insertProfileError);
+        return new NextResponse('<html><body style="font-family:sans-serif;text-align:center;padding:50px;"><h1>Error</h1><p>Could not create investor profile.</p></body></html>', { status: 500, headers: { 'Content-Type': 'text/html' } });
+      }
       profile = inserted as InvestorProfile;
     }
 
     // Approve investor
-    const { data: updatedProfile } = await supabase
+    const { data: updatedProfile, error: approveError } = await supabase
       .from('investor_profiles')
       .update({ approval_status: 'approved', approved_at: new Date().toISOString() })
       .eq('id', tokenData.investor_id)
       .select('*')
       .single();
+    if (approveError) {
+      console.error('approve: update profile error', approveError);
+      return new NextResponse('<html><body style="font-family:sans-serif;text-align:center;padding:50px;"><h1>Error</h1><p>Could not mark investor as approved.</p></body></html>', { status: 500, headers: { 'Content-Type': 'text/html' } });
+    }
     profile = (updatedProfile as InvestorProfile) ?? profile;
 
     // Mark token as used
-    await supabase
+    const { error: markUsedError } = await supabase
       .from('approval_tokens')
       .update({ used: true, used_at: new Date().toISOString() })
       .eq('token', token);
+    if (markUsedError) {
+      console.error('approve: mark token used error', markUsedError);
+    }
 
     // Confirm email so they can log in immediately
     try {
