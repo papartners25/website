@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
+import { createClient as createSupabaseAdmin } from '@supabase/supabase-js';
 
 export async function createClient() {
   const cookieStore = await cookies();
@@ -26,4 +27,19 @@ export async function createClient() {
       },
     }
   );
+}
+
+// Admin client for server-side operations that require elevated privileges
+// Used only inside API routes on the server. Requires SUPABASE_SERVICE_ROLE_KEY.
+export function createAdminClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!serviceRoleKey) {
+    throw new Error('SUPABASE_SERVICE_ROLE_KEY is not set');
+  }
+
+  return createSupabaseAdmin(url, serviceRoleKey, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
 }

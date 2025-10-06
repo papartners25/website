@@ -88,6 +88,11 @@ export async function GET(request: Request) {
                     <!-- Header -->
                     <tr>
                       <td style="padding: 40px 40px 30px; text-align: center;">
+                        <div style="display: inline-block; background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%); border: 2px solid rgba(239, 68, 68, 0.2); border-radius: 50%; width: 80px; height: 80px; margin-bottom: 24px;">
+                          <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                            <span style="font-size: 40px; color: #ef4444;">✕</span>
+                          </div>
+                        </div>
                         <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 600;">Application Update</h1>
                         <p style="margin: 10px 0 0; color: #94a3b8; font-size: 14px;">PA Partners</p>
                       </td>
