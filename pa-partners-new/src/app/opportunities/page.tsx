@@ -161,8 +161,8 @@ export default function OpportunitiesPage() {
             )}
           </div>
 
-          {/* Information Banner */}
-          <div className="mt-8 surface rounded-xl p-6 border border-amber-400/20 bg-amber-400/5">
+          {/* Information Banner - constrained to match card widths */}
+          <div className="mt-8 surface rounded-xl p-6 border border-amber-400/20 bg-amber-400/5 max-w-4xl mx-auto">
             <div className="flex items-start gap-4">
               <div className="p-2 rounded-lg bg-amber-400/10 mt-0.5">
                 <TrendingUp size={20} className="text-amber-400" />
