@@ -56,7 +56,7 @@ export default function OpportunitiesPage() {
   return (
     <>
       <div className="surface border-b border-white/5">
-        <div className="mx-auto max-w-7xl px-4 py-6">
+        <div className="mx-auto max-w-6xl px-4 py-6">
           <div className="flex items-center justify-between">
             <div>
               <Link 
