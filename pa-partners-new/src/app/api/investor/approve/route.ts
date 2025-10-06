@@ -189,9 +189,10 @@ export async function POST(request: Request) {
     }
 
     // Send confirmation email
+    const recipient = profile.email ?? process.env.ADMIN_EMAIL ?? 'info@papartners.co';
     await resend.emails.send({
       from: 'PA Partners <onboarding@papartners.co>',
-      to: profile.email,
+      to: recipient,
       subject: 'Welcome to PA Partners Investor Portal',
       html: `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
       <body style="margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background-color:#0f172a;">
