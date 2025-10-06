@@ -110,6 +110,7 @@ Click **Add a variable** and add each of these:
 | `RESEND_API_KEY` | `re_CJyxTYCW_6sC8jgzVUM6EW8yQcWoJJsUM` | Secret - server only |
 | `ADMIN_EMAIL` | `info@papartners.co` | Where approval requests go |
 | `NEXT_PUBLIC_SITE_URL` | `https://papartners.co` | For email links |
+| `SUPABASE_SERVICE_ROLE_KEY` | `******` | Required for admin approval + email confirm |
 
 ### 3.3 Save and Redeploy
 
@@ -160,6 +161,19 @@ Click **Add a variable** and add each of these:
 4. They should receive:
    **"Welcome to PA Partners Investor Portal"**
    with a **Log In to Portal** button
+## Step 4.5: Disable Supabase Signup Confirmation Email (Option 2)
+
+We handle confirmation during admin approval and send our own branded email. Turn off Supabase’s default confirmation email:
+
+1. In Supabase dashboard, go to: Authentication → Providers → Email
+2. Toggle OFF “Confirm email” (Email confirmations)
+3. Save
+4. Optional: Clear any queued confirmation emails (Auth → Logs) and retry a fresh signup
+
+Notes:
+- Approval API confirms the user via Admin API, so investors can log in immediately after approval
+- All investor-facing messaging comes from our Resend templates
+
 
 ### 4.4 Test Login
 
