@@ -29,7 +29,7 @@ export const DEALS: Deal[] = [
     location: "Columbus, OH",
     summary:
       "A 8-unit multifamily investment located in the heart of North Linden. This well-maintained brick building features all 2-bedroom, 1-bathroom units with strong in-place rents. Each unit is separately metered, and tenants are responsible for all utilities, minimizing ownership expenses. The property offers on-site parking and has undergone recent capital improvements, making it an ideal low-maintenance addition to any investment portfolio.",
-    metrics: { irr: "20%+", equityMultiple: "2.70x", hold: "3-5 yrs" },
+    metrics: { irr: "18.9%", equityMultiple: "2.21x", hold: "2-5 yrs" },
     pdfUrl: "/deals/oakland-park-apts-investment-proforma.pdf",
     excelUrl: "/deals/oakland-park-apts-investment-proforma.xlsx",
   },
