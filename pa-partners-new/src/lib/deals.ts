@@ -24,14 +24,14 @@ export const DEALS: Deal[] = [
     excelUrl: "/deals/broadway-court-pro-forma.xlsx",
   },
   {
-    id: "south-of-mound",
-    name: "South of Mound",
+    id: "oakland-park-apartments",
+    name: "Oakland Park Apartments",
     location: "Columbus, OH",
     summary:
-      "16-unit value-add multifamily two-building property in Columbus's South of Main neighborhood focused on interior renovations and operational efficiencies.",
-    metrics: { irr: "20%+", equityMultiple: "2.87x", hold: "2-5 yrs" },
-    pdfUrl: "/deals/south-of-mound-summary.pdf",
-    excelUrl: "/deals/south-of-mound-pro-forma.xlsx",
+      "A 8-unit multifamily investment located in the heart of North Linden. This well-maintained brick building features all 2-bedroom, 1-bathroom units with strong in-place rents. Each unit is separately metered, and tenants are responsible for all utilities, minimizing ownership expenses. The property offers on-site parking and has undergone recent capital improvements, making it an ideal low-maintenance addition to any investment portfolio.",
+    metrics: { irr: "20%+", equityMultiple: "2.70x", hold: "3-5 yrs" },
+    pdfUrl: "/deals/oakland-park-apts-investment-proforma.pdf",
+    excelUrl: "/deals/oakland-park-apts-investment-proforma.xlsx",
   },
 ];
 
