@@ -12,6 +12,18 @@ export type Deal = {
 
 export const DEALS: Deal[] = [
   {
+    id: "broadway-court",
+    name: "Broadway Court",
+    location: "Columbus, OH",
+    summary:
+      "This 30-unit value-add investment sits along Columbus's multi-billion-dollar LinkUS mobility corridor, offering immediate upside potential and a high cash-on-cash profile.",
+    metrics: { irr: "20%+", equityMultiple: "2.15x", hold: "2-4 yrs" },
+    omUrl: "/deals/broadway-court-om.pdf",
+    execSummaryUrl: "/deals/broadway-court-executive-summary.pdf",
+    pdfUrl: "/deals/broadway-court-summary.pdf",
+    excelUrl: "/deals/broadway-court-pro-forma.xlsx",
+  },
+  {
     id: "oakland-park-apartments",
     name: "Oakland Park Apartments",
     location: "Columbus, OH",
@@ -20,18 +32,6 @@ export const DEALS: Deal[] = [
     metrics: { irr: "18.9%", equityMultiple: "2.21x", hold: "2-5 yrs" },
     pdfUrl: "/deals/oakland-park-apts-investment-proforma.pdf",
     excelUrl: "/deals/oakland-park-apts-investment-proforma.xlsx",
-  },
-  {
-    id: "broadway-court",
-    name: "Broadway Court",
-    location: "Columbus, OH",
-    summary:
-      "This 30-unit value-add investment sits along Columbus's multi-billion-dollar LinkUS mobility corridor, offering immediate upside potential and a high cash-on-cash profile.",
-    metrics: { irr: "20%+", equityMultiple: "2.72x", hold: "2-5 yrs" },
-    omUrl: "/deals/broadway-court-om.pdf",
-    execSummaryUrl: "/deals/broadway-court-executive-summary.pdf",
-    pdfUrl: "/deals/broadway-court-summary.pdf",
-    excelUrl: "/deals/broadway-court-pro-forma.xlsx",
   },
 ];
 
