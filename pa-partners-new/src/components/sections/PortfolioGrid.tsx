@@ -6,7 +6,7 @@ import Section from "@/components/layout/Section";
 const items = [
   {
     title: "Value-Add Multifamily",
-    src: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?q=80&w=1600&auto=format&fit=crop",
+    src: "/portfolio/value-add-multifamily.jpg",
   },
   {
     title: "Ground Up Development",
