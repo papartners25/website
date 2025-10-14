@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const supabase = createClient();
@@ -34,8 +35,10 @@ export default function LoginPage() {
       }
 
       if (data.session) {
-        // Successfully logged in
-        router.push("/dashboard");
+        // Successfully logged in - honor `next` param when present
+        const next = searchParams.get("next");
+        const isInternal = next && next.startsWith("/");
+        router.push(isInternal ? (next as string) : "/dashboard");
         router.refresh();
       }
     } catch (err) {

@@ -1,10 +1,15 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import type { Deal } from "@/lib/deals";
 
-export default function DealCard({ deal }: { deal: Deal }) {
+export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: boolean }) {
   const [open, setOpen] = useState(false);
-  const [preview, setPreview] = useState<"summary" | "om" | "exec">("summary");
+  // Determine initial preview based on deal config
+  const initialPreview: "summary" | "om" | "exec" = deal.hideSummaryTab
+    ? (deal.execSummaryUrl ? "exec" : (deal.omUrl ? "om" : "summary"))
+    : "summary";
+  const [preview, setPreview] = useState<"summary" | "om" | "exec">(initialPreview);
   const activeUrl = preview === "exec" && deal.execSummaryUrl
     ? deal.execSummaryUrl
     : (preview === "om" && deal.omUrl ? deal.omUrl : deal.pdfUrl);
@@ -21,24 +26,36 @@ export default function DealCard({ deal }: { deal: Deal }) {
             <div><dt className="text-slate-400">Hold</dt><dd className="text-white">{deal.metrics.hold ?? "—"}</dd></div>
           </dl>
         </div>
-        <button
-          className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:bg-white/5"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? "Hide" : "Expand"}
-        </button>
+        {isPublic ? (
+          <Link
+            href="/login?next=/dataroom"
+            className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-xs sm:text-sm text-slate-200 hover:text-white hover:bg-white/5 whitespace-nowrap shrink-0 self-start"
+          >
+            <span className="sm:hidden">Login</span>
+            <span className="hidden sm:inline">Login to Expand</span>
+          </Link>
+        ) : (
+          <button
+            className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:bg-white/5"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? "Hide" : "Expand"}
+          </button>
+        )}
       </div>
-      {open && (
+      {!isPublic && open && (
         <div className="mt-5 grid gap-4">
           <div className="flex items-center gap-2">
-            <button
-              className={`inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm ${
-                preview === "summary" ? "bg-white text-slate-900" : "text-slate-200 hover:text-white hover:bg-white/5"
-              }`}
-              onClick={() => setPreview("summary")}
-            >
-              PDF Summary
-            </button>
+            {!deal.hideSummaryTab && (
+              <button
+                className={`inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm ${
+                  preview === "summary" ? "bg-white text-slate-900" : "text-slate-200 hover:text-white hover:bg-white/5"
+                }`}
+                onClick={() => setPreview("summary")}
+              >
+                PDF Summary
+              </button>
+            )}
             {deal.execSummaryUrl && (
               <button
                 className={`inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm ${
@@ -83,13 +100,15 @@ export default function DealCard({ deal }: { deal: Deal }) {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <a
-              href={deal.pdfUrl}
-              download
-              className="inline-flex items-center rounded-lg bg-white text-slate-900 px-3 py-1.5 text-sm font-medium hover:bg-slate-100"
-            >
-              Download PDF Summary
-            </a>
+            {!deal.hideSummaryTab && (
+              <a
+                href={deal.pdfUrl}
+                download
+                className="inline-flex items-center rounded-lg bg-white text-slate-900 px-3 py-1.5 text-sm font-medium hover:bg-slate-100"
+              >
+                Download PDF Summary
+              </a>
+            )}
             {deal.execSummaryUrl && (
               <a
                 href={deal.execSummaryUrl}
@@ -105,7 +124,7 @@ export default function DealCard({ deal }: { deal: Deal }) {
                 download
                 className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:bg-white/5"
               >
-                Download OM (PDF)
+                Download Offering Memorandum (PDF)
               </a>
             )}
             <a
@@ -116,11 +135,11 @@ export default function DealCard({ deal }: { deal: Deal }) {
               Download Pro Forma (XLSX)
             </a>
           </div>
-          <p className="text-slate-400 text-xs mt-1">
-            For the full Executive Summary, email
-            {" "}
-            <a href="mailto:info@papartners.co" className="underline hover:text-slate-300">info@papartners.co</a>.
-          </p>
+          {deal.footerNote && (
+            <p className="text-slate-400 text-xs mt-2">
+              {deal.footerNote}
+            </p>
+          )}
         </div>
       )}
     </article>

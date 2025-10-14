@@ -1,57 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
-import { DEALS } from "@/lib/deals";
+import { DEALS, computeDealStats } from "@/lib/deals";
 import DealCard from "@/components/dataroom/DealCard";
 import Link from "next/link";
-import { ArrowLeft, TrendingUp, Building2 } from "lucide-react";
+import { TrendingUp, Building2, LogIn } from "lucide-react";
+import PortalPreview from "@/components/common/PortalPreview";
 
 export default function OpportunitiesPage() {
-  const router = useRouter();
-  const supabase = createClient();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function checkAuth() {
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        
-        if (!session) {
-          router.push("/login");
-          return;
-        }
-        
-        setIsAuthenticated(true);
-      } catch (error) {
-        console.error("Auth check error:", error);
-        router.push("/login");
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    checkAuth();
-  }, [router, supabase.auth]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-white border-r-transparent mb-4"></div>
-          <p className="text-slate-400">Loading opportunities...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return null; // Will redirect
-  }
 
   return (
     <>
@@ -61,29 +18,27 @@ export default function OpportunitiesPage() {
           <div className="surface rounded-xl p-6 md:p-7 shadow-card mb-8">
             <div className="flex items-center justify-between">
               <div>
-                <Link
-                  href="/dashboard"
-                  className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors mb-3"
-                >
-                  <ArrowLeft size={16} />
-                  Back to Dashboard
-                </Link>
                 <h1 className="text-2xl font-semibold text-white">Investment Opportunities</h1>
                 <p className="text-sm text-slate-400 mt-1">
                   Explore current deals available for investment
                 </p>
               </div>
               <Link
-                href="/dashboard"
+                href="/login?next=/dataroom"
                 className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-sm text-slate-300 hover:text-white hover:border-white/20 transition-colors"
               >
-                <Building2 size={16} />
-                <span className="hidden sm:inline">My Portfolio</span>
+                <LogIn size={16} />
+                <span className="hidden sm:inline">Investor Login</span>
               </Link>
             </div>
           </div>
 
           {/* Quick Stats */}
+          {(() => {
+            const stats = computeDealStats(DEALS);
+            const irrText = stats.irrRange ? `${stats.irrRange.min.toFixed(0)}-${stats.irrRange.max.toFixed(0)}%` : "—";
+            const holdText = stats.holdRange ? `${stats.holdRange.min}-${stats.holdRange.max} years` : "—";
+            return (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             <div className="surface rounded-xl p-5 shadow-card">
               <div className="flex items-center gap-3">
@@ -92,7 +47,7 @@ export default function OpportunitiesPage() {
                 </div>
                 <div>
                   <p className="text-sm text-slate-400">Available Deals</p>
-                  <p className="text-2xl font-semibold text-white">{DEALS.length}</p>
+                  <p className="text-2xl font-semibold text-white">{stats.availableDeals}</p>
                 </div>
               </div>
             </div>
@@ -103,7 +58,7 @@ export default function OpportunitiesPage() {
                 </div>
                 <div>
                   <p className="text-sm text-slate-400">Avg Target IRR</p>
-                  <p className="text-2xl font-semibold text-white">15-18%</p>
+                  <p className="text-2xl font-semibold text-white">{irrText}</p>
                 </div>
               </div>
             </div>
@@ -114,11 +69,13 @@ export default function OpportunitiesPage() {
                 </div>
                 <div>
                   <p className="text-sm text-slate-400">Hold Period</p>
-                  <p className="text-2xl font-semibold text-white">3-5 years</p>
+                  <p className="text-2xl font-semibold text-white">{holdText}</p>
                 </div>
               </div>
             </div>
           </div>
+            );
+          })()}
 
           {/* Deal Cards */}
           <div className="space-y-6">
@@ -139,7 +96,7 @@ export default function OpportunitiesPage() {
 
             <div className="grid gap-4">
               {DEALS.map((deal) => (
-                <DealCard key={deal.id} deal={deal} />
+                <DealCard key={deal.id} deal={deal} isPublic />
               ))}
             </div>
 
@@ -160,26 +117,24 @@ export default function OpportunitiesPage() {
             )}
           </div>
 
-          {/* Information Banner - constrained to match card widths */}
+          {/* Information Banner - Broadway Courts Update */}
           <div className="mt-8 surface rounded-xl p-6 border border-amber-400/20 bg-amber-400/5 max-w-4xl mx-auto">
             <div className="flex items-start gap-4">
               <div className="p-2 rounded-lg bg-amber-400/10 mt-0.5">
                 <TrendingUp size={20} className="text-amber-400" />
               </div>
               <div className="flex-1">
-                <h3 className="text-white font-medium mb-1">Investment Process</h3>
-                <p className="text-sm text-slate-300 leading-relaxed mb-3">
-                  Review the executive summary and pro forma for each opportunity. When you&apos;re ready 
-                  to proceed, download the full offering memorandum or reach out to discuss investment terms.
+                <h3 className="text-white font-medium mb-1">Broadway Courts Update</h3>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  After extensive due diligence on the Broadway Courts property, we've made the strategic decision to step away from that transaction. While the fundamentals were solid, competitive bidding pushed pricing beyond our underwriting standards, and our diligence uncovered structural and operational complications that would have added execution risk and capital requirements beyond our initial projections. We remain disciplined in our approach and won't chase deals that compromise our return thresholds or risk profile.
                 </p>
-                <Link 
-                  href="/contact" 
-                  className="text-sm text-amber-400 hover:text-amber-300 font-medium"
-                >
-                  Questions? Contact our investment team →
-                </Link>
               </div>
             </div>
+          </div>
+
+          {/* Public Page Only: Investor Portal Preview */}
+          <div className="max-w-4xl mx-auto">
+            <PortalPreview />
           </div>
         </Container>
       </Section>

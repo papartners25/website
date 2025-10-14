@@ -1,12 +1,14 @@
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
 import Link from "next/link";
-import { Lock, Mail, LogIn } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
+import { ArrowLeft, TrendingUp, Building2 } from "lucide-react";
+import { DEALS, computeDealStats } from "@/lib/deals";
+import DealCard from "@/components/dataroom/DealCard";
 
 export const metadata = {
-  title: "Real Estate Data Room",
-  description: "Explore current opportunities with summaries and downloads.",
+  title: "Investor Data Room",
+  description: "Authenticated access to interactive deal materials.",
 };
 
 export default async function DataroomPage() {
@@ -16,29 +18,16 @@ export default async function DataroomPage() {
   } = await supabase.auth.getSession();
 
   if (!session) {
-    // Not logged in – show access required UI with login link
     return (
       <Section>
         <Container>
           <div className="max-w-2xl mx-auto py-12 md:py-20">
             <div className="surface rounded-2xl p-8 md:p-12 shadow-card text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-400/10 border border-amber-400/20 mb-6">
-                <Lock size={32} className="text-amber-400" />
-              </div>
-              <h1 className="text-2xl md:text-3xl font-semibold text-white mb-4">Data Room Access Required</h1>
-              <p className="text-slate-300 leading-relaxed mb-8">
-                Please sign in to access confidential deal information in the data room.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <Link href="/login" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-white text-slate-900 px-6 py-3 text-sm font-medium hover:bg-slate-100 transition-colors">
-                  <LogIn size={16} />
-                  Investor Login
-                </Link>
-                <Link href="/contact" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg border border-white/10 px-6 py-3 text-sm text-slate-300 hover:text-white hover:border-white/20 transition-colors">
-                  <Mail size={16} />
-                  Request Access
-                </Link>
-              </div>
+              <h1 className="text-2xl md:text-3xl font-semibold text-white mb-4">Investor Login Required</h1>
+              <p className="text-slate-300 leading-relaxed mb-6">Log in to access full previews and downloads.</p>
+              <Link href="/login?next=/dataroom" className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-slate-900 px-6 py-3 text-sm font-medium hover:bg-slate-100 transition-colors">
+                Login to Continue
+              </Link>
             </div>
           </div>
         </Container>
@@ -46,16 +35,101 @@ export default async function DataroomPage() {
     );
   }
 
-  // Authenticated investor – simple placeholder content for now
   return (
     <Section>
       <Container>
-        <div className="surface rounded-2xl p-8 md:p-10 shadow-card">
-          <h1 className="text-2xl md:text-3xl font-semibold text-white mb-3">Data Room</h1>
-          <p className="text-slate-300 mb-6">Welcome. Deal documents and pro formas will appear here.</p>
-          <Link href="/opportunities" className="inline-flex items-center gap-2 rounded-lg bg-white text-slate-900 px-5 py-2.5 text-sm font-medium hover:bg-slate-100">
-            Browse Opportunities
-          </Link>
+        {/* Inset Header Card */}
+        <div className="surface rounded-xl p-6 md:p-7 shadow-card mb-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <Link
+                href="/dashboard"
+                className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors mb-3"
+              >
+                <ArrowLeft size={16} />
+                Back to Dashboard
+              </Link>
+              <h1 className="text-2xl font-semibold text-white">Investment Opportunities</h1>
+              <p className="text-sm text-slate-400 mt-1">
+                Explore current deals available for investment
+              </p>
+            </div>
+            <Link
+              href="/dashboard"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-sm text-slate-300 hover:text-white hover:border-white/20 transition-colors"
+            >
+              <Building2 size={16} />
+              <span className="hidden sm:inline">My Portfolio</span>
+            </Link>
+          </div>
+        </div>
+
+        {/* Quick Stats */}
+        {(() => {
+          const stats = computeDealStats(DEALS);
+          const irrText = stats.irrRange ? `${stats.irrRange.min.toFixed(0)}-${stats.irrRange.max.toFixed(0)}%` : "—";
+          const holdText = stats.holdRange ? `${stats.holdRange.min}-${stats.holdRange.max} years` : "—";
+          return (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div className="surface rounded-xl p-5 shadow-card">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-amber-400/10">
+                <Building2 size={20} className="text-amber-400" />
+              </div>
+              <div>
+                <p className="text-sm text-slate-400">Available Deals</p>
+                <p className="text-2xl font-semibold text-white">{stats.availableDeals}</p>
+              </div>
+            </div>
+          </div>
+          <div className="surface rounded-xl p-5 shadow-card">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-green-400/10">
+                <TrendingUp size={20} className="text-green-400" />
+              </div>
+              <div>
+                <p className="text-sm text-slate-400">Avg Target IRR</p>
+                <p className="text-2xl font-semibold text-white">{irrText}</p>
+              </div>
+            </div>
+          </div>
+          <div className="surface rounded-xl p-5 shadow-card">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-blue-400/10">
+                <TrendingUp size={20} className="text-blue-400" />
+              </div>
+              <div>
+                <p className="text-sm text-slate-400">Hold Period</p>
+                <p className="text-2xl font-semibold text-white">{holdText}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+          );
+        })()}
+
+        {/* Deal Cards */}
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-semibold text-white">Current Opportunities</h2>
+              <p className="text-sm text-slate-400 mt-1">
+                Review detailed summaries, financial models, and investment terms
+              </p>
+            </div>
+            <select className="px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-white text-sm">
+              <option>All Property Types</option>
+              <option>Multifamily</option>
+              <option>Commercial</option>
+              <option>Mixed-Use</option>
+            </select>
+          </div>
+
+          <div className="grid gap-4">
+            {DEALS.map((deal) => (
+              <DealCard key={deal.id} deal={deal} />
+            ))}
+          </div>
         </div>
       </Container>
     </Section>
