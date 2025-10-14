@@ -126,7 +126,7 @@ export default function OpportunitiesPage() {
               <div className="flex-1">
                 <h3 className="text-white font-medium mb-1">Broadway Courts Update</h3>
                 <p className="text-sm text-slate-300 leading-relaxed">
-                  After extensive due diligence on the Broadway Courts property, we've made the strategic decision to step away from that transaction. While the fundamentals were solid, competitive bidding pushed pricing beyond our underwriting standards, and our diligence uncovered structural and operational complications that would have added execution risk and capital requirements beyond our initial projections. We remain disciplined in our approach and won't chase deals that compromise our return thresholds or risk profile.
+                  After extensive due diligence on the Broadway Courts property, we&apos;ve made the strategic decision to step away from that transaction. While the fundamentals were solid, competitive bidding pushed pricing beyond our underwriting standards, and our diligence uncovered structural and operational complications that would have added execution risk and capital requirements beyond our initial projections. We remain disciplined in our approach and won&apos;t chase deals that compromise our return thresholds or risk profile.
                 </p>
               </div>
             </div>
