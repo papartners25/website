@@ -1,4 +1,4 @@
-import RedirectNotice from "@/components/common/RedirectNotice";
+import RealEstateContent from "@/components/sections/RealEstateContent";
 export const metadata = {
   title: "Real Estate",
   description:
@@ -6,15 +6,5 @@ export const metadata = {
 };
 
 export default function RealEstatePage() {
-  return (
-    <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-      <div className="surface rounded-xl p-6 md:p-8 text-center shadow-elevated">
-        <RedirectNotice
-          message="The Real Estate page is under construction. You’re being redirected to current opportunities."
-          href="/opportunities"
-          delayMs={6000}
-        />
-      </div>
-    </div>
-  );
+  return <RealEstateContent />;
 }
