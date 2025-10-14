@@ -22,7 +22,7 @@ export default function DataroomPrompt({ delayMs = 5000 }: { delayMs?: number })
     <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
       <button aria-label="Close modal overlay" className="absolute inset-0 bg-black/60" onClick={() => setOpen(false)} />
       <div className="relative z-10 w-full max-w-md rounded-2xl p-6 shadow-card bg-white/20 border border-white/25 backdrop-blur-2xl saturate-150">
-        <h3 className="text-lg font-medium text-white">Visit our Real Estate Data Room?</h3>
+        <h3 className="text-lg font-medium text-white">View Investment Opportunities?</h3>
         <p className="mt-2 text-sm text-slate-300">
           Explore current opportunities with expandable summaries, PDF previews, and downloadable pro formas.
         </p>
@@ -37,14 +37,14 @@ export default function DataroomPrompt({ delayMs = 5000 }: { delayMs?: number })
             Not now
           </button>
           <Link
-            href="/dataroom"
+            href="/opportunities"
             className="inline-flex items-center rounded-lg bg-white text-slate-900 px-3 py-1.5 text-sm font-medium hover:bg-slate-100"
             onClick={() => {
               if (typeof window !== "undefined") sessionStorage.setItem("dataroomVisited", "1");
               setOpen(false);
             }}
           >
-            Visit Data Room
+            Browse Opportunities
           </Link>
         </div>
       </div>

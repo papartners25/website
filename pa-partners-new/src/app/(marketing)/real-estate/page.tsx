@@ -10,8 +10,8 @@ export default function RealEstatePage() {
     <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
       <div className="surface rounded-xl p-6 md:p-8 text-center shadow-elevated">
         <RedirectNotice
-          message="The Real Estate page is under construction. You’re being redirected to the data room."
-          href="/dataroom"
+          message="The Real Estate page is under construction. You’re being redirected to current opportunities."
+          href="/opportunities"
           delayMs={6000}
         />
       </div>

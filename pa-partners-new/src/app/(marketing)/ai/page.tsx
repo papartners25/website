@@ -10,10 +10,9 @@ export default function AIPage() {
     <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
       <div className="surface rounded-xl p-6 md:p-8 text-center shadow-elevated">
         <RedirectNotice
-          message="Our AI Solutions page is under construction. We’ll take you back to where you were."
+          message="Our AI Solutions page is under construction. Redirecting you to current opportunities."
           delayMs={6000}
-          backFirst
-          fallbackHref="/"
+          href="/opportunities"
         />
       </div>
     </div>
