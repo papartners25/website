@@ -6,13 +6,18 @@ import type { Deal } from "@/lib/deals";
 export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: boolean }) {
   const [open, setOpen] = useState(false);
   // Determine initial preview based on deal config
-  const initialPreview: "summary" | "om" | "exec" = deal.hideSummaryTab
+  const initialPreview: "summary" | "om" | "exec" | "brief" = deal.hideSummaryTab
     ? (deal.execSummaryUrl ? "exec" : (deal.omUrl ? "om" : "summary"))
     : "summary";
-  const [preview, setPreview] = useState<"summary" | "om" | "exec">(initialPreview);
-  const activeUrl = preview === "exec" && deal.execSummaryUrl
-    ? deal.execSummaryUrl
-    : (preview === "om" && deal.omUrl ? deal.omUrl : deal.pdfUrl);
+  const [preview, setPreview] = useState<"summary" | "om" | "exec" | "brief">(initialPreview);
+  const activeUrl =
+    (preview === "brief" && deal.briefUrl)
+      ? deal.briefUrl
+      : (preview === "exec" && deal.execSummaryUrl)
+        ? deal.execSummaryUrl
+        : (preview === "om" && deal.omUrl)
+          ? deal.omUrl
+          : deal.pdfUrl;
   return (
     <article className="rounded-xl surface p-5">
       <div className="flex items-start justify-between gap-4">
@@ -46,6 +51,16 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
       {!isPublic && open && (
         <div className="mt-5 grid gap-4">
           <div className="flex items-center gap-2">
+            {deal.briefUrl && (
+              <button
+                className={`inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm ${
+                  preview === "brief" ? "bg-white text-slate-900" : "text-slate-200 hover:text-white hover:bg-white/5"
+                }`}
+                onClick={() => setPreview("brief")}
+              >
+                Deal Brief
+              </button>
+            )}
             {!deal.hideSummaryTab && (
               <button
                 className={`inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm ${
@@ -93,13 +108,22 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
             </div>
             <div className="hidden md:block">
               <iframe
-                title={`${deal.name} ${preview === "om" ? "OM" : "Summary PDF"}`}
+                title={`${deal.name} ${preview === "brief" ? "Deal Brief" : preview === "om" ? "OM" : preview === "exec" ? "Executive Summary" : "Summary PDF"}`}
                 src={`${activeUrl}#view=FitH`}
                 className="w-full h-[420px]"
               />
             </div>
           </div>
           <div className="flex items-center gap-2">
+            {deal.briefUrl && (
+              <a
+                href={deal.briefUrl}
+                download
+                className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:bg-white/5"
+              >
+                Download Deal Brief (PDF)
+              </a>
+            )}
             {!deal.hideSummaryTab && (
               <a
                 href={deal.pdfUrl}

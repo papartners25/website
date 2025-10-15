@@ -6,6 +6,7 @@ export type Deal = {
   metrics: { irr?: string; equityMultiple?: string; hold?: string };
   omUrl?: string;
   execSummaryUrl?: string;
+  briefUrl?: string;
   pdfUrl: string;
   excelUrl: string;
   footerNote?: string;
@@ -22,8 +23,9 @@ export const DEALS: Deal[] = [
     metrics: { irr: "23.8%", equityMultiple: "2.70x", hold: "2-5 yrs" },
     omUrl: "/deals/south-of-mound-investment-memorandum.pdf",
     execSummaryUrl: "/deals/south-of-mound-executive-summary.pdf",
+    briefUrl: "/deals/south-of-mound-deal-brief-2025-10-15.pdf",
     pdfUrl: "/deals/south-of-mound-executive-summary.pdf",
-    excelUrl: "/deals/south_of_mound_investment_proforma.xlsx",
+    excelUrl: "/deals/south-of-mound-pro-forma-2025-10-15.xlsx",
     footerNote: "Target IRR with a 3-year hold (expected) is 30.7%.",
     hideSummaryTab: true,
   },
