@@ -25,7 +25,6 @@ export const DEALS: Deal[] = [
     execSummaryUrl: "/deals/south-of-mound-executive-summary.pdf",
     pdfUrl: "/deals/south-of-mound-executive-summary.pdf",
     excelUrl: "/deals/south-of-mound-pro-forma-2025-10-17.xlsx",
-    footerNote: "Target IRR with a 3-year hold (expected) is 30.7%.",
     hideSummaryTab: true,
   },
   {
