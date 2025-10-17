@@ -18,6 +18,17 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
         : (preview === "om" && deal.omUrl)
           ? deal.omUrl
           : deal.pdfUrl;
+
+  // Public pages should show more conservative, rounded metrics.
+  // Private (/dataroom) shows exact deal.metrics.
+  const publicMetricOverrides: Record<string, Partial<Deal["metrics"]>> = {
+    "south-of-mound": { irr: "20%+", equityMultiple: "2.0x+" },
+    "oakland-park-apartments": { irr: "15%+", equityMultiple: "2.0x+" },
+  };
+
+  const displayMetrics = isPublic
+    ? { ...deal.metrics, ...publicMetricOverrides[deal.id] }
+    : deal.metrics;
   return (
     <article className="rounded-xl surface p-5">
       <div className="flex items-start justify-between gap-4">
@@ -26,9 +37,9 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
           <p className="text-slate-300 text-sm">{deal.location}</p>
           <p className="text-slate-300 text-sm mt-2">{deal.summary}</p>
           <dl className="mt-3 grid grid-cols-3 gap-3 text-xs text-slate-300">
-            <div><dt className="text-slate-400">Target IRR</dt><dd className="text-white">{deal.metrics.irr ?? "—"}</dd></div>
-            <div><dt className="text-slate-400">Equity Multiple</dt><dd className="text-white">{deal.metrics.equityMultiple ?? "—"}</dd></div>
-            <div><dt className="text-slate-400">Hold</dt><dd className="text-white">{deal.metrics.hold ?? "—"}</dd></div>
+            <div><dt className="text-slate-400">Target IRR</dt><dd className="text-white">{displayMetrics.irr ?? "—"}</dd></div>
+            <div><dt className="text-slate-400">Equity Multiple</dt><dd className="text-white">{displayMetrics.equityMultiple ?? "—"}</dd></div>
+            <div><dt className="text-slate-400">Hold</dt><dd className="text-white">{displayMetrics.hold ?? "—"}</dd></div>
           </dl>
         </div>
         {isPublic ? (
