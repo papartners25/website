@@ -19,7 +19,7 @@ export type Deal = {
 export const DEALS: Deal[] = [
   {
     id: "summit-flats",
-    name: "Summit Flats",
+    name: "Summit Flats (32 units)",
     location: "Columbus, OH (Weinland Park)",
     summary: `This off-market value-add opportunity features creative 10% seller financing that eliminates Year 1 cash payments and delivers a fundable 1.27x DSCR while we execute renovations across 32 units in Columbus's Weinland Park—a B- neighborhood with strong upward momentum located just 0.5 miles from the Short North Arts District. Our $12,600 per-unit renovation program drives rents from current levels of $730-$1,050 to target rates of $995-$1,285 (blended $1,140), delivering a projected 22.63% levered IRR and 2.18x equity multiple with a month 18-20 refinance returning ~54% of initial equity. To emphasize downside protection, our pro forma underwrites to rents 13-20% below broker-confirmed market maximums of $1,150-$1,600, and even under severely stressed assumptions (85% of targets, extended timeline, no refinance), the deal still delivers 9.2% IRR with positive coverage throughout.`,
     metrics: { irr: "22.6%", equityMultiple: "2.16x", hold: "3-5 yrs" },
@@ -33,7 +33,7 @@ export const DEALS: Deal[] = [
   },
   {
     id: "south-of-mound",
-    name: "South of Mound",
+    name: "South of Mound (16 units)",
     location: "Columbus, OH",
     summary:
       "This value-add opportunity allows us to acquire a stabilized, cash-flowing asset in a B- neighborhood with immediate positive returns while executing a straightforward renovation program to drive rents from current levels of $800-$900 per unit to market-leading rates of $1,250+ per unit. To emphasize deal stability, our pro forma underwrites to an initial stabilized rent of $960/unit with 3.2% annual growth.",
