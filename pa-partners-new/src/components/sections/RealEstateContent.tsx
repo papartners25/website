@@ -62,7 +62,7 @@ export default function RealEstateContent() {
         </Container>
       </Section>
 
-      {/* Current acquisition highlight */}
+      {/* Current opportunities (summit first) */}
       <Section className="py-8 md:py-10">
         <Container>
           <motion.div
@@ -72,10 +72,14 @@ export default function RealEstateContent() {
             transition={{ duration: 0.5 }}
             className="surface rounded-xl p-5 md:p-6 shadow-card"
           >
-            <h2 className="text-xl md:text-2xl font-semibold text-white">Current Acquisition</h2>
-            <p className="text-slate-300 text-sm md:text-base mt-2">Actively pursuing our first value‑add location through the South of Mound acquisition.</p>
-            <div className="mt-4">
-              {DEALS.filter(d => d.id === "south-of-mound").map(d => (
+            <h2 className="text-xl md:text-2xl font-semibold text-white">Current Opportunities</h2>
+            <p className="text-slate-300 text-sm md:text-base mt-2">Explore active value‑add investments we’re underwriting now.</p>
+            <div className="mt-4 grid gap-4">
+              {(["summit-flats", "south-of-mound"]
+                .map(id => DEALS.find(d => d.id === id))
+                .filter((d): d is typeof DEALS[number] => Boolean(d))
+                .map(d => ({ ...d, imageUrl: undefined }))
+              ).map(d => (
                 <DealCard key={d.id} deal={d} isPublic={true} />
               ))}
             </div>
