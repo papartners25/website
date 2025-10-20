@@ -10,6 +10,8 @@ export type Deal = {
   pdfUrl: string;
   excelUrl: string;
   imageUrl?: string;
+  imageFit?: "cover" | "contain";
+  imagePosition?: string;
   footerNote?: string;
   hideSummaryTab?: boolean;
 };
@@ -26,6 +28,8 @@ export const DEALS: Deal[] = [
     pdfUrl: "/deals/summit-flats-executive-summary.pdf",
     excelUrl: "/deals/summit-flats-pro-forma.xlsx",
     imageUrl: "/deals/summit-flats-rendering.png",
+    imageFit: "contain",
+    imagePosition: "center",
   },
   {
     id: "south-of-mound",

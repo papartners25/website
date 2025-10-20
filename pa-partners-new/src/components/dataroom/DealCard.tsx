@@ -1,15 +1,14 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import type { Deal } from "@/lib/deals";
 
 export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: boolean }) {
   const [open, setOpen] = useState(false);
   // Determine initial preview based on deal config
-  const initialPreview: "summary" | "om" | "exec" | "brief" = deal.hideSummaryTab
-    ? (deal.execSummaryUrl ? "exec" : (deal.omUrl ? "om" : "summary"))
-    : "summary";
-  const [preview, setPreview] = useState<"summary" | "om" | "exec" | "brief">(initialPreview);
+  const initialPreview: "om" | "exec" | "brief" = deal.execSummaryUrl ? "exec" : (deal.omUrl ? "om" : (deal.briefUrl ? "brief" : "exec"));
+  const [preview, setPreview] = useState<"om" | "exec" | "brief">(initialPreview);
   const activeUrl =
     (preview === "brief" && deal.briefUrl)
       ? deal.briefUrl
@@ -17,7 +16,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
         ? deal.execSummaryUrl
         : (preview === "om" && deal.omUrl)
           ? deal.omUrl
-          : deal.pdfUrl;
+          : (deal.execSummaryUrl ?? deal.omUrl ?? deal.pdfUrl);
 
   // Public pages should show more conservative, rounded metrics.
   // Private (/dataroom) shows exact deal.metrics.
@@ -29,6 +28,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
   const displayMetrics = isPublic
     ? { ...deal.metrics, ...publicMetricOverrides[deal.id] }
     : deal.metrics;
+
   return (
     <article className="rounded-xl surface p-5">
       <div className="flex items-start justify-between gap-4">
@@ -37,8 +37,16 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
           <p className="text-slate-300 text-sm">{deal.location}</p>
           {deal.imageUrl && (
             <div className="mt-3 rounded-lg overflow-hidden border border-white/10 bg-white/5">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={deal.imageUrl} alt={`${deal.name} rendering`} className="w-full h-40 object-cover" />
+              <div className="relative w-full h-40">
+                <Image
+                  src={deal.imageUrl}
+                  alt={`${deal.name} rendering`}
+                  fill
+                  style={{ objectFit: deal.imageFit ?? "cover", objectPosition: deal.imagePosition ?? "center" }}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority={false}
+                />
+              </div>
             </div>
           )}
           <p className="text-slate-300 text-sm mt-2">{deal.summary}</p>
@@ -78,16 +86,6 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
                 Deal Brief
               </button>
             )}
-            {!deal.hideSummaryTab && (
-              <button
-                className={`inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm ${
-                  preview === "summary" ? "bg-white text-slate-900" : "text-slate-200 hover:text-white hover:bg-white/5"
-                }`}
-                onClick={() => setPreview("summary")}
-              >
-                PDF Summary
-              </button>
-            )}
             {deal.execSummaryUrl && (
               <button
                 className={`inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm ${
@@ -125,7 +123,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
             </div>
             <div className="hidden md:block">
               <iframe
-                title={`${deal.name} ${preview === "brief" ? "Deal Brief" : preview === "om" ? "OM" : preview === "exec" ? "Executive Summary" : "Summary PDF"}`}
+                title={`${deal.name} ${preview === "brief" ? "Deal Brief" : preview === "om" ? "OM" : "Executive Summary"}`}
                 src={`${activeUrl}#view=FitH`}
                 className="w-full h-[420px]"
               />
@@ -139,15 +137,6 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
                 className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:bg-white/5"
               >
                 Download Deal Brief (PDF)
-              </a>
-            )}
-            {!deal.hideSummaryTab && (
-              <a
-                href={deal.pdfUrl}
-                download
-                className="inline-flex items-center rounded-lg bg-white text-slate-900 px-3 py-1.5 text-sm font-medium hover:bg-slate-100"
-              >
-                Download PDF Summary
               </a>
             )}
             {deal.execSummaryUrl && (
