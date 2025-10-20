@@ -23,7 +23,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
   // Private (/dataroom) shows exact deal.metrics.
   const publicMetricOverrides: Record<string, Partial<Deal["metrics"]>> = {
     "south-of-mound": { irr: "20%+", equityMultiple: "2.0x+" },
-    "oakland-park-apartments": { irr: "15%+", equityMultiple: "2.0x+" },
+    "summit-flats": { irr: "20%+", equityMultiple: "2.0x+" },
   };
 
   const displayMetrics = isPublic
@@ -32,9 +32,15 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
   return (
     <article className="rounded-xl surface p-5">
       <div className="flex items-start justify-between gap-4">
-        <div>
+        <div className="flex-1 min-w-0">
           <h3 className="text-white font-medium">{deal.name}</h3>
           <p className="text-slate-300 text-sm">{deal.location}</p>
+          {deal.imageUrl && (
+            <div className="mt-3 rounded-lg overflow-hidden border border-white/10 bg-white/5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={deal.imageUrl} alt={`${deal.name} rendering`} className="w-full h-40 object-cover" />
+            </div>
+          )}
           <p className="text-slate-300 text-sm mt-2">{deal.summary}</p>
           <dl className="mt-3 grid grid-cols-3 gap-3 text-xs text-slate-300">
             <div><dt className="text-slate-400">Target IRR</dt><dd className="text-white">{displayMetrics.irr ?? "—"}</dd></div>

@@ -9,11 +9,24 @@ export type Deal = {
   briefUrl?: string;
   pdfUrl: string;
   excelUrl: string;
+  imageUrl?: string;
   footerNote?: string;
   hideSummaryTab?: boolean;
 };
 
 export const DEALS: Deal[] = [
+  {
+    id: "summit-flats",
+    name: "Summit Flats",
+    location: "Columbus, OH (Weinland Park)",
+    summary: `This off-market value-add opportunity features creative 10% seller financing that eliminates Year 1 cash payments and delivers a fundable 1.27x DSCR while we execute renovations across 32 units in Columbus's Weinland Park—a B- neighborhood with strong upward momentum located just 0.5 miles from the Short North Arts District. Our $12,600 per-unit renovation program drives rents from current levels of $730-$1,050 to target rates of $995-$1,285 (blended $1,140), delivering a projected 22.63% levered IRR and 2.18x equity multiple with a month 18-20 refinance returning ~54% of initial equity. To emphasize downside protection, our pro forma underwrites to rents 13-20% below broker-confirmed market maximums of $1,150-$1,600, and even under severely stressed assumptions (85% of targets, extended timeline, no refinance), the deal still delivers 9.2% IRR with positive coverage throughout.`,
+    metrics: { irr: "22.6%", equityMultiple: "2.16x", hold: "3-5 yrs" },
+    execSummaryUrl: "/deals/summit-flats-executive-summary.pdf",
+    omUrl: "/deals/summit-flats-investment-memorandum.pdf",
+    pdfUrl: "/deals/summit-flats-executive-summary.pdf",
+    excelUrl: "/deals/summit-flats-pro-forma.xlsx",
+    imageUrl: "/deals/summit-flats-rendering.png",
+  },
   {
     id: "south-of-mound",
     name: "South of Mound",
@@ -26,16 +39,6 @@ export const DEALS: Deal[] = [
     pdfUrl: "/deals/south-of-mound-executive-summary.pdf",
     excelUrl: "/deals/south-of-mound-pro-forma-2025-10-17.xlsx",
     hideSummaryTab: true,
-  },
-  {
-    id: "oakland-park-apartments",
-    name: "Oakland Park Apartments",
-    location: "Columbus, OH",
-    summary:
-      "A 8-unit multifamily investment located in the heart of North Linden. This well-maintained brick building features all 2-bedroom, 1-bathroom units with strong in-place rents. Each unit is separately metered, and tenants are responsible for all utilities, minimizing ownership expenses. The property offers on-site parking and has undergone recent capital improvements, making it an ideal low-maintenance addition to any investment portfolio.",
-    metrics: { irr: "18.9%", equityMultiple: "2.21x", hold: "2-5 yrs" },
-    pdfUrl: "/deals/oakland-park-apts-investment-proforma.pdf",
-    excelUrl: "/deals/oakland-park-apts-investment-proforma.xlsx",
   },
 ];
 
