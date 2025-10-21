@@ -203,7 +203,10 @@ BEGIN
   VALUES (
     NEW.id,
     NEW.email,
-    COALESCE(NEW.raw_user_meta_data->>'full_name', 'New Investor'),
+    CASE
+      WHEN lower(NEW.email) = 'invest@papartners.co' THEN 'Investor Admin'
+      ELSE COALESCE(NEW.raw_user_meta_data->>'full_name', 'New Investor')
+    END,
     'pending'
   );
   RETURN NEW;

@@ -1,18 +1,39 @@
 "use client";
 import Link from "next/link";
 import { NAV_ITEMS } from "@/lib/site";
-import { Menu } from "lucide-react";
-import { useState } from "react";
+import { LogOut, Menu } from "lucide-react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [isAuthed, setIsAuthed] = useState<boolean | null>(null);
+  const supabase = createClient();
+  const router = useRouter();
   const logoSources = [
     "/logo/pap-logo-gold.png",
     "/logo/pa-partners-logo.png",
     "/logo/pa-favicon.ico",
   ];
   const [logoIdx, setLogoIdx] = useState(0);
+
+  useEffect(() => {
+    let mounted = true;
+    supabase.auth.getSession().then(({ data }) => {
+      if (!mounted) return;
+      setIsAuthed(!!data.session);
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!mounted) return;
+      setIsAuthed(!!session);
+    });
+    return () => {
+      mounted = false;
+      sub.subscription.unsubscribe();
+    };
+  }, [supabase]);
   return (
     <header className="sticky top-0 z-40">
       <div className="mx-auto max-w-6xl px-4">
@@ -37,9 +58,21 @@ export default function Header() {
           ))}
           </nav>
           <div className="flex items-center gap-2">
-            <Link href="/login" className="hidden md:inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:border-white/20">
-              Investor Login
-            </Link>
+            {isAuthed ? (
+              <button
+                onClick={async () => { if (typeof window !== 'undefined') { try { sessionStorage.removeItem('investorDealsModalShown_v1'); sessionStorage.removeItem('admin_integrations_unlocked_v1'); } catch {} } await supabase.auth.signOut(); router.push("/"); }}
+                className="hidden md:inline-flex items-center gap-2 rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:border-white/20"
+                aria-label="Logout"
+                title="Logout"
+              >
+                <LogOut size={16} />
+                <span>Logout</span>
+              </button>
+            ) : (
+              <Link href="/login" className="hidden md:inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:border-white/20">
+                Investor Login
+              </Link>
+            )}
             <button
               className="md:hidden inline-flex items-center p-2 rounded-lg hover:bg-white/5"
               aria-label="Open navigation menu"
@@ -65,7 +98,17 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
-              <Link href="/login" className="px-2 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-white/5">Investor Login</Link>
+              {isAuthed ? (
+                <button
+                  onClick={async () => { if (typeof window !== 'undefined') { try { sessionStorage.removeItem('investorDealsModalShown_v1'); sessionStorage.removeItem('admin_integrations_unlocked_v1'); } catch {} } await supabase.auth.signOut(); setOpen(false); router.push("/"); }}
+                  className="px-2 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-white/5 inline-flex items-center gap-2"
+                >
+                  <LogOut size={16} />
+                  <span>Logout</span>
+                </button>
+              ) : (
+                <Link href="/login" className="px-2 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-white/5" onClick={() => setOpen(false)}>Investor Login</Link>
+              )}
             </div>
           </div>
         </div>

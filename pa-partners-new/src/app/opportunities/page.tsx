@@ -5,7 +5,7 @@ import Section from "@/components/layout/Section";
 import { DEALS, computeDealStats } from "@/lib/deals";
 import DealCard from "@/components/dataroom/DealCard";
 import Link from "next/link";
-import { TrendingUp, Building2, LogIn } from "lucide-react";
+import { TrendingUp, Building2, Mail } from "lucide-react";
 import PortalPreview from "@/components/common/PortalPreview";
 
 export default function OpportunitiesPage() {
@@ -23,13 +23,21 @@ export default function OpportunitiesPage() {
                   Explore current deals available for investment
                 </p>
               </div>
-              <Link
-                href="/login?next=/dataroom"
+              <a
+                href="mailto:invest@papartners.co?subject=Investment%20Inquiry"
                 className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-sm text-slate-300 hover:text-white hover:border-white/20 transition-colors"
+                aria-label="Email Investment Inquiry"
+                onClick={(e) => {
+                  // Force Chrome to invoke the OS/mail client
+                  try {
+                    e.preventDefault();
+                    window.location.href = "mailto:invest@papartners.co?subject=Investment%20Inquiry";
+                  } catch {}
+                }}
               >
-                <LogIn size={16} />
-                <span className="hidden sm:inline">Investor Login</span>
-              </Link>
+                <Mail size={16} />
+                <span className="hidden sm:inline">Email Investment Team</span>
+              </a>
             </div>
           </div>
 

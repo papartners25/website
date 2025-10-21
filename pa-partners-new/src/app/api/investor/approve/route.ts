@@ -161,7 +161,9 @@ export async function POST(request: Request) {
         return new NextResponse('User not found', { status: 404 });
       }
       const meta = (authUser.user_metadata ?? {}) as Record<string, unknown>;
-      const fullName = typeof meta.full_name === 'string' ? meta.full_name : 'New Investor';
+      const adminEmail = 'invest@papartners.co';
+      const baseFullName = typeof meta.full_name === 'string' ? meta.full_name : 'New Investor';
+      const fullName = (authUser.email?.toLowerCase() === adminEmail) ? 'Investor Admin' : baseFullName;
       const { data: inserted, error: insertProfileError } = await supabase
         .from('investor_profiles')
         .insert({ id: authUser.id, email: (authUser.email as string), full_name: fullName, approval_status: 'pending' })
