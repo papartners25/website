@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Deal } from "@/lib/deals";
@@ -80,16 +81,24 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
                   <>
                     <button
                       aria-label="Previous image"
-                      className="absolute left-0 top-0 h-full w-1/2 cursor-pointer bg-gradient-to-r from-black/0 to-black/0 hover:to-black/10"
+                      className="absolute left-0 top-0 h-full w-1/2 cursor-pointer bg-gradient-to-r from-black/0 to-black/0 hover:to-black/10 z-[1]"
                       onMouseEnter={() => setFlipped(false)}
                       onClick={(e) => { e.stopPropagation(); setFlipped(false); }}
-                    />
+                    >
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/80 opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none">
+                        <ChevronLeft size={20} />
+                      </span>
+                    </button>
                     <button
                       aria-label="Next image"
-                      className="absolute right-0 top-0 h-full w-1/2 cursor-pointer bg-gradient-to-l from-black/0 to-black/0 hover:to-black/10"
+                      className="absolute right-0 top-0 h-full w-1/2 cursor-pointer bg-gradient-to-l from-black/0 to-black/0 hover:to-black/10 z-[1]"
                       onMouseEnter={() => setFlipped(true)}
                       onClick={(e) => { e.stopPropagation(); setFlipped(true); }}
-                    />
+                    >
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-white/80 opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none">
+                        <ChevronRight size={20} />
+                      </span>
+                    </button>
                   </>
                 )}
                 {/* Center expand button */}
