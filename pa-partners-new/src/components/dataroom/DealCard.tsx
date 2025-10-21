@@ -7,6 +7,8 @@ import type { Deal } from "@/lib/deals";
 export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: boolean }) {
   const [open, setOpen] = useState(false);
   const [flipped, setFlipped] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [lightbox, setLightbox] = useState(false);
   // Determine initial preview based on deal config
   const initialPreview: "om" | "exec" | "brief" = deal.execSummaryUrl ? "exec" : (deal.omUrl ? "om" : (deal.briefUrl ? "brief" : "exec"));
   const [preview, setPreview] = useState<"om" | "exec" | "brief">(initialPreview);
@@ -30,13 +32,15 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
     ? { ...deal.metrics, ...publicMetricOverrides[deal.id] }
     : deal.metrics;
 
-  // Timed crossfade between primary and secondary renderings every 7.5s (reduced-motion aware)
+  // Timed crossfade between primary and secondary renderings every 10s (reduced-motion aware)
   useEffect(() => {
     if (!deal.secondaryImageUrl) return;
     if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const id = setInterval(() => setFlipped((v) => !v), 7500);
+    const id = setInterval(() => {
+      if (!paused) setFlipped((v) => !v);
+    }, 10000);
     return () => clearInterval(id);
-  }, [deal.secondaryImageUrl]);
+  }, [deal.secondaryImageUrl, paused]);
 
   return (
     <article className="rounded-xl surface p-5">
@@ -46,7 +50,11 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
           <p className="text-slate-300 text-sm">{deal.location}</p>
           {deal.imageUrl && (
             <div className="mt-3 rounded-lg overflow-hidden border border-white/10 bg-white/5">
-              <div className="relative w-full h-40 group">
+              <div
+                className="relative w-full h-40 group"
+                onMouseEnter={() => setPaused(true)}
+                onMouseLeave={() => setPaused(false)}
+              >
                 <Image
                   src={deal.imageUrl}
                   alt={`${deal.name} rendering`}
@@ -54,7 +62,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
                   style={{ objectFit: deal.imageFit ?? "cover", objectPosition: deal.imagePosition ?? "center" }}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   priority={false}
-                  className={deal.secondaryImageUrl ? `transition-opacity duration-700 ease-out ${flipped ? 'opacity-0' : 'opacity-100'} group-hover:opacity-0` : undefined}
+                  className={deal.secondaryImageUrl ? `transition-opacity duration-700 ease-out ${flipped ? 'opacity-0' : 'opacity-100'}` : undefined}
                 />
                 {deal.secondaryImageUrl && (
                   <Image
@@ -64,9 +72,32 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
                     style={{ objectFit: deal.imageFit ?? "cover", objectPosition: deal.imagePosition ?? "center" }}
                     sizes="(max-width: 768px) 100vw, 50vw"
                     priority={false}
-                    className={`transition-opacity duration-700 ease-out ${flipped ? 'opacity-100' : 'opacity-0'} group-hover:opacity-100`}
+                    className={`transition-opacity duration-700 ease-out ${flipped ? 'opacity-100' : 'opacity-0'}`}
                   />
                 )}
+                {/* Hover left/right zones for manual navigation */}
+                {deal.secondaryImageUrl && (
+                  <>
+                    <button
+                      aria-label="Previous image"
+                      className="absolute left-0 top-0 h-full w-1/2 cursor-pointer bg-gradient-to-r from-black/0 to-black/0 hover:to-black/10"
+                      onMouseEnter={() => setFlipped(false)}
+                      onClick={(e) => { e.stopPropagation(); setFlipped(false); }}
+                    />
+                    <button
+                      aria-label="Next image"
+                      className="absolute right-0 top-0 h-full w-1/2 cursor-pointer bg-gradient-to-l from-black/0 to-black/0 hover:to-black/10"
+                      onMouseEnter={() => setFlipped(true)}
+                      onClick={(e) => { e.stopPropagation(); setFlipped(true); }}
+                    />
+                  </>
+                )}
+                {/* Center expand button */}
+                <button
+                  aria-label="Expand image"
+                  className="absolute inset-0"
+                  onClick={() => { setPaused(true); setLightbox(true); }}
+                />
               </div>
             </div>
           )}
@@ -191,6 +222,24 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
               {deal.footerNote}
             </p>
           )}
+        </div>
+      )}
+      {/* Lightbox modal for image expand */}
+      {lightbox && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4" onClick={() => { setLightbox(false); setPaused(false); }}>
+          <button aria-label="Close" className="absolute inset-0 bg-black/70" />
+          <div className="relative z-10 w-full max-w-4xl">
+            <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
+              <Image
+                src={flipped && deal.secondaryImageUrl ? deal.secondaryImageUrl : (deal.imageUrl as string)}
+                alt={`${deal.name} enlarged`}
+                fill
+                sizes="100vw"
+                priority
+                className="rounded-xl object-contain bg-black/20"
+              />
+            </div>
+          </div>
         </div>
       )}
     </article>
