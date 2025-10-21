@@ -1,6 +1,15 @@
 import { NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase/server';
 
+// NEXT ACTION NOTE (for agent/owner):
+// - Replace placeholder token exchange below with real POST to Intuit token endpoint:
+//   POST https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer
+//   headers: Authorization: Basic base64(client_id:client_secret), Content-Type: application/x-www-form-urlencoded
+//   body: grant_type=authorization_code&code=${code}&redirect_uri=${redirectUri}
+// - Securely store access_token, refresh_token, expires_in; compute token_expires_at
+// - Consider encrypting tokens at rest or using a secrets manager
+// - Ensure redirect URI matches Intuit app config: {NEXT_PUBLIC_SITE_URL}/api/integrations/quickbooks/callback
+
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
