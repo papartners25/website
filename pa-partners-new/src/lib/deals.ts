@@ -10,6 +10,7 @@ export type Deal = {
   pdfUrl: string;
   excelUrl: string;
   imageUrl?: string;
+  secondaryImageUrl?: string;
   imageFit?: "cover" | "contain";
   imagePosition?: string;
   footerNote?: string;
@@ -28,6 +29,7 @@ export const DEALS: Deal[] = [
     pdfUrl: "/deals/summit-flats-executive-summary.pdf",
     excelUrl: "/deals/summit-flats-pro-forma.xlsx",
     imageUrl: "/deals/summit-flats-rendering.png",
+    secondaryImageUrl: "/deals/summit-flats-rendering-2.png",
     imageFit: "contain",
     imagePosition: "center",
   },

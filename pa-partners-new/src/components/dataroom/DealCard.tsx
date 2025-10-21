@@ -37,7 +37,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
           <p className="text-slate-300 text-sm">{deal.location}</p>
           {deal.imageUrl && (
             <div className="mt-3 rounded-lg overflow-hidden border border-white/10 bg-white/5">
-              <div className="relative w-full h-40">
+              <div className="relative w-full h-40 group">
                 <Image
                   src={deal.imageUrl}
                   alt={`${deal.name} rendering`}
@@ -45,7 +45,19 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
                   style={{ objectFit: deal.imageFit ?? "cover", objectPosition: deal.imagePosition ?? "center" }}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   priority={false}
+                  className={deal.secondaryImageUrl ? "transition-opacity duration-700 ease-out opacity-100 group-hover:opacity-0" : undefined}
                 />
+                {deal.secondaryImageUrl && (
+                  <Image
+                    src={deal.secondaryImageUrl}
+                    alt={`${deal.name} alternate rendering`}
+                    fill
+                    style={{ objectFit: deal.imageFit ?? "cover", objectPosition: deal.imagePosition ?? "center" }}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority={false}
+                    className="transition-opacity duration-700 ease-out opacity-0 group-hover:opacity-100"
+                  />
+                )}
               </div>
             </div>
           )}
