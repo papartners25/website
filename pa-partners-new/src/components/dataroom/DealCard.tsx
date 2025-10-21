@@ -81,8 +81,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
                   <>
                     <button
                       aria-label="Previous image"
-                      className="absolute left-0 top-0 h-full w-1/2 cursor-pointer bg-gradient-to-r from-black/0 to-black/0 hover:to-black/10 z-[1]"
-                      onMouseEnter={() => setFlipped(false)}
+                      className="absolute left-0 top-0 h-full w-1/3 cursor-pointer bg-gradient-to-r from-black/0 to-black/0 hover:to-black/10 z-[2]"
                       onClick={(e) => { e.stopPropagation(); setFlipped(false); }}
                     >
                       <span className="absolute left-3 top-1/2 -translate-y-1/2 text-white/80 opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none">
@@ -91,8 +90,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
                     </button>
                     <button
                       aria-label="Next image"
-                      className="absolute right-0 top-0 h-full w-1/2 cursor-pointer bg-gradient-to-l from-black/0 to-black/0 hover:to-black/10 z-[1]"
-                      onMouseEnter={() => setFlipped(true)}
+                      className="absolute right-0 top-0 h-full w-1/3 cursor-pointer bg-gradient-to-l from-black/0 to-black/0 hover:to-black/10 z-[2]"
                       onClick={(e) => { e.stopPropagation(); setFlipped(true); }}
                     >
                       <span className="absolute right-3 top-1/2 -translate-y-1/2 text-white/80 opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none">
@@ -104,7 +102,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
                 {/* Center expand button */}
                 <button
                   aria-label="Expand image"
-                  className="absolute inset-0"
+                  className="absolute top-0 bottom-0 left-1/3 right-1/3 z-[1]"
                   onClick={() => { setPaused(true); setLightbox(true); }}
                 />
               </div>
