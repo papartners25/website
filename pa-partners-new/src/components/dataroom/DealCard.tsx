@@ -33,13 +33,13 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
     ? { ...deal.metrics, ...publicMetricOverrides[deal.id] }
     : deal.metrics;
 
-  // Timed crossfade between primary and secondary renderings every 10s (reduced-motion aware)
+  // Timed crossfade between primary and secondary renderings every 8.25s (reduced-motion aware)
   useEffect(() => {
     if (!deal.secondaryImageUrl) return;
     if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const id = setInterval(() => {
       if (!paused) setFlipped((v) => !v);
-    }, 10000);
+    }, 8250);
     return () => clearInterval(id);
   }, [deal.secondaryImageUrl, paused]);
 
