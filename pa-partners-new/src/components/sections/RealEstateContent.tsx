@@ -7,9 +7,28 @@ import DealCard from "@/components/dataroom/DealCard";
 import Link from "next/link";
 import React from "react";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { createClient } from "@/lib/supabase/client";
 
 export default function RealEstateContent() {
   const stats = computeDealStats(DEALS);
+  const supabase = createClient();
+  const [isAuthed, setIsAuthed] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    let mounted = true;
+    supabase.auth.getSession().then(({ data }) => {
+      if (!mounted) return;
+      setIsAuthed(!!data.session);
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!mounted) return;
+      setIsAuthed(!!session);
+    });
+    return () => {
+      mounted = false;
+      sub.subscription.unsubscribe();
+    };
+  }, [supabase]);
   return (
     <>
       {/* Page header with smooth entrance to match home transitions */}
@@ -80,7 +99,7 @@ export default function RealEstateContent() {
                 .filter((d): d is typeof DEALS[number] => Boolean(d))
                 .map(d => ({ ...d, imageUrl: undefined }))
               ).map(d => (
-                <DealCard key={d.id} deal={d} isPublic={true} />
+                <DealCard key={d.id} deal={d} isPublic={!isAuthed} />
               ))}
             </div>
           </motion.div>
