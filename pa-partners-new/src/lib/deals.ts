@@ -21,7 +21,7 @@ export const DEALS: Deal[] = [
     id: "summit-flats",
     name: "Summit Flats (32 units)",
     location: "Columbus, OH (Weinland Park)",
-    summary: `This off‑market value‑add opportunity pairs creative 10% seller financing with a straightforward renovation program across 32 units in Columbus’s Weinland Park—just a half‑mile from the Short North. The structure removes Year 1 cash payments and supports a fundable 1.27x DSCR while we execute $12.6K per‑unit upgrades to reposition interiors and lift rents to updated market levels. We’re targeting a 20%+ levered IRR and 2.0x+ equity multiple with a mid‑term refinance designed to return a majority of invested equity. Under conservative underwriting and stress tests, cash flow coverage remains positive throughout.`,
+    summary: `This off‑market value‑add opportunity pairs creative 10% seller financing with a straightforward renovation program across 32 units in Columbus’s Weinland Park, just a half‑mile from the Short North. The structure removes Year 1 cash payments and supports a fundable 1.27x DSCR while we execute $12.6K per‑unit upgrades to reposition interiors and lift rents to updated market levels. We’re targeting a 20%+ levered IRR and 2.0x+ equity multiple with a mid‑term refinance designed to return a majority of invested equity. Under conservative underwriting and stress tests, cash flow coverage remains positive throughout.`,
     metrics: { irr: "22.6%", equityMultiple: "2.16x", hold: "3-5 yrs" },
     execSummaryUrl: "/deals/summit-flats-executive-summary.pdf",
     omUrl: "/deals/summit-flats-investment-memorandum.pdf",
