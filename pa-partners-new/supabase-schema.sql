@@ -223,3 +223,34 @@ CREATE TRIGGER on_auth_user_created
 GRANT USAGE ON SCHEMA public TO anon, authenticated;
 GRANT ALL ON ALL TABLES IN SCHEMA public TO anon, authenticated;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated;
+
+-- Integration connections table (stores provider auth tokens securely)
+CREATE TABLE IF NOT EXISTS public.integration_connections (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  investor_id UUID REFERENCES public.investor_profiles(id) ON DELETE CASCADE NOT NULL,
+  provider TEXT NOT NULL, -- quickbooks, appfolio, stripe, etc.
+  status TEXT NOT NULL DEFAULT 'connected',
+  access_token TEXT,
+  refresh_token TEXT,
+  token_expires_at TIMESTAMP WITH TIME ZONE,
+  meta JSONB DEFAULT '{}',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_integration_connections_investor_provider ON public.integration_connections(investor_id, provider);
+
+ALTER TABLE public.integration_connections ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Owner can view own integrations"
+  ON public.integration_connections FOR SELECT
+  USING (auth.uid() = investor_id);
+
+CREATE POLICY "Owner can manage own integrations"
+  ON public.integration_connections FOR INSERT
+  WITH CHECK (auth.uid() = investor_id);
+
+CREATE POLICY "Owner can update own integrations"
+  ON public.integration_connections FOR UPDATE
+  USING (auth.uid() = investor_id)
+  WITH CHECK (auth.uid() = investor_id);

@@ -23,6 +23,10 @@ export default function IntegrationConnectModal({ service, onClose }: { service:
     try {
       setLoading(true);
       setMessage(null);
+      if (service === 'quickbooks') {
+        window.location.href = '/api/integrations/quickbooks/start';
+        return;
+      }
       const res = await fetch(`/api/integrations/${service}/connect`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

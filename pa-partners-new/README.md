@@ -1,3 +1,20 @@
+## QuickBooks OAuth (stub)
+
+Environment variables required:
+
+- `QB_CLIENT_ID`
+- `QB_CLIENT_SECRET` (used when you implement token exchange)
+- `NEXT_PUBLIC_SITE_URL` (e.g. `http://localhost:3000` during local dev)
+
+Routes added:
+
+- `GET /api/integrations/quickbooks/start` → redirects to QuickBooks authorize
+- `GET /api/integrations/quickbooks/callback` → handles redirect and stores placeholder tokens in `integration_connections`
+
+You must configure the redirect URI in Intuit Developer portal to:
+
+`{NEXT_PUBLIC_SITE_URL}/api/integrations/quickbooks/callback`
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
