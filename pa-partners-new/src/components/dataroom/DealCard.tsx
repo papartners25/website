@@ -10,6 +10,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
   const [flipped, setFlipped] = useState(false);
   const [paused, setPaused] = useState(false);
   const [lightbox, setLightbox] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
   // Determine initial preview based on deal config
   const initialPreview: "om" | "exec" | "brief" = deal.execSummaryUrl ? "exec" : (deal.omUrl ? "om" : (deal.briefUrl ? "brief" : "exec"));
   const [preview, setPreview] = useState<"om" | "exec" | "brief">(initialPreview);
@@ -42,6 +43,14 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
     }, 8250);
     return () => clearInterval(id);
   }, [deal.secondaryImageUrl, paused]);
+
+  // Detect touch devices to adjust interactivity (expand entire image on tap)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const hoverNone = window.matchMedia && window.matchMedia('(hover: none)').matches;
+    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+    setIsTouch(Boolean(hoverNone || hasTouch));
+  }, []);
 
   return (
     <article className="rounded-xl surface p-5">
@@ -77,7 +86,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
                   />
                 )}
                 {/* Hover left/right zones for manual navigation */}
-                {deal.secondaryImageUrl && (
+                {deal.secondaryImageUrl && !isTouch && (
                   <>
                     <button
                       aria-label="Previous image"
@@ -102,7 +111,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
                 {/* Center expand button */}
                 <button
                   aria-label="Expand image"
-                  className="absolute top-0 bottom-0 left-1/3 right-1/3 z-[1]"
+                  className={isTouch ? "absolute inset-0 z-[1]" : "absolute top-0 bottom-0 left-1/3 right-1/3 z-[1]"}
                   onClick={() => { setPaused(true); setLightbox(true); }}
                 />
               </div>
