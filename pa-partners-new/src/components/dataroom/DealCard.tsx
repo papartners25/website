@@ -1,11 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Deal } from "@/lib/deals";
 
 export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: boolean }) {
   const [open, setOpen] = useState(false);
+  const [flipped, setFlipped] = useState(false);
   // Determine initial preview based on deal config
   const initialPreview: "om" | "exec" | "brief" = deal.execSummaryUrl ? "exec" : (deal.omUrl ? "om" : (deal.briefUrl ? "brief" : "exec"));
   const [preview, setPreview] = useState<"om" | "exec" | "brief">(initialPreview);
@@ -29,6 +30,14 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
     ? { ...deal.metrics, ...publicMetricOverrides[deal.id] }
     : deal.metrics;
 
+  // Timed crossfade between primary and secondary renderings every 7.5s (reduced-motion aware)
+  useEffect(() => {
+    if (!deal.secondaryImageUrl) return;
+    if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const id = setInterval(() => setFlipped((v) => !v), 7500);
+    return () => clearInterval(id);
+  }, [deal.secondaryImageUrl]);
+
   return (
     <article className="rounded-xl surface p-5">
       <div className="flex items-start justify-between gap-4">
@@ -45,7 +54,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
                   style={{ objectFit: deal.imageFit ?? "cover", objectPosition: deal.imagePosition ?? "center" }}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   priority={false}
-                  className={deal.secondaryImageUrl ? "transition-opacity duration-700 ease-out opacity-100 group-hover:opacity-0" : undefined}
+                  className={deal.secondaryImageUrl ? `transition-opacity duration-700 ease-out ${flipped ? 'opacity-0' : 'opacity-100'} group-hover:opacity-0` : undefined}
                 />
                 {deal.secondaryImageUrl && (
                   <Image
@@ -55,7 +64,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
                     style={{ objectFit: deal.imageFit ?? "cover", objectPosition: deal.imagePosition ?? "center" }}
                     sizes="(max-width: 768px) 100vw, 50vw"
                     priority={false}
-                    className="transition-opacity duration-700 ease-out opacity-0 group-hover:opacity-100"
+                    className={`transition-opacity duration-700 ease-out ${flipped ? 'opacity-100' : 'opacity-0'} group-hover:opacity-100`}
                   />
                 )}
               </div>
