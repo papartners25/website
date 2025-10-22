@@ -133,12 +133,22 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
             <span className="hidden sm:inline">Login to Expand</span>
           </Link>
         ) : (
-          <button
-            className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:bg-white/5"
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? "Hide" : "Expand"}
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:bg-white/5"
+              onClick={() => setOpen((v) => !v)}
+            >
+              {open ? "Hide" : "Expand"}
+            </button>
+            {deal.strategyUrl && (
+              <Link
+                href={deal.strategyUrl}
+                className="inline-flex items-center rounded-lg bg-white text-slate-900 px-3 py-1.5 text-sm font-medium hover:bg-slate-100"
+              >
+                Tax & Refi Strategy
+              </Link>
+            )}
+          </div>
         )}
       </div>
       {!isPublic && open && (

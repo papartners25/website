@@ -15,6 +15,7 @@ export type Deal = {
   imagePosition?: string;
   footerNote?: string;
   hideSummaryTab?: boolean;
+  strategyUrl?: string;
 };
 
 export const DEALS: Deal[] = [
@@ -32,6 +33,7 @@ export const DEALS: Deal[] = [
     secondaryImageUrl: "/deals/summit-flats-rendering-2.png",
     imageFit: "contain",
     imagePosition: "center",
+    strategyUrl: "/dataroom/summit-flats/strategy",
   },
   {
     id: "south-of-mound",
