@@ -718,7 +718,7 @@ const CostSegPresentation = () => {
         <div className="space-y-6">
           <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded">
             <p className="text-lg text-gray-700 leading-relaxed">
-              When the property is sold, depreciation taken must be "recaptured" and taxed. However, the <span className="font-bold">time value of money</span> and <span className="font-bold">favorable recapture rates</span> still result in significant net benefits.
+              When the property is sold, depreciation taken must be &quot;recaptured&quot; and taxed. However, the <span className="font-bold">time value of money</span> and <span className="font-bold">favorable recapture rates</span> still result in significant net benefits.
             </p>
           </div>
 
@@ -1058,7 +1058,7 @@ const CostSegPresentation = () => {
             <h3 className="text-xl font-bold mb-4 text-gray-800">Common Investor Questions</h3>
             <div className="space-y-4">
               <div className="border-l-4 border-blue-500 pl-4 py-2">
-                <p className="font-semibold text-gray-800 mb-1">Q: What if I can't use the losses right away?</p>
+                <p className="font-semibold text-gray-800 mb-1">Q: What if I can&apos;t use the losses right away?</p>
                 <p className="text-sm text-gray-600">A: Losses carry forward indefinitely and can be used when you have passive income or when the property is sold. Plus, you still benefit from the tax-free refinance proceeds.</p>
               </div>
               <div className="border-l-4 border-blue-500 pl-4 py-2">
