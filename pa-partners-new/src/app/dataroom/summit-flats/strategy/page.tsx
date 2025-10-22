@@ -1,7 +1,7 @@
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
 import Link from "next/link";
-import { ArrowLeft, FileDown, FileText, Table, Mail } from "lucide-react";
+import { ArrowLeft, Mail } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import StrategySplit from "@/components/dataroom/StrategySplit";
 import { DEALS } from "@/lib/deals";

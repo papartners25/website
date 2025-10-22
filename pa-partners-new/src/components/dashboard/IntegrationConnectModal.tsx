@@ -34,8 +34,9 @@ export default function IntegrationConnectModal({ service, onClose }: { service:
       });
       if (!res.ok) throw new Error(await res.text());
       setMessage("Connected successfully (stub)");
-    } catch (e: any) {
-      setMessage(e?.message || "Failed to connect");
+    } catch (e: unknown) {
+      const errMessage = typeof e === "object" && e && "message" in e ? String((e as { message?: unknown }).message) : undefined;
+      setMessage(errMessage || "Failed to connect");
     } finally {
       setLoading(false);
     }

@@ -542,7 +542,7 @@ const CostSegPresentation = () => {
                   <div className="font-bold text-lg text-gray-800">Ongoing Ownership</div>
                   <div className="text-sm text-gray-600 mt-1">Receiving 70% of cash distributions + 70% of profits at sale (after capital & preferred return)</div>
                   <div className="text-lg font-bold text-purple-600 mt-2">Still own 95% of $4.45M asset</div>
-                  <div className="text-sm text-gray-600 mt-2 italic">All future returns calculated on ~$4K remaining basis = "infinite" returns</div>
+                  <div className="text-sm text-gray-600 mt-2 italic">All future returns calculated on ~$4K remaining basis = &quot;infinite&quot; returns</div>
                 </div>
               </div>
             </div>
@@ -882,7 +882,7 @@ const CostSegPresentation = () => {
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-yellow-600 font-bold">•</span>
-                  <span><span className="font-semibold">First-time passive investors</span> (still benefit, but can't use losses immediately)</span>
+                  <span><span className="font-semibold">First-time passive investors</span> (still benefit, but can&apos;t use losses immediately)</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <span className="text-yellow-600 font-bold">•</span>
@@ -921,7 +921,7 @@ const CostSegPresentation = () => {
 
           <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
             <p className="text-center text-gray-700">
-              <span className="font-bold text-blue-700">Bottom Line:</span> Even if you can't use losses immediately, they create value by reducing taxes at sale or when you generate future passive income. The strategy works for all investors, but provides <span className="font-bold">immediate cash benefits</span> for those who can utilize losses now. Plus, the <span className="font-bold">refinance benefit is available to everyone regardless of tax status</span>.
+              <span className="font-bold text-blue-700">Bottom Line:</span> Even if you can&apos;t use losses immediately, they create value by reducing taxes at sale or when you generate future passive income. The strategy works for all investors, but provides <span className="font-bold">immediate cash benefits</span> for those who can utilize losses now. Plus, the <span className="font-bold">refinance benefit is available to everyone regardless of tax status</span>.
             </p>
           </div>
         </div>
@@ -1071,7 +1071,7 @@ const CostSegPresentation = () => {
               </div>
               <div className="border-l-4 border-blue-500 pl-4 py-2">
                 <p className="font-semibold text-gray-800 mb-1">Q: What happens if we sell before Year 5?</p>
-                <p className="text-sm text-gray-600">A: You'll pay recapture taxes on the depreciation taken, but you still benefit from the time value of money and rate arbitrage. The economic benefit remains positive.</p>
+                <p className="text-sm text-gray-600">A: You&apos;ll pay recapture taxes on the depreciation taken, but you still benefit from the time value of money and rate arbitrage. The economic benefit remains positive.</p>
               </div>
               <div className="border-l-4 border-blue-500 pl-4 py-2">
                 <p className="font-semibold text-gray-800 mb-1">Q: Can I do a 1031 exchange when I exit?</p>
@@ -1104,7 +1104,7 @@ const CostSegPresentation = () => {
 
           <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-6 rounded-lg text-center">
             <p className="text-2xl font-bold mb-2">Ready to Move Forward?</p>
-            <p className="text-lg opacity-90">Let's discuss how the Weinland Park Summit opportunity fits your investment goals</p>
+            <p className="text-lg opacity-90">Let&apos;s discuss how the Weinland Park Summit opportunity fits your investment goals</p>
           </div>
         </div>
       )
@@ -1227,7 +1227,7 @@ const CostSegPresentation = () => {
 
           <div className="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-8 rounded-lg text-center">
             <p className="text-2xl font-bold mb-3">Questions About Weinland Park Summit?</p>
-            <p className="text-lg mb-4">We're here to help you understand how this opportunity fits your portfolio</p>
+            <p className="text-lg mb-4">We&apos;re here to help you understand how this opportunity fits your portfolio</p>
             <div className="text-sm opacity-75">
               Please consult with your tax advisor to determine your individual tax benefits
             </div>
