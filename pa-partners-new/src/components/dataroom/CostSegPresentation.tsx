@@ -581,7 +581,7 @@ const CostSegPresentation = () => {
               <div>
                 <div className="font-bold text-yellow-800 mb-2">What This Means</div>
                 <p className="text-gray-700">
-                  This is the power of combining strategic tax planning with disciplined value-add execution. LPs achieve an "infinite return" position 
+                  This is the power of combining strategic tax planning with disciplined value-add execution. LPs achieve an &quot;infinite return&quot; position 
                   where all future cash flows and appreciation represent pure profit with minimal capital at risk.
                 </p>
               </div>
