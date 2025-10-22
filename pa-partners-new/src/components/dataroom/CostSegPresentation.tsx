@@ -964,7 +964,7 @@ const CostSegPresentation = () => {
               <li>• <span className="font-semibold">Recapture risk:</span> Early sale results in recapture taxes, reducing overall benefit</li>
               <li>• <span className="font-semibold">Legislative risk:</span> Tax laws can change; bonus depreciation may be reduced or eliminated</li>
               <li>• <span className="font-semibold">Alternative Minimum Tax (AMT):</span> Some investors may be subject to AMT, reducing benefits</li>
-              <li>• <span className="font-semibold">State taxes:</span> State tax treatment varies; some states don't allow bonus depreciation</li>
+              <li>• <span className="font-semibold">State taxes:</span> State tax treatment varies; some states don&apos;t allow bonus depreciation</li>
               <li>• <span className="font-semibold">1031 exchange impact:</span> Exchanging into this property may limit depreciable basis</li>
               <li>• <span className="font-semibold">Refinance contingencies:</span> Refinance is contingent on successful value-add execution, market conditions, and lender approval</li>
             </ul>
@@ -1217,7 +1217,7 @@ const CostSegPresentation = () => {
               <div>
                 <div className="font-bold text-yellow-800 mb-2">Conservative Underwriting</div>
                 <p className="text-gray-700">
-                  We've underwritten this deal <span className="font-bold">WITHOUT</span> relying on cost segregation benefits or refinance proceeds
+                  We&apos;ve underwritten this deal <span className="font-bold">WITHOUT</span> relying on cost segregation benefits or refinance proceeds
                   to hit our return targets. These strategies represent <span className="font-bold">pure upside</span> to a fundamentally sound investment—not 
                   a requirement to make the deal work.
                 </p>
