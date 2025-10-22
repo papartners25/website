@@ -48,7 +48,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const hoverNone = window.matchMedia && window.matchMedia('(hover: none)').matches;
-    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+    const hasTouch = 'ontouchstart' in window || (navigator.maxTouchPoints ?? 0) > 0;
     setIsTouch(Boolean(hoverNone || hasTouch));
   }, []);
 
