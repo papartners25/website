@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useRef, useState, useCallback } from "react";
+import { useMemo, useRef, useState, useCallback, useEffect } from "react";
 import { Minus, Plus, Maximize2, Minimize2, Highlighter, FileDown, FileText, Table } from "lucide-react";
 import CostSegPresentation from "@/components/dataroom/CostSegPresentation";
 import type { Deal } from "@/lib/deals";
@@ -11,7 +11,7 @@ export default function StrategySplit({ deal }: { deal: Deal | undefined }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const contentOuterRef = useRef<HTMLDivElement | null>(null);
 
-  const clamp = (v: number) => Math.min(1.25, Math.max(0.6, v));
+  const clamp = (v: number) => Math.min(1.25, Math.max(0.5, v));
 
   const fitToWidth = useCallback(() => {
     const container = containerRef.current;
@@ -33,6 +33,43 @@ export default function StrategySplit({ deal }: { deal: Deal | undefined }) {
   }), [zoom]);
 
   // no dynamic height; allow the surface padding to remain equal on all sides
+  
+  // Auto-fit on mount, when layout changes, and on window resize/orientation change
+  useEffect(() => {
+    // Apply a more zoomed-out default for narrow mobile portrait before fitting
+    if (typeof window !== "undefined") {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const isPortrait = height > width;
+      if (isPortrait && width <= 420) {
+        setZoom((z) => clamp(Math.min(z, width <= 360 ? 0.55 : 0.6)));
+      }
+    }
+
+    const applyFit = () => {
+      // Use rAF to coalesce multiple rapid resize/layout events
+      requestAnimationFrame(() => fitToWidth());
+    };
+
+    // Initial fit (handles mobile portrait on first load)
+    applyFit();
+
+    const container = containerRef.current;
+    let ro: ResizeObserver | undefined;
+    if (typeof ResizeObserver !== "undefined" && container) {
+      ro = new ResizeObserver(() => applyFit());
+      ro.observe(container);
+    }
+
+    window.addEventListener("resize", applyFit);
+    window.addEventListener("orientationchange", applyFit);
+
+    return () => {
+      window.removeEventListener("resize", applyFit);
+      window.removeEventListener("orientationchange", applyFit);
+      if (ro && container) ro.unobserve(container);
+    };
+  }, [fitToWidth, showSidebar]);
 
   return (
     <div className={highContrast ? "hc" : undefined}>
