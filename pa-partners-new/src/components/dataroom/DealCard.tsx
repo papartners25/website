@@ -57,7 +57,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
     <article className="rounded-xl surface p-5" onClick={() => setActionsOpen(false)}>
       {/* Top section uses absolute buttons on small screens to avoid affecting content width */}
       <div className="relative flex flex-col md:flex-row items-start md:items-start md:justify-between gap-4">
-        <div className="flex-1 min-w-0 pr-28 md:pr-0">
+        <div className="flex-1 min-w-0">
           <h3 className="text-white font-medium">{deal.name}</h3>
           <p className="text-slate-300 text-sm">{deal.location}</p>
           {deal.imageUrl && (
@@ -150,7 +150,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
             {/* md+: regular inline button */}
             <Link
               href="/login?next=/dataroom"
-              className="hidden md:inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-xs sm:text-sm text-slate-200 hover:text-white hover:bg-white/5 whitespace-nowrap shrink-0 self-start"
+              className="hidden md:inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-xs sm:text-sm text-slate-200 hover:text-white hover:bg-white/5 whitespace-nowrap shrink-0 self-start absolute right-0 top-0"
             >
               <span className="sm:hidden">Login</span>
               <span className="hidden sm:inline">Login to Expand</span>
@@ -188,8 +188,8 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
                 </div>
               )}
             </div>
-            {/* md+: regular inline buttons */}
-            <div className="hidden md:flex items-center gap-2 md:self-start">
+            {/* md+: absolute buttons so content keeps full width */}
+            <div className="hidden md:flex items-center gap-2 absolute right-0 top-0">
               <button
                 className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:bg-white/5"
                 onClick={() => setOpen((v) => !v)}
