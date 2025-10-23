@@ -1126,11 +1126,11 @@ const CostSegPresentation = () => {
               <h4 className="font-bold text-green-700 text-xl mb-4 text-center">Tax Benefits</h4>
               <div className="space-y-3">
                 <div className="flex justify-between items-center p-3 bg-green-50 rounded">
-                  <span className="text-sm">Year 1 LP Benefit</span>
+                  <span className="text-sm text-gray-800">Year 1 LP Benefit</span>
                   <span className="font-bold text-green-600">$347K</span>
                 </div>
                 <div className="flex justify-between items-center p-3 bg-green-50 rounded">
-                  <span className="text-sm">Per $100K Invested</span>
+                  <span className="text-sm text-gray-800">Per $100K Invested</span>
                   <span className="font-bold text-green-600">$45K</span>
                 </div>
               </div>
@@ -1140,11 +1140,11 @@ const CostSegPresentation = () => {
               <h4 className="font-bold text-blue-700 text-xl mb-4 text-center">Refinance</h4>
               <div className="space-y-3">
                 <div className="flex justify-between items-center p-3 bg-blue-50 rounded">
-                  <span className="text-sm">Year 2 LP Proceeds</span>
+                  <span className="text-sm text-gray-800">Year 2 LP Proceeds</span>
                   <span className="font-bold text-blue-600">$419K</span>
                 </div>
                 <div className="flex justify-between items-center p-3 bg-blue-50 rounded">
-                  <span className="text-sm">Tax Treatment</span>
+                  <span className="text-sm text-gray-800">Tax Treatment</span>
                   <span className="font-bold text-blue-600">Tax-Free</span>
                 </div>
               </div>
@@ -1154,11 +1154,11 @@ const CostSegPresentation = () => {
               <h4 className="font-bold text-purple-700 text-xl mb-4 text-center">Net Result</h4>
               <div className="space-y-3">
                 <div className="flex justify-between items-center p-3 bg-purple-50 rounded">
-                  <span className="text-sm">Capital Recovered</span>
+                  <span className="text-sm text-gray-800">Capital Recovered</span>
                   <span className="font-bold text-purple-600">99.5%</span>
                 </div>
                 <div className="flex justify-between items-center p-3 bg-purple-50 rounded">
-                  <span className="text-sm">By Month</span>
+                  <span className="text-sm text-gray-800">By Month</span>
                   <span className="font-bold text-purple-600">18</span>
                 </div>
               </div>
