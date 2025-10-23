@@ -54,7 +54,8 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
 
   return (
     <article className="rounded-xl surface p-5">
-      <div className="flex items-start justify-between gap-4">
+      {/* Top section uses absolute buttons on small screens to avoid affecting content width */}
+      <div className="relative flex flex-col md:flex-row items-start md:items-start md:justify-between gap-4">
         <div className="flex-1 min-w-0">
           <h3 className="text-white font-medium">{deal.name}</h3>
           <p className="text-slate-300 text-sm">{deal.location}</p>
@@ -124,16 +125,17 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
             <div><dt className="text-slate-400">Hold</dt><dd className="text-white">{displayMetrics.hold ?? "—"}</dd></div>
           </dl>
         </div>
+        {/* Action buttons: absolute on small screens so they don't consume content width */}
         {isPublic ? (
           <Link
             href="/login?next=/dataroom"
-            className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-xs sm:text-sm text-slate-200 hover:text-white hover:bg-white/5 whitespace-nowrap shrink-0 self-start"
+            className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-xs sm:text-sm text-slate-200 hover:text-white hover:bg-white/5 whitespace-nowrap shrink-0 self-start absolute right-0 top-0 md:static"
           >
             <span className="sm:hidden">Login</span>
             <span className="hidden sm:inline">Login to Expand</span>
           </Link>
         ) : (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 absolute right-0 top-0 md:static md:self-start">
             <button
               className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:bg-white/5"
               onClick={() => setOpen((v) => !v)}
@@ -143,9 +145,12 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
             {deal.strategyUrl && (
               <Link
                 href={deal.strategyUrl}
-                className="inline-flex items-center rounded-lg bg-white text-slate-900 px-3 py-1.5 text-sm font-medium hover:bg-slate-100"
+                className="inline-flex items-center rounded-lg bg-white text-slate-900 px-3 py-1.5 text-sm font-medium hover:bg-slate-100 max-w-[150px] sm:max-w-[200px] md:max-w-none whitespace-nowrap overflow-hidden text-ellipsis"
+                title="Tax & Refi Strategy"
               >
-                Tax & Refi Strategy
+                {/* Short label on very small screens, full label on sm+; still allows truncation if tight */}
+                <span className="sm:hidden">Tax & Refi</span>
+                <span className="hidden sm:inline">Tax & Refi Strategy</span>
               </Link>
             )}
           </div>
