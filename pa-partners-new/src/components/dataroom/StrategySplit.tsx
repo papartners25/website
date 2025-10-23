@@ -1,13 +1,12 @@
 "use client";
 import { useMemo, useRef, useState, useCallback, useEffect } from "react";
-import { Minus, Plus, Maximize2, Minimize2, Highlighter, FileDown, FileText, Table } from "lucide-react";
+import { Minus, Plus, Maximize2, Minimize2, FileDown, FileText, Table } from "lucide-react";
 import CostSegPresentation from "@/components/dataroom/CostSegPresentation";
 import type { Deal } from "@/lib/deals";
 
 export default function StrategySplit({ deal }: { deal: Deal | undefined }) {
   const [showSidebar, setShowSidebar] = useState(true);
   const [zoom, setZoom] = useState(0.8);
-  const [highContrast, setHighContrast] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const contentOuterRef = useRef<HTMLDivElement | null>(null);
 
@@ -72,7 +71,7 @@ export default function StrategySplit({ deal }: { deal: Deal | undefined }) {
   }, [fitToWidth, showSidebar]);
 
   return (
-    <div className={highContrast ? "hc" : undefined}>
+    <div>
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <button
@@ -82,13 +81,6 @@ export default function StrategySplit({ deal }: { deal: Deal | undefined }) {
           >
             {showSidebar ? <Maximize2 size={16} /> : <Minimize2 size={16} />}
             {showSidebar ? "Wide mode" : "Show documents"}
-          </button>
-          <button
-            className={`inline-flex items-center gap-1 rounded-lg border border-white/10 px-3 py-1.5 text-sm ${highContrast ? "bg-white text-slate-900" : "text-slate-200 hover:text-white hover:bg-white/5"}`}
-            onClick={() => setHighContrast((v) => !v)}
-            aria-pressed={highContrast}
-          >
-            <Highlighter size={16} /> High contrast
           </button>
         </div>
         <div className="flex items-center gap-2">
