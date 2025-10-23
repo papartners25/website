@@ -11,6 +11,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
   const [paused, setPaused] = useState(false);
   const [lightbox, setLightbox] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
+  const [actionsOpen, setActionsOpen] = useState(false);
   // Determine initial preview based on deal config
   const initialPreview: "om" | "exec" | "brief" = deal.execSummaryUrl ? "exec" : (deal.omUrl ? "om" : (deal.briefUrl ? "brief" : "exec"));
   const [preview, setPreview] = useState<"om" | "exec" | "brief">(initialPreview);
@@ -53,10 +54,10 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
   }, []);
 
   return (
-    <article className="rounded-xl surface p-5">
+    <article className="rounded-xl surface p-5" onClick={() => setActionsOpen(false)}>
       {/* Top section uses absolute buttons on small screens to avoid affecting content width */}
       <div className="relative flex flex-col md:flex-row items-start md:items-start md:justify-between gap-4">
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 pr-28 md:pr-0">
           <h3 className="text-white font-medium">{deal.name}</h3>
           <p className="text-slate-300 text-sm">{deal.location}</p>
           {deal.imageUrl && (
@@ -125,35 +126,87 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
             <div><dt className="text-slate-400">Hold</dt><dd className="text-white">{displayMetrics.hold ?? "—"}</dd></div>
           </dl>
         </div>
-        {/* Action buttons: absolute on small screens so they don't consume content width */}
+        {/* Action buttons */}
         {isPublic ? (
-          <Link
-            href="/login?next=/dataroom"
-            className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-xs sm:text-sm text-slate-200 hover:text-white hover:bg-white/5 whitespace-nowrap shrink-0 self-start absolute right-0 top-0 md:static"
-          >
-            <span className="sm:hidden">Login</span>
-            <span className="hidden sm:inline">Login to Expand</span>
-          </Link>
-        ) : (
-          <div className="flex items-center gap-2 absolute right-0 top-0 md:static md:self-start">
-            <button
-              className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:bg-white/5"
-              onClick={() => setOpen((v) => !v)}
-            >
-              {open ? "Hide" : "Expand"}
-            </button>
-            {deal.strategyUrl && (
-              <Link
-                href={deal.strategyUrl}
-                className="inline-flex items-center rounded-lg bg-white text-slate-900 px-3 py-1.5 text-sm font-medium hover:bg-slate-100 max-w-[150px] sm:max-w-[200px] md:max-w-none whitespace-nowrap overflow-hidden text-ellipsis"
-                title="Tax & Refi Strategy"
+          <>
+            {/* Small screens: compact actions drawer */}
+            <div className="absolute right-0 top-0 md:hidden" onClick={(e) => e.stopPropagation()}>
+              <button
+                className="inline-flex items-center rounded-lg bg-white text-slate-900 px-3 py-1.5 text-sm font-medium hover:bg-slate-100"
+                onClick={() => setActionsOpen((v) => !v)}
+                aria-expanded={actionsOpen}
+                aria-haspopup="menu"
               >
-                {/* Short label on very small screens, full label on sm+; still allows truncation if tight */}
-                <span className="sm:hidden">Tax & Refi</span>
-                <span className="hidden sm:inline">Tax & Refi Strategy</span>
-              </Link>
-            )}
-          </div>
+                Actions
+              </button>
+              {actionsOpen && (
+                <div className="mt-1 w-44 rounded-lg border border-white/10 bg-slate-900/95 backdrop-blur p-1 shadow-lg absolute right-0 z-10">
+                  <Link href="/login?next=/dataroom" className="block w-full text-left px-3 py-2 rounded-md text-slate-200 hover:text-white hover:bg-white/5 text-sm">
+                    Login to Expand
+                  </Link>
+                </div>
+              )}
+            </div>
+            {/* md+: regular inline button */}
+            <Link
+              href="/login?next=/dataroom"
+              className="hidden md:inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-xs sm:text-sm text-slate-200 hover:text-white hover:bg-white/5 whitespace-nowrap shrink-0 self-start"
+            >
+              <span className="sm:hidden">Login</span>
+              <span className="hidden sm:inline">Login to Expand</span>
+            </Link>
+          </>
+        ) : (
+          <>
+            {/* Small screens: compact actions drawer */}
+            <div className="absolute right-0 top-0 md:hidden" onClick={(e) => e.stopPropagation()}>
+              <button
+                className="inline-flex items-center rounded-lg bg-white text-slate-900 px-3 py-1.5 text-sm font-medium hover:bg-slate-100"
+                onClick={() => setActionsOpen((v) => !v)}
+                aria-expanded={actionsOpen}
+                aria-haspopup="menu"
+              >
+                Actions
+              </button>
+              {actionsOpen && (
+                <div className="mt-1 w-48 rounded-lg border border-white/10 bg-slate-900/95 backdrop-blur p-1 shadow-lg absolute right-0 z-10">
+                  <button
+                    className="block w-full text-left px-3 py-2 rounded-md text-slate-200 hover:text-white hover:bg-white/5 text-sm"
+                    onClick={() => { setOpen((v) => !v); setActionsOpen(false); }}
+                  >
+                    {open ? "Hide details" : "Expand details"}
+                  </button>
+                  {deal.strategyUrl && (
+                    <Link
+                      href={deal.strategyUrl}
+                      className="block w-full text-left px-3 py-2 rounded-md text-slate-900 bg-white hover:bg-slate-100 text-sm font-medium"
+                      onClick={() => setActionsOpen(false)}
+                    >
+                      Tax & Refi Strategy
+                    </Link>
+                  )}
+                </div>
+              )}
+            </div>
+            {/* md+: regular inline buttons */}
+            <div className="hidden md:flex items-center gap-2 md:self-start">
+              <button
+                className="inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:bg-white/5"
+                onClick={() => setOpen((v) => !v)}
+              >
+                {open ? "Hide" : "Expand"}
+              </button>
+              {deal.strategyUrl && (
+                <Link
+                  href={deal.strategyUrl}
+                  className="inline-flex items-center rounded-lg bg-white text-slate-900 px-3 py-1.5 text-sm font-medium hover:bg-slate-100 whitespace-nowrap"
+                  title="Tax & Refi Strategy"
+                >
+                  Tax & Refi Strategy
+                </Link>
+              )}
+            </div>
+          </>
         )}
       </div>
       {!isPublic && open && (
