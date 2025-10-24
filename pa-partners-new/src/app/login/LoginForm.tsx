@@ -11,6 +11,9 @@ export default function LoginForm() {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState("");
+  const [resetLoading, setResetLoading] = useState(false);
   const supabase = createClient();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -19,12 +22,12 @@ export default function LoginForm() {
     setError("");
 
     const formData = new FormData(e.currentTarget);
-    const email = formData.get("email") as string;
+    const emailFromForm = formData.get("email") as string;
     const password = formData.get("password") as string;
 
     try {
       const { data, error: signInError } = await supabase.auth.signInWithPassword({
-        email,
+        email: emailFromForm,
         password,
       });
 
@@ -47,6 +50,32 @@ export default function LoginForm() {
     }
   };
 
+  const handleSendReset = async () => {
+    setError("");
+    setMessage("");
+    if (!email) {
+      setError("Please enter your email first.");
+      return;
+    }
+    try {
+      setResetLoading(true);
+      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+      const redirectTo = `${baseUrl}/login/reset`;
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo,
+      });
+      if (resetError) {
+        setError(resetError.message);
+      } else {
+        setMessage("If that email exists, we sent a reset link.");
+      }
+    } catch (e) {
+      setError("Unable to send reset email. Please try again.");
+    } finally {
+      setResetLoading(false);
+    }
+  };
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 md:py-24">
       <div className="mx-auto max-w-md">
@@ -65,12 +94,21 @@ export default function LoginForm() {
                 required
                 className="mt-1 w-full rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-slate-400 px-3 py-2"
                 placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
               <div className="flex items-center justify-between">
                 <label className="block text-sm text-slate-300">Password</label>
-                <Link href="#" className="text-xs text-slate-300 hover:text-white">Forgot?</Link>
+                <button
+                  type="button"
+                  onClick={handleSendReset}
+                  disabled={resetLoading}
+                  className="text-xs text-slate-300 hover:text-white disabled:opacity-50"
+                >
+                  {resetLoading ? "Sending…" : "Forgot?"}
+                </button>
               </div>
               <input
                 type="password"
@@ -83,6 +121,11 @@ export default function LoginForm() {
             {error && (
               <div className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-lg px-3 py-2">
                 {error}
+              </div>
+            )}
+            {message && (
+              <div className="text-sm text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 rounded-lg px-3 py-2">
+                {message}
               </div>
             )}
             <button
