@@ -14,7 +14,7 @@ export default function RealEstateContent() {
   const activeDeals = ["summit-flats"]
     .map(id => DEALS.find(d => d.id === id))
     .filter((d): d is typeof DEALS[number] => Boolean(d));
-  const stats = computeDealStats(activeDeals as any);
+  const stats = computeDealStats(activeDeals);
   const supabase = createClient();
   const [isAuthed, setIsAuthed] = React.useState<boolean>(false);
 

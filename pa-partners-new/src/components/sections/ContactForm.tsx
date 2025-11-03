@@ -142,7 +142,7 @@ export default function ContactForm() {
             </p>
           )}
           {!isNewsletterMode && isSubmitSuccessful && (
-            <p className="text-sm text-green-400 text-center">Thanks! We'll be in touch.</p>
+            <p className="text-sm text-green-400 text-center">Thanks! We&apos;ll be in touch.</p>
           )}
         </form>
       </Container>
