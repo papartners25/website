@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { ArrowLeft, TrendingUp, Building2 } from "lucide-react";
 import { DEALS, computeDealStats } from "@/lib/deals";
 import DealCard from "@/components/dataroom/DealCard";
+import UpcomingCard from "@/components/dataroom/UpcomingCard";
 
 export const metadata = {
   title: "Investor Data Room",
@@ -66,7 +67,8 @@ export default async function DataroomPage() {
 
         {/* Quick Stats */}
         {(() => {
-          const stats = computeDealStats(DEALS);
+          const activeDeals = DEALS.filter(d => d.id !== "south-of-mound");
+          const stats = computeDealStats(activeDeals);
           const irrText = stats.irrRange ? `${stats.irrRange.min.toFixed(0)}-${stats.irrRange.max.toFixed(0)}%` : "—";
           const holdText = stats.holdRange ? `${stats.holdRange.min}-${stats.holdRange.max} years` : "—";
           return (
@@ -126,9 +128,25 @@ export default async function DataroomPage() {
           </div>
 
           <div className="grid gap-4">
-            {DEALS.map((deal) => (
+            {DEALS.filter(d => d.id !== "south-of-mound").map((deal) => (
               <DealCard key={deal.id} deal={deal} />
             ))}
+            <UpcomingCard />
+          </div>
+        </div>
+
+        {/* Information Banner - South of Mound Update */}
+        <div className="mt-8 surface rounded-xl p-6 border border-amber-400/20 bg-amber-400/5 max-w-4xl mx-auto">
+          <div className="flex items-start gap-4">
+            <div className="p-2 rounded-lg bg-amber-400/10 mt-0.5">
+              <TrendingUp size={20} className="text-amber-400" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-white font-medium mb-1">South of Mound Update</h3>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                We have elected to withdraw our name from negotiations on the South of Mound opportunity. While the asset presented potential, the final terms did not align with our underwriting standards and risk posture. We remain disciplined and focused on opportunities that fit our value‑add strategy and return thresholds.
+              </p>
+            </div>
           </div>
         </div>
       </Container>
