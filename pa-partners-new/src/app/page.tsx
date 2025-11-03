@@ -8,7 +8,7 @@ import DataroomPrompt from "@/components/common/DataroomPrompt";
 export default function Home() {
   return (
     <>
-      <DataroomPrompt delayMs={5000} />
+      <DataroomPrompt delayMs={7250} />
       <Hero />
       <ServicesOverview />
       <PortfolioGrid />
