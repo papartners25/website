@@ -34,7 +34,9 @@ export default function StrategySplit({ deal }: { deal: Deal | undefined }) {
     width: `${(1 / zoom) * 100}%`,
   }), [zoom]);
 
-  // no dynamic height; allow the surface padding to remain equal on all sides
+  const containerHeight = useMemo(() => ({
+    height: `${900 * zoom}px`
+  }), [zoom]);
   
   // Auto-fit on mount and when sidebar toggles, NOT on every resize
   useEffect(() => {
@@ -115,8 +117,8 @@ export default function StrategySplit({ deal }: { deal: Deal | undefined }) {
       </div>
 
       <div className={showSidebar ? "grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,360px)]" : "grid gap-6 grid-cols-1"}>
-        <div ref={containerRef} className="surface rounded-xl p-0 md:p-0 shadow-card overflow-y-auto overflow-x-hidden">
-          <div ref={contentOuterRef} style={wrapperStyle}>
+        <div ref={containerRef} className="surface rounded-xl p-0 md:p-0 shadow-card overflow-hidden" style={containerHeight}>
+          <div ref={contentOuterRef} style={wrapperStyle} className="block">
             <CostSegPresentation />
           </div>
         </div>

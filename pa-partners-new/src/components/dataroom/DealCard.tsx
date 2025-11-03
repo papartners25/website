@@ -182,7 +182,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
                       className="block w-full text-left px-3 py-2 rounded-md text-slate-900 bg-white hover:bg-slate-100 text-sm font-medium"
                       onClick={() => setActionsOpen(false)}
                     >
-                      Tax & Refi Strategy
+                      Tax Strategy
                     </Link>
                   )}
                 </div>
@@ -200,9 +200,9 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
                 <Link
                   href={deal.strategyUrl}
                   className="inline-flex items-center rounded-lg bg-white text-slate-900 px-3 py-1.5 text-sm font-medium hover:bg-slate-100 whitespace-nowrap"
-                  title="Tax & Refi Strategy"
+                  title="Tax Strategy"
                 >
-                  Tax & Refi Strategy
+                  Tax Strategy
                 </Link>
               )}
             </div>

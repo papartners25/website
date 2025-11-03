@@ -7,8 +7,8 @@ import StrategySplit from "@/components/dataroom/StrategySplit";
 import { DEALS } from "@/lib/deals";
 
 export const metadata = {
-  title: "Summit Flats – Tax & Refi Strategy",
-  description: "Strategic tax planning and refinance analysis with document previews and downloads.",
+  title: "Summit Flats – Tax Strategy",
+  description: "Strategic tax planning and value-add exit analysis with document previews and downloads.",
 };
 
 export default async function SummitFlatsStrategyPage() {
@@ -49,7 +49,7 @@ export default async function SummitFlatsStrategyPage() {
                 <ArrowLeft size={16} />
                 Back to Opportunities
               </Link>
-              <h1 className="text-2xl font-semibold text-white">Summit Flats – Tax & Refinance Strategy</h1>
+              <h1 className="text-2xl font-semibold text-white">Summit Flats – Tax Strategy</h1>
               <p className="text-sm text-slate-400 mt-1">Interactive analysis plus all deal downloads in one place</p>
             </div>
             <div className="flex items-center gap-3">
