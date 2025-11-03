@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import * as RHF from "react-hook-form";
 import Container from "@/components/layout/Container";
@@ -11,7 +11,7 @@ type FormInputs = {
   message: string;
 };
 
-export default function ContactForm() {
+function ContactFormContent() {
   const searchParams = useSearchParams();
   const topic = searchParams.get("topic");
   const [isNewsletterMode, setIsNewsletterMode] = useState(false);
@@ -147,5 +147,21 @@ export default function ContactForm() {
         </form>
       </Container>
     </Section>
+  );
+}
+
+export default function ContactForm() {
+  return (
+    <Suspense fallback={
+      <Section>
+        <Container>
+          <div className="text-center py-12">
+            <p className="text-slate-400">Loading...</p>
+          </div>
+        </Container>
+      </Section>
+    }>
+      <ContactFormContent />
+    </Suspense>
   );
 }
