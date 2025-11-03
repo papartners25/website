@@ -16,14 +16,17 @@ export default function StrategySplit({ deal }: { deal: Deal | undefined }) {
     const container = containerRef.current;
     const outer = contentOuterRef.current;
     if (!container || !outer) return;
-    const scaledWidth = outer.getBoundingClientRect().width; // includes current zoom
-    const unscaledWidth = scaledWidth / zoom || scaledWidth;
-    const target = container.clientWidth;
-    if (unscaledWidth > 0) {
-      const next = clamp(target / unscaledWidth);
-      setZoom(next);
-    }
-  }, [zoom]);
+    
+    setZoom((currentZoom) => {
+      const scaledWidth = outer.getBoundingClientRect().width; // includes current zoom
+      const unscaledWidth = scaledWidth / currentZoom || scaledWidth;
+      const target = container.clientWidth;
+      if (unscaledWidth > 0) {
+        return clamp(target / unscaledWidth);
+      }
+      return currentZoom;
+    });
+  }, []); // Remove zoom dependency
 
   const wrapperStyle = useMemo(() => ({
     transform: `scale(${zoom})`,
@@ -33,7 +36,7 @@ export default function StrategySplit({ deal }: { deal: Deal | undefined }) {
 
   // no dynamic height; allow the surface padding to remain equal on all sides
   
-  // Auto-fit on mount, when layout changes, and on window resize/orientation change
+  // Auto-fit on mount and when sidebar toggles, NOT on every resize
   useEffect(() => {
     // Apply a more zoomed-out default for narrow mobile portrait before fitting
     if (typeof window !== "undefined") {
@@ -45,30 +48,34 @@ export default function StrategySplit({ deal }: { deal: Deal | undefined }) {
       }
     }
 
-    const applyFit = () => {
-      // Use rAF to coalesce multiple rapid resize/layout events
+    // Only fit once when sidebar changes or on mount
+    const timer = setTimeout(() => {
       requestAnimationFrame(() => fitToWidth());
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [fitToWidth, showSidebar]);
+
+  // Handle window resize separately with debouncing
+  useEffect(() => {
+    let resizeTimer: NodeJS.Timeout;
+    
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        requestAnimationFrame(() => fitToWidth());
+      }, 250); // Debounce resize events
     };
 
-    // Initial fit (handles mobile portrait on first load)
-    applyFit();
-
-    const container = containerRef.current;
-    let ro: ResizeObserver | undefined;
-    if (typeof ResizeObserver !== "undefined" && container) {
-      ro = new ResizeObserver(() => applyFit());
-      ro.observe(container);
-    }
-
-    window.addEventListener("resize", applyFit);
-    window.addEventListener("orientationchange", applyFit);
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleResize);
 
     return () => {
-      window.removeEventListener("resize", applyFit);
-      window.removeEventListener("orientationchange", applyFit);
-      if (ro && container) ro.unobserve(container);
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
     };
-  }, [fitToWidth, showSidebar]);
+  }, [fitToWidth]);
 
   return (
     <div>
