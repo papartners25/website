@@ -28,6 +28,7 @@ import PortfolioChart from '@/components/dashboard/PortfolioChart';
 import EmptyState from '@/components/dashboard/EmptyState';
 import DashboardHero from '@/components/dashboard/DashboardHero';
 import IntegrationConnectModal from '@/components/dashboard/IntegrationConnectModal';
+import NewsletterComposer from '@/components/dashboard/NewsletterComposer';
 import { 
   TrendingUp, 
   DollarSign, 
@@ -363,6 +364,19 @@ export default function DashboardPage() {
                       <button onClick={() => setActiveService('snowflake')} className="px-3 py-1.5 rounded-lg bg-white text-slate-900 text-sm font-medium hover:bg-slate-100">Connect</button>
                       <button className="px-3 py-1.5 rounded-lg border border-white/10 text-sm text-slate-300 hover:text-white hover:border-white/20">Docs</button>
                     </div>
+                  </div>
+                  
+                  {/* Newsletter Composer */}
+                  <div className="surface rounded-lg p-4 border border-white/10 md:col-span-2 xl:col-span-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <PlugZap size={16} className="text-blue-400" />
+                        <span className="text-white text-sm font-medium">Opportunity Newsletter</span>
+                      </div>
+                      <span className="text-xs text-slate-400">Communications</span>
+                    </div>
+                    <p className="text-xs text-slate-400 mb-3">Send manual updates to newsletter subscribers about new opportunities.</p>
+                    <NewsletterComposer />
                   </div>
                 </div>
               )}

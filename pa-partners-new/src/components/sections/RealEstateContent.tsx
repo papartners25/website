@@ -4,13 +4,17 @@ import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
 import { DEALS, computeDealStats } from "@/lib/deals";
 import DealCard from "@/components/dataroom/DealCard";
+import UpcomingCard from "@/components/dataroom/UpcomingCard";
 import Link from "next/link";
 import React from "react";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { createClient } from "@/lib/supabase/client";
 
 export default function RealEstateContent() {
-  const stats = computeDealStats(DEALS);
+  const activeDeals = ["summit-flats"]
+    .map(id => DEALS.find(d => d.id === id))
+    .filter((d): d is typeof DEALS[number] => Boolean(d));
+  const stats = computeDealStats(activeDeals as any);
   const supabase = createClient();
   const [isAuthed, setIsAuthed] = React.useState<boolean>(false);
 
@@ -94,13 +98,12 @@ export default function RealEstateContent() {
             <h2 className="text-xl md:text-2xl font-semibold text-white">Current Opportunities</h2>
             <p className="text-slate-300 text-sm md:text-base mt-2">Explore active value‑add investments we’re underwriting now.</p>
             <div className="mt-4 grid gap-4">
-              {(["summit-flats", "south-of-mound"]
-                .map(id => DEALS.find(d => d.id === id))
-                .filter((d): d is typeof DEALS[number] => Boolean(d))
+              {activeDeals
                 .map(d => ({ ...d, imageUrl: undefined }))
-              ).map(d => (
-                <DealCard key={d.id} deal={d} isPublic={!isAuthed} />
-              ))}
+                .map(d => (
+                  <DealCard key={d.id} deal={d} isPublic={!isAuthed} />
+                ))}
+              <UpcomingCard />
             </div>
           </motion.div>
         </Container>

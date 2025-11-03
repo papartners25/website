@@ -4,12 +4,13 @@ import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
 import { DEALS, computeDealStats } from "@/lib/deals";
 import DealCard from "@/components/dataroom/DealCard";
+import UpcomingCard from "@/components/dataroom/UpcomingCard";
 import Link from "next/link";
 import { TrendingUp, Building2, Mail } from "lucide-react";
 import PortalPreview from "@/components/common/PortalPreview";
 
 export default function OpportunitiesPage() {
-
+  const activeDeals = DEALS.filter(d => d.id !== "south-of-mound");
   return (
     <>
       <Section>
@@ -43,8 +44,9 @@ export default function OpportunitiesPage() {
 
           {/* Quick Stats */}
           {(() => {
-            const stats = computeDealStats(DEALS);
-            const irrText = stats.irrRange ? `${stats.irrRange.min.toFixed(0)}-${stats.irrRange.max.toFixed(0)}%` : "—";
+            const stats = computeDealStats(activeDeals);
+            // Public page shows approximated ranges to protect private data
+            const irrText = "20%+";
             const holdText = stats.holdRange ? `${stats.holdRange.min}-${stats.holdRange.max} years` : "—";
             return (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
@@ -65,7 +67,7 @@ export default function OpportunitiesPage() {
                   <TrendingUp size={20} className="text-green-400" />
                 </div>
                 <div>
-                  <p className="text-sm text-slate-400">Avg Target IRR</p>
+                  <p className="text-sm text-slate-400">Target IRR</p>
                   <p className="text-2xl font-semibold text-white">{irrText}</p>
                 </div>
               </div>
@@ -103,9 +105,10 @@ export default function OpportunitiesPage() {
             </div>
 
             <div className="grid gap-4">
-              {DEALS.map((deal) => (
+              {activeDeals.map((deal) => (
                 <DealCard key={deal.id} deal={deal} isPublic />
               ))}
+              <UpcomingCard />
             </div>
 
             {DEALS.length === 0 && (
@@ -125,17 +128,15 @@ export default function OpportunitiesPage() {
             )}
           </div>
 
-          {/* Information Banner - Broadway Courts Update */}
+          {/* Information Banner - South of Mound Update */}
           <div className="mt-8 surface rounded-xl p-6 border border-amber-400/20 bg-amber-400/5 max-w-4xl mx-auto">
             <div className="flex items-start gap-4">
               <div className="p-2 rounded-lg bg-amber-400/10 mt-0.5">
                 <TrendingUp size={20} className="text-amber-400" />
               </div>
               <div className="flex-1">
-                <h3 className="text-white font-medium mb-1">Broadway Courts Update</h3>
-                <p className="text-sm text-slate-300 leading-relaxed">
-                  After extensive due diligence on the Broadway Courts property, we&apos;ve made the strategic decision to step away from that transaction. While the fundamentals were solid, competitive bidding pushed pricing beyond our underwriting standards, and our diligence uncovered structural and operational complications that would have added execution risk and capital requirements beyond our initial projections. We remain disciplined in our approach and won&apos;t chase deals that compromise our return thresholds or risk profile.
-                </p>
+                <h3 className="text-white font-medium mb-1">South of Mound Update</h3>
+                <p className="text-sm text-slate-300 leading-relaxed">We have elected to withdraw our name from negotiations on the South of Mound opportunity. While the asset presented potential, the final terms did not align with our underwriting standards and risk posture. We remain disciplined and focused on opportunities that fit our value‑add strategy and return thresholds.</p>
               </div>
             </div>
           </div>
