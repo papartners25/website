@@ -28,7 +28,7 @@ export default function DealCard({ deal, isPublic }: { deal: Deal; isPublic?: bo
   // Private (/dataroom) shows exact deal.metrics.
   const publicMetricOverrides: Record<string, Partial<Deal["metrics"]>> = {
     "south-of-mound": { irr: "20%+", equityMultiple: "1.50x+" },
-    "summit-flats": { irr: "20%+", equityMultiple: "1.50x+" },
+    "summit-flats": { irr: "20%+", equityMultiple: "2.0x+", hold: "2-3 yrs" },
   };
 
   const displayMetrics = isPublic

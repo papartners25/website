@@ -24,7 +24,7 @@ export const DEALS: Deal[] = [
     name: "Summit Flats (32 units)",
     location: "Columbus, OH (Weinland Park)",
     summary: `Off‑market acquisition of three adjacent properties in Columbus's Weinland Park submarket totaling 32 units. The business plan is a classic value‑add with aggressive value creation: strategic $420k renovation budget driving NOI growth from $225k (Year 1 blended) to $294k stabilized run-rate by Month 9, reaching $350k+ by Year 5 with 3.2% annual rent growth. Conservative 9-month lease-up and rent stabilization period models gradual achievement of market rents ($1,250/unit average). The 2-year hold period captures this rapid value creation, with strategic exit at 6.25% cap rate yielding 26.4% levered IRR. 75% LTC bridge financing at 7% IO provides optimal leverage during the value-creation phase.`,
-    metrics: { irr: "26.4%", equityMultiple: "1.60x", hold: "24 months" },
+    metrics: { irr: "27.7%", equityMultiple: "2.09x", hold: "2-3 yrs" },
     execSummaryUrl: "/deals/summit-flats-executive-summary.pdf",
     omUrl: "/deals/summit-flats-investment-memorandum.pdf",
     pdfUrl: "/deals/summit-flats-executive-summary.pdf",
