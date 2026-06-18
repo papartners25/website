@@ -18,7 +18,17 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/services",
-        destination: "/",
+        destination: "/development-consulting",
+        permanent: false,
+      },
+      {
+        source: "/ai",
+        destination: "/new-business",
+        permanent: false,
+      },
+      {
+        source: "/opportunities",
+        destination: "/new-business",
         permanent: false,
       },
     ];

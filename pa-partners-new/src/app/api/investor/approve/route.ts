@@ -220,7 +220,7 @@ export async function POST(request: Request) {
       <tr><td style="padding:0 40px 40px;"><p style="margin:0 0 24px;color:#e2e8f0;font-size:16px;line-height:1.6;">Hello ${profile.full_name},</p><p style="margin:0 0 24px;color:#e2e8f0;font-size:16px;line-height:1.6;">Your investor portal access has been approved. You can now log in.</p>
       <table width="100%" cellpadding="0" cellspacing="0" style="margin:30px 0;"><tr><td align="center"><a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://papartners.co'}/login" style="display:inline-block;background-color:#fbbf24;color:#18181b;padding:16px 40px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;">Log In to Portal</a></td></tr></table>
       <p style="margin:24px 0 0;color:#94a3b8;font-size:14px;line-height:1.6;">Need help? Email <a href="mailto:info@papartners.co" style="color:#fbbf24;text-decoration:none;">info@papartners.co</a></p></td></tr>
-      <tr><td style="padding:30px;text-align:center;border-top:1px solid rgba(255,255,255,.1);"><p style="margin:0 0 8px;color:#64748b;font-size:13px;">PA Partners</p><p style="margin:0;color:#64748b;font-size:12px;">Value-add real estate and applied AI solutions</p></td></tr>
+      <tr><td style="padding:30px;text-align:center;border-top:1px solid rgba(255,255,255,.1);"><p style="margin:0 0 8px;color:#64748b;font-size:13px;">PA Partners</p><p style="margin:0;color:#64748b;font-size:12px;">Development consulting and real estate development</p></td></tr>
       </table></td></tr></table></body></html>`,
     });
 

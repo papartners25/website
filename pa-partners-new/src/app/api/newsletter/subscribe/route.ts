@@ -81,7 +81,7 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({
-      message: "Successfully subscribed! You'll receive updates on new opportunities.",
+      message: "Successfully subscribed! You'll receive PA Partners updates.",
     });
   } catch (error) {
     console.error("Newsletter subscription error:", error);
@@ -91,4 +91,3 @@ export async function POST(request: Request) {
     );
   }
 }
-

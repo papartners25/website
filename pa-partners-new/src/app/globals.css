@@ -3,24 +3,29 @@
 @plugin "@tailwindcss/forms";
 
 :root {
-  --background: #0a0f1e; /* deep navy for dark shells */
+  --background: #090b10;
   --foreground: #e6edf5;
-  --surface: rgba(255, 255, 255, 0.06);
+  --surface: rgba(255, 255, 255, 0.065);
   --border: rgba(148, 163, 184, 0.18);
   --muted: #94a3b8;
-  --accent: #d4af37; /* soft gold */
+  --accent: #d4af37;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0f1e;
+    --background: #090b10;
     --foreground: #e6edf5;
   }
 }
 
 body {
   @apply bg-[var(--background)] text-[var(--foreground)] antialiased selection:bg-slate-200/30 selection:text-slate-900;
-  background-image: radial-gradient(800px 400px at 50% -10%, rgba(148,163,184,0.12), transparent 60%);
+  background-image:
+    linear-gradient(115deg, rgba(212, 175, 55, 0.08), transparent 34%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.16), transparent 42%),
+    repeating-linear-gradient(90deg, rgba(148, 163, 184, 0.045) 0 1px, transparent 1px 72px),
+    repeating-linear-gradient(0deg, rgba(148, 163, 184, 0.035) 0 1px, transparent 1px 72px);
+  background-attachment: fixed;
 }
 
 /* Subtle card and glass surfaces */
@@ -29,6 +34,13 @@ body {
   backdrop-filter: saturate(140%) blur(10px);
   -webkit-backdrop-filter: saturate(140%) blur(10px);
   border: 1px solid var(--border);
+}
+
+.hero-field {
+  background:
+    linear-gradient(90deg, rgba(9, 11, 16, 0.96) 0%, rgba(9, 11, 16, 0.82) 31%, rgba(9, 11, 16, 0.28) 58%, rgba(9, 11, 16, 0.72) 100%),
+    linear-gradient(180deg, rgba(9, 11, 16, 0.08) 0%, rgba(9, 11, 16, 0.72) 100%),
+    repeating-linear-gradient(112deg, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px 18px);
 }
 
 /* High-contrast overrides for strategy presentation */

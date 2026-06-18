@@ -7,7 +7,7 @@ export const defaultMetadata: Metadata = {
     template: "%s | PA Partners",
   },
   description:
-    "Navigating Tomorrow's Markets with Today's Investments. PA Partners focuses on value-add, cash-flowing real estate and practical AI solutions.",
+    "PA Partners provides development consulting, capital stack architecture, underwriting support, and internal multifamily and mixed-use development.",
   icons: {
     icon: "/logo/pa-favicon.ico",
     shortcut: "/logo/pa-favicon.ico",
@@ -21,5 +21,4 @@ export const defaultMetadata: Metadata = {
     card: "summary_large_image",
   },
 };
-
 

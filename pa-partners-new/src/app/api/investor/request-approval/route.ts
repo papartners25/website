@@ -145,7 +145,7 @@ export async function POST(request: Request) {
                     <tr>
                       <td style="padding: 30px; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1);">
                         <p style="margin: 0; color: #64748b; font-size: 13px;">
-                          PA Partners | Value-add real estate and applied AI solutions
+                          PA Partners | Development consulting and real estate development
                         </p>
                       </td>
                     </tr>

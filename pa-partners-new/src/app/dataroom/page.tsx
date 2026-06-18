@@ -1,15 +1,12 @@
+import Link from "next/link";
+import { ArrowLeft, FileLock2, Mail, ShieldCheck } from "lucide-react";
 import Container from "@/components/layout/Container";
 import Section from "@/components/layout/Section";
-import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { ArrowLeft, TrendingUp, Building2 } from "lucide-react";
-import { DEALS, computeDealStats } from "@/lib/deals";
-import DealCard from "@/components/dataroom/DealCard";
-import UpcomingCard from "@/components/dataroom/UpcomingCard";
 
 export const metadata = {
-  title: "Investor Data Room",
-  description: "Authenticated access to interactive deal materials.",
+  title: "Private Portal",
+  description: "Authenticated access for approved PA Partners investors and partners.",
 };
 
 export default async function DataroomPage() {
@@ -22,11 +19,18 @@ export default async function DataroomPage() {
     return (
       <Section>
         <Container>
-          <div className="max-w-2xl mx-auto py-12 md:py-20">
-            <div className="surface rounded-2xl p-8 md:p-12 shadow-card text-center">
-              <h1 className="text-2xl md:text-3xl font-semibold text-white mb-4">Investor Login Required</h1>
-              <p className="text-slate-300 leading-relaxed mb-6">Log in to access full previews and downloads.</p>
-              <Link href="/login?next=/dataroom" className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-slate-900 px-6 py-3 text-sm font-medium hover:bg-slate-100 transition-colors">
+          <div className="mx-auto max-w-2xl py-12 md:py-20">
+            <div className="surface rounded-2xl p-8 text-center shadow-card md:p-12">
+              <FileLock2 size={36} className="mx-auto text-amber-300" />
+              <h1 className="mt-5 text-2xl font-semibold text-white md:text-3xl">Private Portal Access</h1>
+              <p className="mb-6 mt-3 leading-relaxed text-slate-300">
+                Approved investors and partners can log in for portal materials, reporting, and private
+                communications when access is active.
+              </p>
+              <Link
+                href="/login?next=/dataroom"
+                className="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-sm font-medium text-slate-950 transition-colors hover:bg-slate-100"
+              >
                 Login to Continue
               </Link>
             </div>
@@ -39,119 +43,51 @@ export default async function DataroomPage() {
   return (
     <Section>
       <Container>
-        {/* Inset Header Card */}
-        <div className="surface rounded-xl p-6 md:p-7 shadow-card mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <Link
-                href="/dashboard"
-                className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors mb-3"
-              >
-                <ArrowLeft size={16} />
-                Back to Dashboard
-              </Link>
-              <h1 className="text-2xl font-semibold text-white">Investment Opportunities</h1>
-              <p className="text-sm text-slate-400 mt-1">
-                Explore current deals available for investment
-              </p>
-            </div>
-            <Link
-              href="/dashboard"
-              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-sm text-slate-300 hover:text-white hover:border-white/20 transition-colors"
-            >
-              <Building2 size={16} />
-              <span className="hidden sm:inline">My Portfolio</span>
+        <div className="surface mb-8 rounded-xl p-6 shadow-card md:p-7">
+          <Link
+            href="/dashboard"
+            className="mb-3 inline-flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-white"
+          >
+            <ArrowLeft size={16} />
+            Back to Dashboard
+          </Link>
+          <h1 className="text-2xl font-semibold text-white">Private Portal</h1>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-300">
+            No active deal room is currently open. PA Partners uses this portal for approved investor
+            communications, confidential materials, reporting, and document access when a mandate or
+            opportunity is active.
+          </p>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          <article className="surface rounded-xl p-6">
+            <ShieldCheck size={24} className="text-amber-300" />
+            <h2 className="mt-4 font-medium text-white">Access Controlled</h2>
+            <p className="mt-2 text-sm leading-relaxed text-slate-300">
+              Materials are shared only with approved users when a specific engagement, investment, or
+              reporting workflow is active.
+            </p>
+          </article>
+          <article className="surface rounded-xl p-6">
+            <FileLock2 size={24} className="text-amber-300" />
+            <h2 className="mt-4 font-medium text-white">Document Ready</h2>
+            <p className="mt-2 text-sm leading-relaxed text-slate-300">
+              The portal architecture remains in place for future private files, investor statements, tax
+              documents, and partner updates.
+            </p>
+          </article>
+          <article className="surface rounded-xl p-6">
+            <Mail size={24} className="text-amber-300" />
+            <h2 className="mt-4 font-medium text-white">Need Materials?</h2>
+            <p className="mt-2 text-sm leading-relaxed text-slate-300">
+              Contact PA Partners if you believe you should have access to a current private workspace.
+            </p>
+            <Link href="/contact" className="mt-4 inline-flex text-sm font-medium text-white hover:text-amber-200">
+              Contact us →
             </Link>
-          </div>
-        </div>
-
-        {/* Quick Stats */}
-        {(() => {
-          const activeDeals = DEALS.filter(d => d.id !== "south-of-mound");
-          const stats = computeDealStats(activeDeals);
-          const irrText = stats.irrRange ? `${stats.irrRange.min.toFixed(0)}-${stats.irrRange.max.toFixed(0)}%` : "—";
-          const holdText = stats.holdRange ? `${stats.holdRange.min}-${stats.holdRange.max} years` : "—";
-          return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="surface rounded-xl p-5 shadow-card">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-amber-400/10">
-                <Building2 size={20} className="text-amber-400" />
-              </div>
-              <div>
-                <p className="text-sm text-slate-400">Available Deals</p>
-                <p className="text-2xl font-semibold text-white">{stats.availableDeals}</p>
-              </div>
-            </div>
-          </div>
-          <div className="surface rounded-xl p-5 shadow-card">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-green-400/10">
-                <TrendingUp size={20} className="text-green-400" />
-              </div>
-              <div>
-                <p className="text-sm text-slate-400">Avg Target IRR</p>
-                <p className="text-2xl font-semibold text-white">{irrText}</p>
-              </div>
-            </div>
-          </div>
-          <div className="surface rounded-xl p-5 shadow-card">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-blue-400/10">
-                <TrendingUp size={20} className="text-blue-400" />
-              </div>
-              <div>
-                <p className="text-sm text-slate-400">Hold Period</p>
-                <p className="text-2xl font-semibold text-white">{holdText}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-          );
-        })()}
-
-        {/* Deal Cards */}
-        <div className="space-y-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-xl font-semibold text-white">Current Opportunities</h2>
-              <p className="text-sm text-slate-400 mt-1">
-                Review detailed summaries, financial models, and investment terms
-              </p>
-            </div>
-            <select className="px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-white text-sm">
-              <option>All Property Types</option>
-              <option>Multifamily</option>
-              <option>Commercial</option>
-              <option>Mixed-Use</option>
-            </select>
-          </div>
-
-          <div className="grid gap-4">
-            {DEALS.filter(d => d.id !== "south-of-mound").map((deal) => (
-              <DealCard key={deal.id} deal={deal} />
-            ))}
-            <UpcomingCard />
-          </div>
-        </div>
-
-        {/* Information Banner - South of Mound Update */}
-        <div className="mt-8 surface rounded-xl p-6 border border-amber-400/20 bg-amber-400/5 max-w-4xl mx-auto">
-          <div className="flex items-start gap-4">
-            <div className="p-2 rounded-lg bg-amber-400/10 mt-0.5">
-              <TrendingUp size={20} className="text-amber-400" />
-            </div>
-            <div className="flex-1">
-              <h3 className="text-white font-medium mb-1">South of Mound Update</h3>
-              <p className="text-sm text-slate-300 leading-relaxed">
-                We have elected to withdraw our name from negotiations on the South of Mound opportunity. While the asset presented potential, the final terms did not align with our underwriting standards and risk posture. We remain disciplined and focused on opportunities that fit our value‑add strategy and return thresholds.
-              </p>
-            </div>
-          </div>
+          </article>
         </div>
       </Container>
     </Section>
   );
 }
-
-

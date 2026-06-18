@@ -5,23 +5,25 @@ import Section from "@/components/layout/Section";
 
 export const metadata = {
   title: "Portfolio",
-  description: "Selected real estate projects and visuals.",
+  description: "Selected PA Partners work across consulting, internal development, and new business formation.",
 };
 
 export default function PortfolioPage() {
   return (
     <>
-      {/* Intro blurb: portfolio spans real estate and software */}
       <Section>
         <Container>
           <div className="surface rounded-xl p-6 md:p-8 shadow-card">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>
-                <h1 className="text-2xl md:text-3xl font-medium text-white">Our Portfolio</h1>
+                <h1 className="text-2xl md:text-3xl font-medium text-white">Selected Work</h1>
                 <p className="text-slate-300 mt-2 text-sm md:text-base">
-                  We invest across real estate and software. Current software ventures include
-                  <a className="underline hover:text-white ml-1" href="https://betterlink.help" target="_blank" rel="noopener noreferrer">Betterlink.help</a>{" "}and
-                  <a className="underline hover:text-white ml-1" href="https://stewietrader.com" target="_blank" rel="noopener noreferrer">StewieTrader.com</a>.
+                  Our work spans development consulting, internal multifamily and mixed-use planning, and
+                  new business formation. Current venture activity includes{" "}
+                  <a className="underline hover:text-white" href="https://frunkvault.com" target="_blank" rel="noopener noreferrer">
+                    FrunkVault
+                  </a>
+                  , a direct-to-consumer e-commerce brand.
                 </p>
               </div>
             </div>
@@ -34,10 +36,6 @@ export default function PortfolioPage() {
         <Container>
           <div className="max-w-5xl mx-auto">
             <PortalPreview />
-            <p className="text-center text-slate-400 text-sm mt-4">
-              For detailed holdings, distributions, and tax docs, use the investor login.{' '}
-              <a href="/login" className="underline hover:text-white">Access Portal →</a>
-            </p>
           </div>
         </Container>
       </Section>
@@ -46,6 +44,5 @@ export default function PortfolioPage() {
     </>
   );
 }
-
 
 

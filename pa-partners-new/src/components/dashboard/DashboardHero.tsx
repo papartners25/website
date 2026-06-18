@@ -1,7 +1,6 @@
 "use client";
 
-import { Sparkles, BarChart3, Clock } from "lucide-react";
-import { DEALS, computeDealStats } from "@/lib/deals";
+import { Clock, FileLock2, ShieldCheck } from "lucide-react";
 
 type DashboardHeroProps = {
   investorName?: string | null;
@@ -9,8 +8,6 @@ type DashboardHeroProps = {
 };
 
 export default function DashboardHero({ investorName, memberSince }: DashboardHeroProps) {
-  const stats = computeDealStats(DEALS);
-
   const formattedMemberSince = (() => {
     if (!memberSince) return null;
     try {
@@ -37,29 +34,18 @@ export default function DashboardHero({ investorName, memberSince }: DashboardHe
             )}
             <span className="text-slate-500">•</span>
             <span className="inline-flex items-center gap-1 text-amber-400">
-              <Sparkles size={14} />
-              {stats.availableDeals} open deal{stats.availableDeals === 1 ? "" : "s"}
+              <ShieldCheck size={14} />
+              Portal access active
             </span>
-            {stats.irrRange && (
-              <>
-                <span className="text-slate-500">•</span>
-                <span className="inline-flex items-center gap-1 text-slate-300">
-                  <BarChart3 size={14} className="opacity-80" />
-                  IRR {stats.irrRange.min.toFixed(1)}%–{stats.irrRange.max.toFixed(1)}%
-                </span>
-              </>
-            )}
-            {stats.holdRange && (
-              <>
-                <span className="text-slate-500">•</span>
-                <span className="text-slate-300">Hold {stats.holdRange.min}–{stats.holdRange.max} yrs</span>
-              </>
-            )}
+            <span className="text-slate-500">•</span>
+            <span className="inline-flex items-center gap-1 text-slate-300">
+              <FileLock2 size={14} className="opacity-80" />
+              Private materials when available
+            </span>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
 

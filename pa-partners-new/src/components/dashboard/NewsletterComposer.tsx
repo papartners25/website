@@ -96,7 +96,7 @@ export default function NewsletterComposer() {
           type="text"
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
-          placeholder="New Opportunities Available – Summit Flats & More"
+          placeholder="PA Partners Update – Consulting, Development, and New Business"
           className="w-full px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-400/50"
           disabled={sending}
         />
@@ -111,13 +111,13 @@ export default function NewsletterComposer() {
           id="newsletter-content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="We're pleased to announce new value-add multifamily opportunities now available for investment. Summit Flats (32 units) in Columbus's Weinland Park offers strong returns and a walkable urban location. Visit our opportunities page to learn more and review detailed investment materials."
+          placeholder="Share a concise update on PA Partners consulting work, internal development activity, or new business initiatives."
           rows={4}
           className="w-full px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-400/50 resize-none"
           disabled={sending}
         />
         <p className="text-xs text-slate-500 mt-1">
-          Emails automatically link to /opportunities page
+          Emails automatically link to the PA Partners website
         </p>
       </div>
 
@@ -162,4 +162,3 @@ export default function NewsletterComposer() {
     </div>
   );
 }
-

@@ -35,9 +35,9 @@ import {
   Wallet, 
   BarChart3,
   FileText,
+  FileLock2,
   Building2,
   User,
-  Sparkles,
   Shield,
   KeyRound,
   PlugZap
@@ -55,7 +55,6 @@ export default function DashboardPage() {
   const [metrics, setMetrics] = useState<PortfolioMetrics | null>(null);
   const [taxDocuments, setTaxDocuments] = useState<TaxDocument[]>([]);
   const [performanceData, setPerformanceData] = useState<PropertyPerformance | null>(null);
-  const [showDealsModal, setShowDealsModal] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminCode, setAdminCode] = useState('');
   const [integrationsUnlocked, setIntegrationsUnlocked] = useState(false);
@@ -125,19 +124,20 @@ export default function DashboardPage() {
           memberSince: investorData?.memberSince || createdAtFromDb || new Date().toISOString(),
         });
 
-        // For non-admin investors, hide demo/mock portfolio data
-        if (!computedIsAdmin) {
+        // For non-admin investors, hide demo/mock portfolio data.
+        if (computedIsAdmin) {
+          setInvestments(investmentsData);
+          setDistributions(distributionsData);
+          setMetrics(metricsData);
+          setTaxDocuments(taxDocsData);
+          setPerformanceData(performanceDataResult);
+        } else {
           setInvestments([]);
           setDistributions([]);
           setMetrics(null);
           setTaxDocuments([]);
           setPerformanceData(null);
         }
-        setInvestments(investmentsData);
-        setDistributions(distributionsData);
-        setMetrics(metricsData);
-        setTaxDocuments(taxDocsData);
-        setPerformanceData(performanceDataResult);
       } catch (error) {
         console.error('Error loading dashboard data:', error);
         router.push('/login');
@@ -148,19 +148,6 @@ export default function DashboardPage() {
 
     checkAuthAndLoadData();
   }, [router, supabase.auth]);
-
-  // Timed glass popup to promote new deals (once per session for investors)
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    if (loading) return;
-    const storageKey = 'investorDealsModalShown_v1';
-    if (sessionStorage.getItem(storageKey) === 'true') return;
-    const timer = setTimeout(() => {
-      setShowDealsModal(true);
-      sessionStorage.setItem(storageKey, 'true');
-    }, 4500);
-    return () => clearTimeout(timer);
-  }, [loading]);
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -196,27 +183,6 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-6">
-        {/* Timed Glass Popup for New Deals */}
-        {showDealsModal && (
-          <div className="fixed inset-0 z-40 flex items-center justify-center px-4" onClick={() => setShowDealsModal(false)}>
-            <button aria-label="Close modal overlay" className="absolute inset-0 bg-black/60" />
-            <div className="relative z-10 surface rounded-2xl p-6 md:p-8 shadow-card border border-white/25 max-w-md w-full text-center backdrop-blur-2xl saturate-150" onClick={(e) => e.stopPropagation()}>
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-400/10 border border-amber-400/20 mb-4">
-                <Sparkles className="text-amber-400" size={28} />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">New Deal Documents</h3>
-              <p className="text-slate-300 mb-5">Jump into the data room to review the latest offering materials.</p>
-              <div className="flex items-center justify-center gap-3">
-                <Link href="/dataroom" className="px-5 py-2.5 rounded-lg bg-white text-slate-900 font-medium hover:bg-slate-100 transition-colors">
-                  Browse New Deals
-                </Link>
-                <button onClick={() => setShowDealsModal(false)} className="px-5 py-2.5 rounded-lg border border-white/10 text-slate-300 hover:text-white hover:border-white/20 transition-colors">
-                  Not now
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
         {/* Dashboard Header */}
         <div className="surface rounded-xl p-5 shadow-card mb-6">
           <div className="flex items-center justify-between gap-4">
@@ -226,17 +192,17 @@ export default function DashboardPage() {
                 href="/dataroom"
                 className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-slate-900 text-sm font-medium hover:bg-slate-100 transition-colors shadow hover:shadow-md"
               >
-                <span className="truncate max-w-[10rem]">Browse New Deals</span>
-                <Sparkles size={16} className="text-amber-500 shrink-0" />
+                <span className="truncate max-w-[10rem]">Portal Materials</span>
+                <FileLock2 size={16} className="text-amber-500 shrink-0" />
               </Link>
               <Link
                 href="/dataroom"
                 className="sm:hidden inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white text-slate-900 text-sm font-medium hover:bg-slate-100 transition-colors shadow hover:shadow-md"
-                aria-label="Browse New Deals"
-                title="Browse New Deals"
+                aria-label="Portal Materials"
+                title="Portal Materials"
               >
-                <Sparkles size={16} className="text-amber-500" />
-                <span className="truncate max-w-[7rem]">New Deals</span>
+                <FileLock2 size={16} className="text-amber-500" />
+                <span className="truncate max-w-[7rem]">Portal</span>
               </Link>
               <Link href="/contact" className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-sm text-slate-300 hover:text-white hover:border-white/20 transition-colors">
                 <User size={16} />
@@ -344,7 +310,7 @@ export default function DashboardPage() {
                       </div>
                       <span className="text-xs text-slate-400">Storage</span>
                     </div>
-                    <p className="text-xs text-slate-400 mb-3">Sync data room folders and share investor-ready documents.</p>
+                    <p className="text-xs text-slate-400 mb-3">Sync private portal folders and share approved documents.</p>
                     <div className="flex items-center gap-2">
                       <button onClick={() => setActiveService('gdrive')} className="px-3 py-1.5 rounded-lg bg-white text-slate-900 text-sm font-medium hover:bg-slate-100">Connect</button>
                       <button className="px-3 py-1.5 rounded-lg border border-white/10 text-sm text-slate-300 hover:text-white hover:border-white/20">Docs</button>
@@ -359,7 +325,7 @@ export default function DashboardPage() {
                       </div>
                       <span className="text-xs text-slate-400">Data Warehouse</span>
                     </div>
-                    <p className="text-xs text-slate-400 mb-3">Centralize deal data and analytics for AI/BI workflows.</p>
+                    <p className="text-xs text-slate-400 mb-3">Centralize portfolio, reporting, and analytics workflows.</p>
                     <div className="flex items-center gap-2">
                       <button onClick={() => setActiveService('snowflake')} className="px-3 py-1.5 rounded-lg bg-white text-slate-900 text-sm font-medium hover:bg-slate-100">Connect</button>
                       <button className="px-3 py-1.5 rounded-lg border border-white/10 text-sm text-slate-300 hover:text-white hover:border-white/20">Docs</button>
@@ -371,11 +337,11 @@ export default function DashboardPage() {
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <PlugZap size={16} className="text-blue-400" />
-                        <span className="text-white text-sm font-medium">Opportunity Newsletter</span>
+                        <span className="text-white text-sm font-medium">Partner Newsletter</span>
                       </div>
                       <span className="text-xs text-slate-400">Communications</span>
                     </div>
-                    <p className="text-xs text-slate-400 mb-3">Send manual updates to newsletter subscribers about new opportunities.</p>
+                    <p className="text-xs text-slate-400 mb-3">Send manual updates to newsletter subscribers.</p>
                     <NewsletterComposer />
                   </div>
                 </div>
@@ -457,11 +423,13 @@ export default function DashboardPage() {
                       <div className="flex-1">
                         <h3 className="text-white font-medium mb-1">Welcome to the Investor Portal</h3>
                         <p className="text-sm text-slate-300">
-                          Your portfolio will populate after your first investment is onboarded. In the meantime, you can browse current opportunities and request access to the data room.
+                          Your portfolio will populate after your first investment is onboarded. In the meantime,
+                          the private portal remains available for approved materials and communications when
+                          active.
                         </p>
                         <div className="mt-4 flex items-center gap-2">
                           <Link href="/dataroom" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-slate-900 text-sm font-medium hover:bg-slate-100 transition-colors">
-                            Browse New Deals
+                            Open Portal
                           </Link>
                           <Link href="/contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 text-sm text-slate-300 hover:text-white hover:border-white/20 transition-colors">
                             Contact Support
@@ -503,7 +471,7 @@ export default function DashboardPage() {
                   />
                 </div>
 
-                {/* Deals CTA integrated in DashboardHero; removed standalone block */}
+                {/* Portal CTA integrated in DashboardHero; removed standalone deal block */}
 
                 {/* Performance Chart */}
                 {performanceData && metrics ? (
@@ -552,7 +520,7 @@ export default function DashboardPage() {
                   <div className="surface rounded-xl p-8 shadow-card text-center">
                     <h3 className="text-lg font-medium text-white mb-2">No Active Investments Yet</h3>
                     <p className="text-sm text-slate-400 max-w-sm mx-auto mb-4">Your first investment will appear here once paperwork is completed and funded.</p>
-                    <Link href="/dataroom" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-slate-900 text-sm font-medium hover:bg-slate-100 transition-colors">Explore Opportunities</Link>
+                    <Link href="/contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-slate-900 text-sm font-medium hover:bg-slate-100 transition-colors">Contact Support</Link>
                   </div>
                 )}
 
@@ -564,7 +532,7 @@ export default function DashboardPage() {
                   </div>
                 ) : null}
 
-                {/* New Opportunities CTA moved above; section removed here */}
+                {/* Portal CTA moved above; section removed here */}
               </div>
             )}
           </>

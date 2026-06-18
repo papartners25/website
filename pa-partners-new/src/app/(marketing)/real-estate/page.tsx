@@ -1,8 +1,8 @@
 import RealEstateContent from "@/components/sections/RealEstateContent";
 export const metadata = {
-  title: "Real Estate",
+  title: "Internal Development",
   description:
-    "Value‑add acquisitions with disciplined underwriting focused on cash‑flowing assets.",
+    "Internal multifamily and mixed-use development work guided by underwriting, capital planning, and execution discipline.",
 };
 
 export default function RealEstatePage() {

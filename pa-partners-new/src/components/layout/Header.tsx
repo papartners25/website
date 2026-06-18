@@ -60,7 +60,7 @@ export default function Header() {
           <div className="flex items-center gap-2">
             {isAuthed ? (
               <button
-                onClick={async () => { if (typeof window !== 'undefined') { try { sessionStorage.removeItem('investorDealsModalShown_v1'); sessionStorage.removeItem('admin_integrations_unlocked_v1'); } catch {} } await supabase.auth.signOut(); router.push("/"); }}
+                onClick={async () => { if (typeof window !== 'undefined') { try { sessionStorage.removeItem('admin_integrations_unlocked_v1'); } catch {} } await supabase.auth.signOut(); router.push("/"); }}
                 className="hidden md:inline-flex items-center gap-2 rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:border-white/20"
                 aria-label="Logout"
                 title="Logout"
@@ -70,7 +70,7 @@ export default function Header() {
               </button>
             ) : (
               <Link href="/login" className="hidden md:inline-flex items-center rounded-lg border border-white/10 px-3 py-1.5 text-sm text-slate-200 hover:text-white hover:border-white/20">
-                Investor Login
+                Partner Login
               </Link>
             )}
             <button
@@ -100,14 +100,14 @@ export default function Header() {
             ))}
               {isAuthed ? (
                 <button
-                  onClick={async () => { if (typeof window !== 'undefined') { try { sessionStorage.removeItem('investorDealsModalShown_v1'); sessionStorage.removeItem('admin_integrations_unlocked_v1'); } catch {} } await supabase.auth.signOut(); setOpen(false); router.push("/"); }}
+                  onClick={async () => { if (typeof window !== 'undefined') { try { sessionStorage.removeItem('admin_integrations_unlocked_v1'); } catch {} } await supabase.auth.signOut(); setOpen(false); router.push("/"); }}
                   className="px-2 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-white/5 inline-flex items-center gap-2"
                 >
                   <LogOut size={16} />
                   <span>Logout</span>
                 </button>
               ) : (
-                <Link href="/login" className="px-2 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-white/5" onClick={() => setOpen(false)}>Investor Login</Link>
+                <Link href="/login" className="px-2 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-white/5" onClick={() => setOpen(false)}>Partner Login</Link>
               )}
             </div>
           </div>
@@ -116,5 +116,4 @@ export default function Header() {
     </header>
   );
 }
-
 

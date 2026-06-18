@@ -10,9 +10,9 @@ export default function EmptyState({ type }: EmptyStateProps) {
     investments: {
       icon: <Building2 size={64} className="text-slate-600" />,
       title: 'No Active Investments',
-      description: 'You haven\'t made any investments yet. Browse our available opportunities to get started.',
-      actionLabel: 'View Opportunities',
-      actionHref: '/portfolio',
+      description: 'Your investments will appear here after onboarding and funding are complete.',
+      actionLabel: 'Contact Support',
+      actionHref: '/contact',
     },
     distributions: {
       icon: <TrendingUp size={64} className="text-slate-600" />,
@@ -32,8 +32,8 @@ export default function EmptyState({ type }: EmptyStateProps) {
       icon: <Building2 size={64} className="text-slate-600" />,
       title: 'Welcome to Your Dashboard',
       description: 'Once you make your first investment, you\'ll see your portfolio performance, distributions, and tax documents here.',
-      actionLabel: 'Explore Opportunities',
-      actionHref: '/portfolio',
+      actionLabel: 'Contact Support',
+      actionHref: '/contact',
     },
   };
 

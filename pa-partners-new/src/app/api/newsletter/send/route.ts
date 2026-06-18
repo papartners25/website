@@ -75,7 +75,7 @@ export async function POST(request: Request) {
                 <div style="background: linear-gradient(to bottom right, #1e293b, #0f172a); border: 1px solid rgba(148, 163, 184, 0.1); border-radius: 12px; padding: 32px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);">
                   <div style="text-align: center; margin-bottom: 24px;">
                     <h1 style="color: #f1f5f9; font-size: 24px; font-weight: 600; margin: 0;">PA Partners</h1>
-                    <p style="color: #94a3b8; font-size: 14px; margin-top: 4px;">Investment Opportunities Update</p>
+                    <p style="color: #94a3b8; font-size: 14px; margin-top: 4px;">Partner Update</p>
                   </div>
                   
                   <div style="color: #cbd5e1; font-size: 15px; line-height: 1.6;">
@@ -83,8 +83,8 @@ export async function POST(request: Request) {
                   </div>
                   
                   <div style="margin-top: 32px; text-align: center;">
-                    <a href="${process.env.NEXT_PUBLIC_SITE_URL || "https://papartners.co"}/opportunities" style="display: inline-block; background-color: #ffffff; color: #0f172a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 14px;">
-                      View Current Opportunities
+                    <a href="${process.env.NEXT_PUBLIC_SITE_URL || "https://papartners.co"}/" style="display: inline-block; background-color: #ffffff; color: #0f172a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 14px;">
+                      Visit PA Partners
                     </a>
                   </div>
                   
@@ -93,7 +93,7 @@ export async function POST(request: Request) {
                       © ${new Date().getFullYear()} PA Partners. All rights reserved.
                     </p>
                     <p style="color: #64748b; font-size: 12px; margin-top: 8px;">
-                      <a href="${process.env.NEXT_PUBLIC_SITE_URL || "https://papartners.co"}/opportunities" style="color: #94a3b8; text-decoration: underline;">Unsubscribe</a>
+                      <a href="${process.env.NEXT_PUBLIC_SITE_URL || "https://papartners.co"}/contact" style="color: #94a3b8; text-decoration: underline;">Contact PA Partners</a>
                     </p>
                   </div>
                 </div>
@@ -133,4 +133,3 @@ export async function POST(request: Request) {
     );
   }
 }
-

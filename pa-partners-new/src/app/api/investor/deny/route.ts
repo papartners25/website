@@ -135,7 +135,7 @@ export async function GET(request: Request) {
                           PA Partners
                         </p>
                         <p style="margin: 0; color: #64748b; font-size: 12px;">
-                          Value-add real estate and applied AI solutions
+                          Development consulting and real estate development
                         </p>
                       </td>
                     </tr>

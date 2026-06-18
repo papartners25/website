@@ -1,7 +1,7 @@
 /**
  * Mock data service for investor dashboard
  * This provides sample data structure that can be easily replaced with
- * real API calls to AppFolio, QuickBooks, Stripe, or Lindy AI
+ * real API calls to AppFolio, QuickBooks, Stripe, or an internal data service
  */
 
 import {
@@ -16,7 +16,7 @@ import {
 
 /**
  * Simulates fetching investor profile
- * Replace with: GET /api/investor/profile or Lindy AI aggregated data
+ * Replace with: GET /api/investor/profile or aggregated account data
  */
 export async function getInvestorProfile(_investorId: string): Promise<Investor | null> {
   // Simulate API delay
@@ -48,9 +48,8 @@ export async function getInvestments(_investorId: string): Promise<Investment[]>
     {
       id: 'inv-1',
       propertyId: 'prop-001',
-      propertyName: 'Broadway Court Apartments',
-      propertyAddress: '123 Broadway St, Columbus, OH 43215',
-      propertyImage: '/deals/broadway-court.jpg',
+      propertyName: 'Capital Account A',
+      propertyAddress: 'Private reporting workspace',
       investmentAmount: 750000,
       ownershipPercentage: 22.5,
       acquisitionDate: '2023-06-15',
@@ -65,8 +64,8 @@ export async function getInvestments(_investorId: string): Promise<Investment[]>
     {
       id: 'inv-2',
       propertyId: 'prop-002',
-      propertyName: 'South of Mound Mixed-Use',
-      propertyAddress: '456 S Mound Ave, Columbus, OH 43205',
+      propertyName: 'Development Account B',
+      propertyAddress: 'Private reporting workspace',
       investmentAmount: 1100000,
       ownershipPercentage: 31.4,
       acquisitionDate: '2022-11-20',
@@ -92,7 +91,7 @@ export async function getDistributions(_investorId: string): Promise<Distributio
     {
       id: 'dist-1',
       investmentId: 'inv-1',
-      propertyName: 'Broadway Court Apartments',
+      propertyName: 'Capital Account A',
       amount: 15750,
       distributionDate: '2025-09-15',
       period: 'Q3 2025',
@@ -104,7 +103,7 @@ export async function getDistributions(_investorId: string): Promise<Distributio
     {
       id: 'dist-2',
       investmentId: 'inv-2',
-      propertyName: 'South of Mound Mixed-Use',
+      propertyName: 'Development Account B',
       amount: 25300,
       distributionDate: '2025-09-15',
       period: 'Q3 2025',
@@ -116,7 +115,7 @@ export async function getDistributions(_investorId: string): Promise<Distributio
     {
       id: 'dist-3',
       investmentId: 'inv-1',
-      propertyName: 'Broadway Court Apartments',
+      propertyName: 'Capital Account A',
       amount: 14200,
       distributionDate: '2025-06-15',
       period: 'Q2 2025',
@@ -126,7 +125,7 @@ export async function getDistributions(_investorId: string): Promise<Distributio
     {
       id: 'dist-4',
       investmentId: 'inv-2',
-      propertyName: 'South of Mound Mixed-Use',
+      propertyName: 'Development Account B',
       amount: 23800,
       distributionDate: '2025-06-15',
       period: 'Q2 2025',
@@ -138,7 +137,7 @@ export async function getDistributions(_investorId: string): Promise<Distributio
 
 /**
  * Calculates portfolio metrics
- * Replace with: Aggregated data from Lindy AI or custom calculation service
+ * Replace with: aggregated data from internal APIs or a custom calculation service
  */
 export async function getPortfolioMetrics(_investorId: string): Promise<PortfolioMetrics> {
   await new Promise(resolve => setTimeout(resolve, 300));
@@ -169,25 +168,25 @@ export async function getTaxDocuments(_investorId: string): Promise<TaxDocument[
       id: 'tax-1',
       year: 2024,
       documentType: 'k1',
-      documentName: 'Schedule K-1 - Broadway Court',
-      fileUrl: '/documents/k1-broadway-2024.pdf',
+      documentName: 'Schedule K-1 - Capital Account A',
+      fileUrl: '/documents/k1-capital-account-a-2024.pdf',
       fileSize: 245000,
       uploadDate: '2025-03-01',
       status: 'available',
       investmentId: 'inv-1',
-      propertyName: 'Broadway Court Apartments',
+      propertyName: 'Capital Account A',
     },
     {
       id: 'tax-2',
       year: 2024,
       documentType: 'k1',
-      documentName: 'Schedule K-1 - South of Mound',
-      fileUrl: '/documents/k1-south-2024.pdf',
+      documentName: 'Schedule K-1 - Development Account B',
+      fileUrl: '/documents/k1-development-account-b-2024.pdf',
       fileSize: 238000,
       uploadDate: '2025-03-01',
       status: 'available',
       investmentId: 'inv-2',
-      propertyName: 'South of Mound Mixed-Use',
+      propertyName: 'Development Account B',
     },
     {
       id: 'tax-3',
@@ -213,7 +212,7 @@ export async function getPropertyPerformance(propertyId: string): Promise<Proper
   
   return {
     propertyId,
-    propertyName: 'Broadway Court Apartments',
+    propertyName: 'Capital Account A',
     monthlyData: months.map((month) => ({
       month: `${month} '25`,
       occupancy: 92 + Math.random() * 6,
@@ -236,28 +235,28 @@ export async function getAccountActivity(_investorId: string): Promise<AccountAc
       id: 'act-1',
       date: '2025-09-15',
       type: 'distribution',
-      description: 'Q3 2025 Distribution - Broadway Court',
+      description: 'Q3 2025 Distribution - Capital Account A',
       amount: 15750,
       balance: 1977000,
-      relatedProperty: 'Broadway Court Apartments',
+      relatedProperty: 'Capital Account A',
     },
     {
       id: 'act-2',
       date: '2025-09-15',
       type: 'distribution',
-      description: 'Q3 2025 Distribution - South of Mound',
+      description: 'Q3 2025 Distribution - Development Account B',
       amount: 25300,
       balance: 1961250,
-      relatedProperty: 'South of Mound Mixed-Use',
+      relatedProperty: 'Development Account B',
     },
     {
       id: 'act-3',
       date: '2025-06-15',
       type: 'distribution',
-      description: 'Q2 2025 Distribution - Broadway Court',
+      description: 'Q2 2025 Distribution - Capital Account A',
       amount: 14200,
       balance: 1935950,
-      relatedProperty: 'Broadway Court Apartments',
+      relatedProperty: 'Capital Account A',
     },
   ];
 }

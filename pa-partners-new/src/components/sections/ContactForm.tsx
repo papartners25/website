@@ -75,7 +75,7 @@ function ContactFormContent() {
         </h2>
         {isNewsletterMode && (
           <p className="text-slate-300 text-center mt-2 max-w-xl mx-auto">
-            Stay informed about new value-add multifamily opportunities and investment updates.
+            Stay informed about PA Partners consulting, development, and new business updates.
           </p>
         )}
         <form
@@ -120,7 +120,7 @@ function ContactFormContent() {
               <textarea
                 className="mt-1 w-full rounded-lg border border-white/10 bg-white/5 text-white placeholder:text-slate-400 px-3 py-2"
                 rows={5}
-                placeholder="How can we help?"
+                placeholder="Tell us about a capital stack, underwriting question, development plan, or new business opportunity."
                 {...register("message", { required: !isNewsletterMode })}
               />
               {errors.message && (
@@ -131,9 +131,12 @@ function ContactFormContent() {
           <div className="flex items-center justify-center">
             <button
               disabled={isSubmitting}
-              className="inline-flex items-center justify-center rounded-lg bg-white text-slate-900 px-4 py-2 text-sm hover:bg-slate-100 disabled:opacity-60"
+              className="group relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-b from-amber-200 via-amber-300 to-amber-500 px-6 py-3 text-sm font-medium tracking-tight text-slate-950 shadow-[0_8px_30px_-12px_rgba(212,175,55,0.7)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-12px_rgba(212,175,55,0.85)] disabled:opacity-60 disabled:hover:translate-y-0"
             >
-              {isSubmitting ? (isNewsletterMode ? "Subscribing..." : "Sending...") : (isNewsletterMode ? "Subscribe" : "Send")}
+              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/55 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
+              <span className="relative z-10">
+                {isSubmitting ? (isNewsletterMode ? "Subscribing..." : "Sending...") : (isNewsletterMode ? "Subscribe" : "Send")}
+              </span>
             </button>
           </div>
           {isNewsletterMode && newsletterStatus && (

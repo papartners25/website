@@ -4,7 +4,7 @@
  * - AppFolio (property management)
  * - QuickBooks (accounting)
  * - Stripe (payments)
- * - Lindy AI (agentic data aggregation)
+ * - Internal data aggregation
  */
 
 export interface Investor {
