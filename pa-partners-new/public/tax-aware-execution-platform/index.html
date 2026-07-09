@@ -60,6 +60,13 @@ a{color:inherit}
 }
 
 /* ---------- preamble ---------- */
+.brief{margin:20px 0 2px;padding:14px 0 12px;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,1.15fr);gap:28px;align-items:start}
+.brief-kicker{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--red);margin-bottom:6px}
+.brief p{font-size:15px;line-height:1.58;color:var(--ink);margin:0}
+.brief p b{font-weight:500}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);border-left:1px solid var(--rule)}
+.flow span{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;line-height:1.5;color:var(--ink-2);padding:2px 10px;border-right:1px solid var(--rule)}
+.flow b{display:block;color:var(--ink);font-size:10px;font-weight:400}
 .preamble{padding:30px 0 8px;columns:2;column-gap:44px;column-rule:1px solid var(--rule-soft)}
 .preamble p{font-size:16.5px;line-height:1.62;text-align:justify;hyphens:auto;margin-bottom:1em;color:var(--ink)}
 .preamble p:first-child::first-line{font-variant:small-caps;letter-spacing:.04em}
@@ -73,6 +80,7 @@ a{color:inherit}
 .item-head h2{font-family:var(--mono);font-size:12.5px;font-weight:400;letter-spacing:.14em}
 .item-head h2 b{font-weight:400;color:var(--red)}
 .item-head .xref{font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.05em}
+.item-note{font-family:var(--mono);font-size:10.5px;line-height:1.6;color:var(--ink-3);margin:10px 0 0;max-width:92ch}
 
 /* summary ledger strip */
 .sumrow{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--ink)}
@@ -188,6 +196,10 @@ tbody tr:hover td{background:rgba(27,24,19,.03)}
 
 @media(max-width:900px){
   .sheet{padding:36px 22px 60px}
+  .brief{grid-template-columns:1fr;gap:14px}
+  .flow{grid-template-columns:1fr}
+  .flow span{padding:6px 0 6px 10px;border-bottom:1px solid var(--rule-soft)}
+  .flow span:last-child{border-bottom:0}
   .preamble{columns:1}
   .sumrow{grid-template-columns:1fr 1fr}
   .sumrow>div{border-right:0;border-bottom:1px solid var(--rule-soft);padding-left:0!important}
@@ -243,15 +255,30 @@ tbody tr:hover td{background:rgba(27,24,19,.03)}
   </div>
   <hr class="hair">
 
+  <div class="brief">
+    <div>
+      <div class="brief-kicker">READ THIS FIRST</div>
+      <p><b>This is a control record for delivering usable deductions, not a claim that bigger losses are always better.</b> Usable means the deduction is supported, sized to household headroom, and valuable at current or intentionally deferred rates.</p>
+    </div>
+    <div class="flow" aria-label="Platform operating sequence">
+      <span><b>GENERATE</b>ordinary attributes</span>
+      <span><b>SUPPORT</b>accounting gate</span>
+      <span><b>SIZE</b>household headroom</span>
+      <span><b>THROTTLE</b>excess loss</span>
+      <span><b>EVIDENCE</b>order record</span>
+    </div>
+  </div>
+
   <!-- PREAMBLE -->
   <div class="preamble">
-    <p>This record is produced continuously by the Platform and constitutes the firm's contemporaneous evidence of systematic, rule-governed trading. The Platform exists on a single premise: commingled tax-aware funds manufacture tax attributes blind — the reference strategy generated ordinary losses of <span class="fig">31%</span> of capital in 2023<sup>1</sup> — and ship them to investors without regard to whether any particular taxpayer can use them. Under §461(l), a substantial share cannot be used in the year generated.<sup>2</sup></p>
+    <p>This record is produced continuously by the Platform and constitutes the firm's contemporaneous evidence of systematic, rule-governed trading. The Platform begins with a practical gap: tax-aware funds can generate large ordinary-loss attributes — the reference strategy generated ordinary losses of <span class="fig">31%</span> of capital in 2023<sup>1</sup> — while a commingled fund may not know whether any particular household can use them in the year generated. Under §461(l), a substantial share can be deferred instead of absorbed currently.<sup>2</sup></p>
     <p>The firm's advantage is the household. Because the adviser holds each client's complete tax posture — outside income, state of residence, carryforwards, loss-limitation headroom — the Platform generates the <em>right character of loss, in the right amount, for each specific household</em>, and suppresses generation where the attribute would be stranded. Every order below carries its economic rationale and the version of the rule that cleared it; frequency, continuity, and regularity of trading are facts this document evidences by existing.<sup>3</sup> The fund is a wrapper. The layer — this record and the machinery behind it — is the asset.</p>
   </div>
 
   <!-- ITEM 1 -->
   <section class="item" id="i1">
     <div class="item-head"><h2><b>ITEM 1.</b>&nbsp;&nbsp;PROGRAM SUMMARY — AS OF THIS RECORD</h2><span class="xref">CROSS-REF: PLAN v2 §9</span></div>
+    <p class="item-note">SIMULATED CONTROL OUTPUTS, NOT LIVE FUND PERFORMANCE. VALUES BELOW SHOW WHAT THE ENGINE WOULD REPORT AFTER SUPPORT GATES, HOUSEHOLD HEADROOM, AND DEFERRAL HAIRCUTS ARE APPLIED.</p>
     <div class="sumrow">
       <div>
         <div class="sum-lbl">USABLE AFTER-TAX ALPHA, YTD, NET OF ALL FEES</div>

@@ -48,6 +48,11 @@ a{color:inherit}
 .item-head h2 b{color:var(--red)}
 .item-head .xref{font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.05em}
 
+/* orientation */
+.schedule-lead{padding:18px 0 2px;max-width:84ch}
+.schedule-lead p{font-size:15px;line-height:1.6;color:var(--ink-2);margin:0}
+.schedule-lead p b{color:var(--ink);font-weight:500}
+
 /* notes */
 .notes{padding-top:16px;max-width:88ch}
 .notes p{font-size:13.5px;color:var(--ink-2);line-height:1.6;padding-left:26px;text-indent:-26px;margin-bottom:7px}
@@ -122,12 +127,16 @@ td sup,th sup{font-family:var(--mono);font-size:9px;color:var(--red)}
   </div>
   <hr class="hair">
 
+  <div class="schedule-lead">
+    <p><b>Start here for the economics.</b> Schedule SC-1 isolates one question: how much of the generated ordinary-loss attribute can each household actually use? The columns compare recurring W-2, substantial K-1 income, near-cap, and oversized-subscription cases.</p>
+  </div>
+
   <!-- S-1 -->
   <section class="item" id="s1">
     <div class="item-head"><h2><b>NOTE S-1.</b>&nbsp;&nbsp;ASSUMPTIONS APPLICABLE TO ALL COLUMNS</h2><span class="xref">SIMPLIFIED · FEDERAL ONLY</span></div>
     <div class="notes">
       <p><b>(a)</b> Married filing jointly; federal tax only. For 2026, the 37% MFJ bracket begins above $768,700 of taxable income; cumulative federal tax at that threshold is ≈$206,600, rounded in the schedule to ≈$207,000. Top-bracket deductions are quoted at a 37% marginal rate; deductions that burn down into lower brackets are valued through the applicable bracket bands. State tax excluded; in conforming high-tax states, savings increase. Medicare surtaxes and NIIT are unaffected by the deduction. QBI interactions ignored.</p>
-      <p><b>(b)</b> Fund profile per reference strategy, benchmarked to public reporting on AQR TA Delphi Plus and used only for Schedule SC-1's simplified year-one economics: annual reference-case gross pre-tax target of 14% of capital; ordinary-loss generation of 30% of capital per annum via notional-principal-contract payment legs. The operating record's Item 5 reports separate YTD attribution. Deferred economic gains are assumed, for illustration, to be realized at the top federal long-term capital gains rate plus NIIT (≈23.8%), excluding state tax; actual production, character, and timing depend on strategy performance, trading path, instrument mix, holding period, fund accounting, and counsel-approved reporting.</p>
+      <p><b>(b)</b> Fund profile per reference strategy, benchmarked to public reporting on AQR TA Delphi Plus and used only for Schedule SC-1's simplified year-one economics. Two separate modeling inputs are shown: a 14% annual reference-case gross pre-tax economic return target, and 30% annual ordinary-loss production via notional-principal-contract payment legs. The operating record's Item 5 reports separate YTD attribution. Deferred economic gains are assumed, for illustration, to be realized at the top federal long-term capital gains rate plus NIIT (≈23.8%), excluding state tax; actual production, character, and timing depend on strategy performance, trading path, instrument mix, holding period, fund accounting, and counsel-approved reporting.</p>
       <p><b>(c)</b> Fees: 1.75% of subscription plus 20% of gains over a 4% T-bill hurdle, incentive computed net of the management fee. As trader-fund expenses, fees flow through as additional ordinary deductions.</p>
       <p><b>(d)</b> §461(l): net business losses deductible against non-business income up to $512,000 (MFJ, for tax years beginning in 2026); the excess converts to an indefinite NOL carryforward usable against 80% of taxable income per year and not re-tested under §461(l). Business losses offset the household's business income without limitation before the cap applies.</p>
       <p><b>(e)</b> Sizing rule: subscription = target usable loss ÷ 30%, where the target is floored at income taxed at 32% or above (the burn-down floor) and capped at household headroom.</p>
