@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form PAX-SC1 · Schedule of Illustrative Household Computations — PA Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F1E8; --ink:#1B1813; --ink-2:#4A443A; --ink-3:#7A7263;
+  --rule:#B9B098; --rule-soft:#D6CFBC; --red:#A92E1B;
+  --serif:'Newsreader',Georgia,serif;
+  --mono:'Fragment Mono',ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink); font-family:var(--serif);
+  font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased;
+  background-image:repeating-linear-gradient(180deg,transparent 0 27px,rgba(27,24,19,.018) 27px 28px);
+}
+::selection{background:var(--ink);color:var(--paper)}
+a{color:inherit}
+.sheet{max-width:1060px;margin:0 auto;padding:56px 64px 80px;position:relative}
+.dbl{border:0;border-top:3px solid var(--ink);position:relative;margin:0}
+.dbl::after{content:"";position:absolute;left:0;right:0;top:4px;border-top:1px solid var(--ink)}
+.hair{border:0;border-top:1px solid var(--rule)}
+.form-line{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-2);padding-bottom:10px}
+.form-line .no{color:var(--red)}
+.masthead{padding:26px 0 22px;display:flex;justify-content:space-between;align-items:flex-end;gap:32px}
+.masthead h1{font-weight:500;font-size:38px;line-height:1.1;letter-spacing:-.01em;max-width:24ch}
+.mast-meta{font-family:var(--mono);font-size:11.5px;text-align:right;color:var(--ink-2);line-height:1.9;white-space:nowrap}
+.mast-meta b{color:var(--ink);font-weight:400}
+.contents{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-2);padding:10px 0 12px}
+.contents a{text-decoration:none}
+.contents a.back-link{color:var(--red)}
+.contents a:hover{color:var(--red)}
+.contents span{margin:0 10px;color:var(--rule)}
+.stamp{
+  position:absolute;top:104px;right:40px;transform:rotate(6deg);
+  font-family:var(--mono);font-size:10px;letter-spacing:.28em;color:var(--red);
+  border:2px solid var(--red);padding:8px 14px 7px;text-align:center;line-height:1.9;opacity:.6;pointer-events:none;
+}
+.item{padding:34px 0 6px}
+.item-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:7px}
+.item-head h2{font-family:var(--mono);font-size:12.5px;font-weight:400;letter-spacing:.14em}
+.item-head h2 b{color:var(--red)}
+.item-head .xref{font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.05em}
+
+/* notes */
+.notes{padding-top:16px;max-width:88ch}
+.notes p{font-size:13.5px;color:var(--ink-2);line-height:1.6;padding-left:26px;text-indent:-26px;margin-bottom:7px}
+.notes p b{font-family:var(--mono);font-size:10.5px;color:var(--ink);font-weight:400;letter-spacing:.05em;margin-right:8px}
+
+/* comparative schedule */
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums lining-nums;margin-top:2px}
+th{font-family:var(--mono);font-size:9.5px;font-weight:400;letter-spacing:.09em;color:var(--ink-2);padding:12px 10px 8px 0;border-bottom:1px solid var(--ink);vertical-align:bottom;line-height:1.7}
+th.col{text-align:right}
+th.col b{display:block;color:var(--ink);font-size:10.5px;font-weight:400}
+th.col.bad b{color:var(--red)}
+td{font-size:14.5px;padding:8px 10px 7px 0;border-bottom:1px solid var(--rule-soft);vertical-align:baseline}
+td.desc{color:var(--ink);padding-right:18px}
+td.desc small{display:block;font-family:var(--mono);font-size:9.5px;color:var(--ink-3);letter-spacing:.04em;margin-top:1px}
+td.n{font-family:var(--mono);font-size:12.5px;text-align:right}
+td .neg{color:var(--red)}
+td .neg::before{content:"("}td .neg::after{content:")"}
+td .bad{color:var(--red)}
+tr.rule-above td{border-top:1px solid var(--ink)}
+tr.total td{border-top:1px solid var(--ink);border-bottom:none;font-weight:600;position:relative;padding-bottom:10px}
+tr.total td::after{content:"";position:absolute;left:0;right:10px;bottom:2px;border-bottom:1px solid var(--ink)}
+tr.total td.desc::after{right:18px}
+tr.plain td{border-bottom:none}
+tbody tr:hover td{background:rgba(27,24,19,.03)}
+td sup,th sup{font-family:var(--mono);font-size:9px;color:var(--red)}
+
+/* commentary */
+.commentary{padding-top:18px;columns:2;column-gap:44px;column-rule:1px solid var(--rule-soft)}
+.commentary p{font-size:14.5px;line-height:1.6;text-align:justify;hyphens:auto;margin-bottom:1em;color:var(--ink);break-inside:avoid}
+.commentary p b{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.1em;color:var(--red)}
+.footnotes{padding:30px 0 0;font-size:13px;color:var(--ink-2);max-width:84ch}
+.footnotes p{padding-left:22px;text-indent:-22px;margin-bottom:6px;line-height:1.55}
+.footnotes sup{font-family:var(--mono);font-size:10px;color:var(--red);margin-right:8px}
+.pageno{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink-3);padding-top:14px;margin-top:30px;border-top:1px solid var(--rule)}
+@media(max-width:900px){
+  .sheet{padding:36px 18px 60px}
+  .commentary{columns:1}
+  .masthead{flex-direction:column;align-items:flex-start}
+  .mast-meta{text-align:left}
+  .stamp{display:none}
+  .sched-wrap{overflow-x:auto}
+  .sched-wrap table{min-width:880px}
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="stamp">ILLUSTRATIVE ONLY<br>NOT TAX ADVICE</div>
+
+  <div class="form-line">
+    <span>FORM PAX-SC1 · EXHIBIT TO DAILY OPERATING RECORD Nº 0187 · INTERNAL USE ONLY</span>
+    <span class="no">SCHEDULE SC-1</span>
+  </div>
+  <hr class="dbl">
+
+  <div class="masthead">
+    <h1>Schedule of Illustrative Household Computations</h1>
+    <div class="mast-meta">
+      PREPARED SATURDAY 5 JULY 2026<br>
+      BASIS: RULESET <b>v3.7.1</b> · SIZING RULE <b>§2.1</b><br>
+      FOUR COLUMNS: THREE SUBSCRIPTIONS, ONE COUNTER-EXAMPLE
+    </div>
+  </div>
+
+  <hr class="hair">
+  <div class="contents">
+    <a class="back-link" href="/tax-aware-execution-platform">← RETURN TO RECORD Nº 0187</a><span>·</span>
+    <a href="#s1">Note S-1 — Assumptions</a><span>·</span>
+    <a href="#s2">Schedule S-2 — Comparative Computation</a><span>·</span>
+    <a href="#s3">Note S-3 — Commentary</a>
+  </div>
+  <hr class="hair">
+
+  <!-- S-1 -->
+  <section class="item" id="s1">
+    <div class="item-head"><h2><b>NOTE S-1.</b>&nbsp;&nbsp;ASSUMPTIONS APPLICABLE TO ALL COLUMNS</h2><span class="xref">SIMPLIFIED · FEDERAL ONLY</span></div>
+    <div class="notes">
+      <p><b>(a)</b> Married filing jointly; federal tax only. For 2026, the 37% MFJ bracket begins above $768,700 of taxable income; cumulative federal tax at that threshold is ≈$206,600, rounded in the schedule to ≈$207,000. Top-bracket deductions are quoted at a 37% marginal rate; deductions that burn down into lower brackets are valued through the applicable bracket bands. State tax excluded; in conforming high-tax states, savings increase. Medicare surtaxes and NIIT are unaffected by the deduction. QBI interactions ignored.</p>
+      <p><b>(b)</b> Fund profile per reference strategy, benchmarked to public reporting on AQR TA Delphi Plus and used only for Schedule SC-1's simplified year-one economics: annual reference-case gross pre-tax target of 14% of capital; ordinary-loss generation of 30% of capital per annum via notional-principal-contract payment legs. The operating record's Item 5 reports separate YTD attribution. Deferred economic gains are assumed, for illustration, to be realized at the top federal long-term capital gains rate plus NIIT (≈23.8%), excluding state tax; actual production, character, and timing depend on strategy performance, trading path, instrument mix, holding period, fund accounting, and counsel-approved reporting.</p>
+      <p><b>(c)</b> Fees: 1.75% of subscription plus 20% of gains over a 4% T-bill hurdle, incentive computed net of the management fee. As trader-fund expenses, fees flow through as additional ordinary deductions.</p>
+      <p><b>(d)</b> §461(l): net business losses deductible against non-business income up to $512,000 (MFJ, for tax years beginning in 2026); the excess converts to an indefinite NOL carryforward usable against 80% of taxable income per year and not re-tested under §461(l). Business losses offset the household's business income without limitation before the cap applies.</p>
+      <p><b>(e)</b> Sizing rule: subscription = target usable loss ÷ 30%, where the target is floored at income taxed at 32% or above (the burn-down floor) and capped at household headroom.</p>
+      <!-- PRODUCTION NOTE — Schedule SC-1 assumes the Phase B NPC sleeve has cleared
+         the accrual-match gate. If the fund/admin/tax-counsel package is pending
+         or failed, ordinary-loss benefits must be excluded from all columns until
+         matched deduction/accrual or approved accounting-method support exists. -->
+      <p><b>(f)</b> NPC accrual-match gate: ordinary-loss benefits are shown only if the fund tax package supports matched deduction/accrual treatment, reasonable amortization, §475 mark-to-market, hedge accounting, or another counsel-approved method. Pending or failed support contributes zero to usable household value.</p>
+    </div>
+  </section>
+
+  <!-- S-2 -->
+  <section class="item" id="s2">
+    <div class="item-head"><h2><b>SCHEDULE S-2.</b>&nbsp;&nbsp;COMPARATIVE COMPUTATION — YEAR ONE</h2><span class="xref">CROSS-REF: RECORD ITEM 2; PLAN v2 §2.1</span></div>
+    <div class="sched-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:32%">LINE ITEM</th>
+          <th class="col"><b>COL. A</b>RECURRING W-2</th>
+          <th class="col"><b>COL. B</b>K-1 HOUSEHOLD</th>
+          <th class="col"><b>COL. C</b>NEAR-CAP W-2</th>
+          <th class="col bad"><b>COL. D</b>OVERSIZED — COUNTER-EXAMPLE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="desc">Annual household income<small>SOURCE CHARACTER</small></td>
+            <td class="n">4,000,000<br><small style="font-size:9px;color:var(--ink-3)">ALL W-2</small></td>
+            <td class="n">3,500,000<br><small style="font-size:9px;color:var(--ink-3)">1.0M W-2 + 2.5M S-CORP K-1</small></td>
+            <td class="n">700,000<br><small style="font-size:9px;color:var(--ink-3)">ALL W-2</small></td>
+            <td class="n">4,000,000<br><small style="font-size:9px;color:var(--ink-3)">ALL W-2</small></td></tr>
+        <tr><td class="desc">Ordinary-loss headroom<small>BUSINESS-INCOME NETTING + §461(l) ALLOWANCE, RATE-FLOORED</small></td>
+            <td class="n">512,000</td><td class="n">3,012,000</td><td class="n">≈300,000</td><td class="n">512,000</td></tr>
+        <tr class="rule-above"><td class="desc">Subscription (engine-sized; Col. D sized by "comfort")</td>
+            <td class="n">1,715,000</td><td class="n">8,000,000</td><td class="n">1,000,000</td><td class="n"><span class="bad">10,000,000</span></td></tr>
+        <tr><td class="desc">Ordinary deductions generated<small>NPC LOSSES 30% + FEE DEDUCTIONS</small></td>
+            <td class="n">≈573,000</td><td class="n">≈2,672,000</td><td class="n">≈334,000</td><td class="n">≈3,340,000</td></tr>
+        <tr><td class="desc">— of which deductible currently</td>
+            <td class="n">512,000</td><td class="n">2,672,000</td><td class="n">297,000</td><td class="n">512,000</td></tr>
+        <tr><td class="desc">— of which deferred to NOL carryforward</td>
+            <td class="n">≈61,000</td><td class="n">—</td><td class="n">≈37,000</td><td class="n"><span class="bad">≈2,828,000</span></td></tr>
+        <tr class="rule-above"><td class="desc">Federal tax before strategy</td>
+            <td class="n">≈1,404,000</td><td class="n">≈1,219,000</td><td class="n">≈168,000</td><td class="n">≈1,404,000</td></tr>
+        <tr><td class="desc">Federal tax after strategy</td>
+            <td class="n">≈1,215,000</td><td class="n">≈231,000</td><td class="n">≈67,000</td><td class="n">≈1,215,000</td></tr>
+        <tr><td class="desc">Tax saved, year one<small>AVERAGE RATE CAPTURED</small></td>
+            <td class="n">189,000 · 37%</td><td class="n">989,000 · 37%</td><td class="n">101,000 · ≈34%</td><td class="n">189,000 · 37%</td></tr>
+        <tr><td class="desc">Fees: management + incentive</td>
+            <td class="n"><span class="neg">58,000</span></td><td class="n"><span class="neg">272,000</span></td><td class="n"><span class="neg">34,000</span></td><td class="n"><span class="neg">340,000</span></td></tr>
+        <tr class="total"><td class="desc">Year-one tax benefit net of fees<small>AS % OF SUBSCRIBED CAPITAL</small></td>
+            <td class="n">131,000 · 7.6%</td><td class="n">717,000 · 9.0%</td><td class="n">67,000 · 6.7%</td><td class="n"><span class="neg">151,000</span> · <span class="neg">1.5%</span></td></tr>
+        <tr class="plain"><td class="desc">Memo: deferred economic gain, net of fees<small>UNREALIZED; TAXED ≈23.8% ON EXIT</small></td>
+            <td class="n">≈182,000</td><td class="n">≈848,000</td><td class="n">≈106,000</td><td class="n">≈1,060,000</td></tr>
+        <tr class="plain"><td class="desc">Memo: attribute capture ratio, year one</td>
+            <td class="n">0.91</td><td class="n">1.00</td><td class="n">0.90</td><td class="n"><span class="bad">0.19</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- S-3 -->
+  <section class="item" id="s3">
+    <div class="item-head"><h2><b>NOTE S-3.</b>&nbsp;&nbsp;COMMENTARY</h2><span class="xref">READ WITH RECORD ITEMS 2 AND 6</span></div>
+    <div class="commentary">
+      <p><b>COL. A — THE CORE CLIENT.</b> Right-sized at $1.715M, the household pays $58,000 in fees to save $189,000 in tax in each recurring year, with ≈$182,000 of economic gain compounding toward long-term rates. The intentionally small NOL spillover drains the following year. This is the repeatable subscription: a fixed annual slab of the client's income is sheltered at full marginal rates, every year, with capture near unity.</p>
+      <p><b>COL. B — THE FLAGSHIP.</b> Because business losses net against the household's $2.5M of K-1 income before §461(l) applies, $2.67M of deductions land with zero stranding — the bill falls 81%. The binding constraint is portfolio concentration, not tax law. Households of this profile should be sourced deliberately; the register flags them.</p>
+      <p><b>COL. C — VIABLE, RARELY OPTIMAL.</b> The burn-down floor caps the budget at ≈$300,000 despite $512,000 of statutory headroom, and the realized rate falls to ≈34%. Per dollar the economics hold, but the absolute benefit is small against the suitability strain of committing $1M to a levered trader fund. The default recommendation for this profile is the Phase A harvesting SMA.</p>
+      <p><b>COL. D — WHAT THE THROTTLE PREVENTS.</b> The same client as Column A, sized by comfort instead of headroom: fees exceed the usable year-one benefit, $2.8M of losses queue behind the 80% carryforward grind, and capture falls to 0.19 — flagging the account as primarily tax-motivated. The position is defensible only as a $10M investment judged on its pre-tax merits; as a tax trade it is rejected at the pre-trade gate. This column is retained in the schedule as the standing illustration of why subscriptions are sized by the State Engine and not by appetite.</p>
+    </div>
+  </section>
+
+  <hr class="hair" style="margin-top:26px">
+  <div class="footnotes">
+    <p><sup>†</sup>All figures are simplified illustrations under Note S-1 and do not constitute tax, legal, or investment advice; every actual subscription is sized on the household's modeled return and reviewed by the client's own tax counsel. Bracket arithmetic is approximated; bills shown are marginal-band estimates, not return-quality computations.</p>
+    <p><sup>‡</sup>The regularity across well-sized columns — a year-one tax benefit net of fees of roughly 7.5–9% of subscribed capital — is the product's unit economics. Income scale does not change the yield; it changes the deployable capital at that yield.</p>
+  </div>
+
+  <div class="pageno"><span>PA PARTNERS · CONFIDENTIAL · FORM PAX-SC1</span><span>EXHIBIT PAGE 1 OF 1 · TO RECORD Nº 0187</span></div>
+</div>
+</body>
+</html>

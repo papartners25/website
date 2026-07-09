@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form PAX-DOR · Daily Operating Record No. 0187 — PA Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F1E8; --ink:#1B1813; --ink-2:#4A443A; --ink-3:#7A7263;
+  --rule:#B9B098; --rule-soft:#D6CFBC; --red:#A92E1B; --red-soft:#C4573F;
+  --serif:'Newsreader',Georgia,serif;
+  --mono:'Fragment Mono',ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper); color:var(--ink); font-family:var(--serif);
+  font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased;
+  font-feature-settings:"onum" 0;
+}
+/* paper fibre — faint, directional, not noise-overlay */
+body{background-image:repeating-linear-gradient(180deg,transparent 0 27px,rgba(27,24,19,.018) 27px 28px)}
+::selection{background:var(--ink);color:var(--paper)}
+a{color:inherit}
+
+.sheet{max-width:1060px;margin:0 auto;padding:56px 64px 80px;position:relative}
+
+/* ---------- rules: the thick/thin financial pair ---------- */
+.dbl{border:0;border-top:3px solid var(--ink);position:relative;margin:0}
+.dbl::after{content:"";position:absolute;left:0;right:0;top:4px;border-top:1px solid var(--ink)}
+.hair{border:0;border-top:1px solid var(--rule)}
+
+/* ---------- masthead ---------- */
+.form-line{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-2);padding-bottom:10px}
+.form-line .no{color:var(--red)}
+.masthead{padding:26px 0 22px;display:flex;justify-content:space-between;align-items:flex-end;gap:32px}
+.masthead h1{font-weight:500;font-size:40px;line-height:1.08;letter-spacing:-.01em;max-width:24ch;font-optical-sizing:auto}
+.masthead h1 .amp{font-style:italic;font-weight:400}
+.mast-meta{font-family:var(--mono);font-size:11.5px;text-align:right;color:var(--ink-2);line-height:1.9;white-space:nowrap}
+.mast-meta b{color:var(--ink);font-weight:400}
+.mast-meta .clock{color:var(--red)}
+.contents{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-2);padding:10px 0 12px;display:flex;flex-wrap:wrap;gap:4px 0}
+.contents a{text-decoration:none;color:var(--ink-2)}
+.contents a.doc-link,.contents a.back-link{color:var(--red)}
+.contents a.doc-link::before{content:"↳ ";color:var(--red)}
+.contents a:hover{color:var(--red)}
+.contents span{margin:0 10px;color:var(--rule)}
+
+/* stamp */
+.stamp{
+  position:absolute;top:110px;right:40px;transform:rotate(6deg);
+  font-family:var(--mono);font-size:10px;letter-spacing:.28em;color:var(--red);
+  border:2px solid var(--red);padding:8px 14px 7px;text-align:center;line-height:1.9;
+  opacity:.6;pointer-events:none;
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='90'%3E%3Cfilter id='r'%3E%3CfeTurbulence baseFrequency='0.55' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9 0.35'/%3E%3CfeComposite operator='in' in2='SourceGraphic'/%3E%3C/filter%3E%3Crect width='200' height='90' filter='url(%23r)'/%3E%3C/svg%3E");
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='90'%3E%3Cfilter id='r'%3E%3CfeTurbulence baseFrequency='0.55' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9 0.35'/%3E%3CfeComposite operator='in' in2='SourceGraphic'/%3E%3C/filter%3E%3Crect width='200' height='90' filter='url(%23r)'/%3E%3C/svg%3E");
+}
+
+/* ---------- preamble ---------- */
+.preamble{padding:30px 0 8px;columns:2;column-gap:44px;column-rule:1px solid var(--rule-soft)}
+.preamble p{font-size:16.5px;line-height:1.62;text-align:justify;hyphens:auto;margin-bottom:1em;color:var(--ink)}
+.preamble p:first-child::first-line{font-variant:small-caps;letter-spacing:.04em}
+.preamble .fig{font-family:var(--mono);font-size:.86em;border-bottom:1px solid var(--ink);padding:0 1px}
+.preamble sup{font-family:var(--mono);font-size:10px;color:var(--red)}
+.preamble em{font-weight:500}
+
+/* ---------- items ---------- */
+.item{padding:34px 0 6px}
+.item-head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:7px;margin-bottom:0}
+.item-head h2{font-family:var(--mono);font-size:12.5px;font-weight:400;letter-spacing:.14em}
+.item-head h2 b{font-weight:400;color:var(--red)}
+.item-head .xref{font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.05em}
+
+/* summary ledger strip */
+.sumrow{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid var(--ink)}
+.sumrow>div{padding:14px 16px 13px 0;border-right:1px solid var(--rule-soft)}
+.sumrow>div:last-child{border-right:0}
+.sumrow>div:nth-child(n+2){padding-left:16px}
+.sum-lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--ink-2);line-height:1.6;min-height:31px}
+.sum-val{font-family:var(--mono);font-size:28px;font-weight:400;line-height:1.12;margin-top:7px;font-variant-numeric:tabular-nums lining-nums}
+.sum-val small{font-size:14px;color:var(--ink-2)}
+  .sum-note{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-top:7px;line-height:1.6}
+  .sum-note.red{color:var(--red)}
+  .det{margin-top:16px;border-top:1px solid var(--ink)}
+  .det td{font-family:var(--mono);font-size:10.5px;line-height:1.6;padding:7px 14px 6px 0}
+  .det td:first-child{color:var(--ink)}
+  .det td:nth-child(2){color:var(--ink-3);font-size:10px}
+  .det .exclude td{color:var(--ink-3)}
+  .det .tot td{border-top:1px solid var(--ink);color:var(--ink)}
+
+  /* ---------- tables: ledger discipline ---------- */
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums lining-nums}
+.table-scroll{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+.table-scroll table{min-width:100%}
+th{font-family:var(--mono);font-size:9.5px;font-weight:400;letter-spacing:.1em;color:var(--ink-2);text-align:left;padding:10px 12px 7px 0;border-bottom:1px solid var(--ink)}
+td{font-size:14.5px;padding:9px 12px 8px 0;border-bottom:1px solid var(--rule-soft);vertical-align:baseline}
+tr:last-child td{border-bottom:0}
+td.mono,th.mono{font-family:var(--mono);font-size:12px}
+.r{text-align:right}
+th:last-child.r,td:last-child.r{padding-right:0}
+th{padding-right:22px}
+td.red{color:var(--red)}
+td sup{font-family:var(--mono);font-size:9px;color:var(--red)}
+
+  /* household and NOL workpapers (Item 2 / Item 2A drill-downs) */
+  tr.hh-row,tr.nol-row{cursor:pointer}
+  tr.hh-row .car,tr.nol-row .car{font-family:var(--mono);font-size:9px;color:var(--red);margin-right:8px;display:inline-block;transition:transform .2s}
+  tr.hh-row.open .car,tr.nol-row.open .car{transform:rotate(90deg)}
+tr.wp{display:none}
+tr.wp.open{display:table-row}
+tr.wp>td{padding:0 0 18px;border-bottom:1px solid var(--rule)}
+tr.wp:hover td{background:transparent}
+.wp-sheet{margin-top:4px;border-left:2px solid var(--rule);padding:14px 18px 14px;background:rgba(27,24,19,.025);font-family:var(--mono);font-size:11px;line-height:1.9;color:var(--ink-2);max-width:760px}
+.wp-sheet h4{font-size:10px;letter-spacing:.14em;color:var(--ink);font-weight:400;margin-bottom:8px}
+.wp-sheet h4 b{color:var(--red);font-weight:400}
+  .wp-line{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dotted var(--rule-soft);padding:2px 0}
+  .wp-line span:last-child{color:var(--ink);white-space:nowrap}
+  .wp-line.wrap span:last-child{white-space:normal;text-align:right;max-width:58ch}
+  .wp-line.indent{padding-left:18px}
+.wp-total{display:flex;justify-content:space-between;border-top:1px solid var(--ink);margin-top:6px;padding-top:5px;color:var(--ink);position:relative}
+.wp-total::after{content:"";position:absolute;left:0;right:0;bottom:-3px;border-bottom:1px solid var(--ink)}
+.wp-note{color:var(--red);margin-top:10px;font-size:10px;letter-spacing:.06em}
+tbody tr:hover td{background:rgba(27,24,19,.03)}
+.neg{color:var(--red)}
+.neg::before{content:"("}.neg::after{content:")"}
+
+/* budget rule-of-thumb bar: typographic, not a widget */
+.budget{font-family:var(--mono);font-size:11px;letter-spacing:-.5px;white-space:nowrap}
+.budget .used{color:var(--ink)}
+.budget .free{color:var(--rule)}
+.budget.warn .used{color:var(--red)}
+
+/* attribution account */
+.acct td{font-size:15.5px;padding:8px 0}
+.acct .desc{padding-right:16px;width:1%;white-space:nowrap}
+.acct .dots{width:auto}
+.acct td:last-child{width:72px;white-space:nowrap}
+.acct .dots{position:relative;overflow:hidden;color:var(--rule)}
+.acct .dots::after{content:". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";letter-spacing:2px;font-size:11px;white-space:nowrap;display:block}
+.acct .dots::after{content:"";display:block;border-bottom:1px dotted var(--rule);transform:translateY(.55em)}
+.acct .sub td{border-top:1px solid var(--ink);border-bottom:none;font-weight:500}
+.acct .tot td{border-top:1px solid var(--ink);border-bottom:none;font-weight:600;font-size:17px;position:relative}
+.acct .tot td::after{content:"";position:absolute;left:0;right:0;bottom:-4px;border-bottom:1px solid var(--ink)}
+.acct .tot .r::after{left:auto;width:100%}
+
+/* blotter */
+.blotter td{font-family:var(--mono);font-size:11.5px;line-height:1.5;padding:8px 14px 7px 0}
+.blotter .act{width:52px}
+.blotter .act.block{color:var(--red)}
+.blotter small{display:block;color:var(--ink-3);font-size:10.5px;margin-top:1px}
+.blotter .new td{animation:inkin .8s ease}
+@keyframes inkin{from{opacity:0;transform:translateY(-2px)}to{opacity:1}}
+
+/* exceptions */
+.exception{display:grid;grid-template-columns:26px 1fr 190px;gap:0 18px;padding:16px 0 14px;border-bottom:1px solid var(--rule-soft)}
+.exception:last-of-type{border-bottom:0}
+.exception .mark{font-family:var(--mono);color:var(--red);font-size:13px;padding-top:2px}
+.exception h3{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.12em;color:var(--red);margin-bottom:5px}
+.exception h3 span{color:var(--ink-3);letter-spacing:.04em;margin-left:10px}
+.exception p{font-size:14.5px;color:var(--ink-2);line-height:1.55;max-width:64ch}
+.exception .memo{font-family:var(--mono);font-size:10.5px;margin-top:6px}
+.exception .memo a{color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;margin-right:16px;cursor:pointer}
+.exception .memo a:hover{color:var(--red);text-decoration-color:var(--red)}
+.initials{border:1px solid var(--rule);height:52px;position:relative;align-self:start}
+.initials span{position:absolute;bottom:4px;left:8px;font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:var(--ink-3)}
+.redline-note{font-size:15px;padding:18px 0 4px;color:var(--ink-2);max-width:78ch}
+.redline-note .fig{font-family:var(--mono);font-size:.88em;border-bottom:2px solid var(--red);padding:0 1px;color:var(--ink)}
+
+/* phase record */
+.phases td:first-child{font-family:var(--mono);font-size:12px;width:96px}
+.phases .tick{width:34px;font-family:var(--mono)}
+.phases .tick.done::before{content:"✓"}
+.phases .tick.live::before{content:"●";color:var(--red);font-size:9px}
+.phases .cur{font-weight:500}
+
+/* footnotes + attestation */
+.footnotes{padding:30px 0 0;font-size:13px;color:var(--ink-2);max-width:84ch}
+.footnotes p{padding-left:22px;text-indent:-22px;margin-bottom:6px;line-height:1.55}
+.footnotes sup{font-family:var(--mono);font-size:10px;color:var(--red);margin-right:8px}
+.attest{margin-top:40px;padding-top:18px;display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
+.attest .decl{font-size:14.5px;font-style:italic;color:var(--ink-2);max-width:52ch;line-height:1.6}
+.sig{text-align:right;font-family:var(--mono);font-size:11px;color:var(--ink-2);line-height:1.9}
+.sig .hand{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--ink);border-bottom:1px solid var(--ink);padding:0 26px 2px;display:inline-block;margin-bottom:6px}
+.pageno{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink-3);padding-top:14px;margin-top:26px}
+
+@media(max-width:900px){
+  .sheet{padding:36px 22px 60px}
+  .preamble{columns:1}
+  .sumrow{grid-template-columns:1fr 1fr}
+  .sumrow>div{border-right:0;border-bottom:1px solid var(--rule-soft);padding-left:0!important}
+  .exception{grid-template-columns:20px 1fr}
+  .initials{display:none}
+  .masthead{flex-direction:column;align-items:flex-start}
+  .mast-meta{text-align:left}
+  .stamp{display:none}
+  .table-scroll.wide table{min-width:880px}
+  .table-scroll.xwide table{min-width:1040px}
+  .table-scroll.medium table{min-width:760px}
+}
+@media(max-width:600px){
+  .table-scroll.account table{min-width:640px}
+}
+@media print{
+  body{background:none}
+  .stamp{opacity:.45}
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="stamp">SIMULATED DATA<br>CONCEPT — NOT FILED</div>
+
+  <div class="form-line">
+    <span>FORM PAX-DOR · DAILY OPERATING RECORD · INTERNAL USE ONLY</span>
+    <span class="no">RECORD Nº 0187</span>
+  </div>
+  <hr class="dbl">
+
+  <div class="masthead">
+    <h1>Tax-Aware Execution Platform Operating Record</h1>
+    <div class="mast-meta">
+      SATURDAY 5 JULY 2026 · <b class="clock" id="clock">14:32:07</b> ET<br>
+      RULESET <b>v3.7.1</b> (IC-APPROVED 22 JUN 2026)<br>
+      EVIDENCE STORE <b>8,412</b> ORDERS · <b>0</b> UNBOUND
+    </div>
+  </div>
+
+  <hr class="hair">
+  <div class="contents">
+    <a href="#i1">Item 1 — Program Summary</a><span>·</span>
+    <a href="#i2">Item 2 — Household Register</a><span>·</span>
+    <a href="#i2a">Item 2A — NOL Sub-Register</a><span>·</span>
+    <a href="#i3">Item 3 — Policy Register</a><span>·</span>
+    <a href="#i4">Item 4 — Execution Blotter</a><span>·</span>
+    <a href="#i5">Item 5 — Attribution Account</a><span>·</span>
+    <a href="#i6">Item 6 — Exceptions</a><span>·</span>
+    <a href="#i7">Item 7 — Phase Record</a><span>·</span>
+    <a class="doc-link" href="/tax-aware-execution-platform/schedule-sc-1">Schedule SC-1 — Illustrative Household Computations</a>
+  </div>
+  <hr class="hair">
+
+  <!-- PREAMBLE -->
+  <div class="preamble">
+    <p>This record is produced continuously by the Platform and constitutes the firm's contemporaneous evidence of systematic, rule-governed trading. The Platform exists on a single premise: commingled tax-aware funds manufacture tax attributes blind — the reference strategy generated ordinary losses of <span class="fig">31%</span> of capital in 2023<sup>1</sup> — and ship them to investors without regard to whether any particular taxpayer can use them. Under §461(l), a substantial share cannot be used in the year generated.<sup>2</sup></p>
+    <p>The firm's advantage is the household. Because the adviser holds each client's complete tax posture — outside income, state of residence, carryforwards, loss-limitation headroom — the Platform generates the <em>right character of loss, in the right amount, for each specific household</em>, and suppresses generation where the attribute would be stranded. Every order below carries its economic rationale and the version of the rule that cleared it; frequency, continuity, and regularity of trading are facts this document evidences by existing.<sup>3</sup> The fund is a wrapper. The layer — this record and the machinery behind it — is the asset.</p>
+  </div>
+
+  <!-- ITEM 1 -->
+  <section class="item" id="i1">
+    <div class="item-head"><h2><b>ITEM 1.</b>&nbsp;&nbsp;PROGRAM SUMMARY — AS OF THIS RECORD</h2><span class="xref">CROSS-REF: PLAN v2 §9</span></div>
+    <div class="sumrow">
+      <div>
+        <div class="sum-lbl">USABLE AFTER-TAX ALPHA, YTD, NET OF ALL FEES</div>
+        <div class="sum-val" id="usableAlpha" data-count="3.42" data-dec="2">0<small>%</small></div>
+        <div class="sum-note" id="usableAlphaNote">computed from Item 2 current-year use</div>
+      </div>
+      <div>
+        <div class="sum-lbl">CURRENT-YEAR ATTRIBUTE CAPTURE (VALUE ÷ POTENTIAL)</div>
+        <div class="sum-val" id="captureRatio" data-count="0.93" data-dec="2">0</div>
+        <div class="sum-note" id="captureNote">carryforwards bifurcated below</div>
+      </div>
+      <div>
+        <div class="sum-lbl">ORDERS WITH SUPPORTING RECORDS</div>
+        <div class="sum-val" data-count="100" data-dec="0">0<small>%</small></div>
+        <div class="sum-note">8,412 of 8,412 · none missing rationale</div>
+      </div>
+      <div>
+        <div class="sum-lbl">POLICY BYPASSES OUTSIDE IC EXCEPTION</div>
+        <div class="sum-val">0</div>
+        <div class="sum-note">since inception</div>
+      </div>
+      <div>
+        <div class="sum-lbl">TRADER-STATUS FACTS, TRAILING 12 MO.</div>
+        <div class="sum-val" data-count="243" data-dec="0">0</div>
+        <div class="sum-note">trading days · mean holding period 9.4 d</div>
+      </div>
+    </div>
+    <table class="det">
+      <tbody id="alphaDet"></tbody>
+    </table>
+  </section>
+
+  <!-- ITEM 2 -->
+  <section class="item" id="i2">
+    <div class="item-head"><h2><b>ITEM 2.</b>&nbsp;&nbsp;HOUSEHOLD TAX STATE REGISTER — 47 SYNCED, 7 SHOWN</h2><span class="xref">CROSS-REF: PLAN v2 §2.1 · SCHEDULE SC-1</span></div>
+    <div class="table-scroll wide">
+    <table>
+      <thead><tr>
+        <th class="mono">ACCOUNT</th><th class="mono">STATE</th>
+        <th class="mono r">HEADROOM<sup>4</sup></th>
+        <th class="mono">ANNUAL LOSS BUDGET, CONSUMED</th>
+        <th class="mono r">CAPTURE<sup>6</sup></th><th class="mono">DISPOSITION</th>
+      </tr></thead>
+      <tbody id="hhreg"></tbody>
+    </table>
+    </div>
+    <p style="font-family:var(--mono);font-size:10px;margin-top:12px;color:var(--ink-3)">CLICK ANY ACCOUNT TO OPEN ITS WORKPAPER — THE INPUTS AND VALUATION BEHIND EVERY FIGURE ON ITS LINE. REGISTER VALUES ARE COMPUTED FROM WORKPAPER INPUTS, NOT RECORDED.</p>
+  </section>
+
+  <!-- ITEM 2A -->
+  <section class="item" id="i2a">
+    <div class="item-head"><h2><b>ITEM 2A.</b>&nbsp;&nbsp;NOL CARRYFORWARD SUB-REGISTER — ATTRIBUTES IN DEFERRAL</h2><span class="xref">COMPUTED THIS SESSION · §172 / §461(l)(2)</span></div>
+    <div class="table-scroll xwide">
+    <table>
+      <thead><tr>
+        <th class="mono">ACCOUNT</th><th class="mono">ORIGIN</th>
+        <th class="mono r">OPENING NOL</th><th class="mono r">ABSORBED 2026<sup>5</sup></th>
+        <th class="mono r">CLOSING</th><th class="mono">PROJECTED DRAIN → EXHAUSTION</th>
+        <th class="mono r">PV HAIRCUT @6%</th>
+      </tr></thead>
+      <tbody id="nolreg"></tbody>
+    </table>
+    </div>
+    <p id="nolsum" style="font-family:var(--mono);font-size:10.5px;margin-top:14px;color:var(--ink-3)"></p>
+    <p style="font-family:var(--mono);font-size:10px;margin-top:8px;color:var(--ink-3)">CLICK ANY DEFERRED ATTRIBUTE TO OPEN ITS SOURCE WORKPAPER — ITEM 2 TRACE, IMPORT ORIGIN, ABSORPTION CAP, AND PV HAIRCUT.</p>
+  </section>
+
+  <!-- ITEM 3 -->
+  <section class="item" id="i3">
+    <div class="item-head"><h2><b>ITEM 3.</b>&nbsp;&nbsp;POLICY REGISTER — RULES IN FORCE THIS SESSION</h2><span class="xref">CROSS-REF: PLAN v2 §2.2</span></div>
+    <!-- PRODUCTION NOTE — implement `npc_accrual_match_gate` from
+       dashboard/NPC_ACCRUAL_MATCH_GUARDRAIL_PLAN.md before any Phase B NPC
+       ordinary-loss attribute reaches household valuation. This is an evidence
+       gate fed by fund admin/tax counsel packages; it must not select securities,
+       pairs, short exits, counterparties, or trade timing. Missing support fails
+       closed to the admin/counsel queue and contributes zero to usable tax value. -->
+    <div class="table-scroll xwide">
+    <table>
+      <thead><tr>
+        <th class="mono">AUTHORITY</th><th class="mono">RULE</th><th class="mono">VER.</th>
+        <th class="mono r">SCREENED</th><th class="mono r">BLOCKED</th><th class="mono r">SUBSTITUTED</th><th class="mono r">TO QUEUE</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="mono">§1091</td><td>Wash sales, enforced across all household accounts</td><td class="mono">3.2</td><td class="mono r">1,204</td><td class="mono r">14</td><td class="mono r">12</td><td class="mono r">—</td></tr>
+        <tr><td class="mono">§1092</td><td>Straddle identification and tagging at order time</td><td class="mono">2.9</td><td class="mono r">1,204</td><td class="mono r">6</td><td class="mono r">—</td><td class="mono r">—</td></tr>
+        <tr><td class="mono">§1259</td><td>Constructive sales against appreciated household positions</td><td class="mono">1.4</td><td class="mono r">311</td><td class="mono r">2</td><td class="mono r">—</td><td class="mono r">—</td></tr>
+        <tr><td class="mono">§446</td><td>NPC payment character and timing, per leg</td><td class="mono">4.0</td><td class="mono r">89</td><td class="mono r">—</td><td class="mono r">—</td><td class="mono r">—</td></tr>
+        <tr><td class="mono red">§446 / N.02-35</td><td>NPC accrual-match gate; no deduction without offsetting accrual support</td><td class="mono">4.1</td><td class="mono r">89</td><td class="mono r">—</td><td class="mono r">—</td><td class="mono r red">1</td></tr>
+        <tr><td class="mono">§162</td><td>Trader-status facts monitor (frequency, continuity)</td><td class="mono">2.1</td><td class="mono r">daily</td><td class="mono r">—</td><td class="mono r">—</td><td class="mono r">—</td></tr>
+        <tr><td class="mono red">§461(l)</td><td>Per-household ordinary-loss throttle</td><td class="mono">3.7</td><td class="mono r">1,204</td><td class="mono r red">14</td><td class="mono r">—</td><td class="mono r red">1</td></tr>
+        <tr><td class="mono">N. 2015-73</td><td>Listed-transaction perimeter; new instruments to counsel</td><td class="mono">1.1</td><td class="mono r">3</td><td class="mono r red">1</td><td class="mono r">—</td><td class="mono r red">1</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- ITEM 4 -->
+  <section class="item" id="i4">
+    <div class="item-head"><h2><b>ITEM 4.</b>&nbsp;&nbsp;EXECUTION BLOTTER — STRAIGHT-THROUGH 99.8%, APPENDING</h2><span class="xref">CROSS-REF: PLAN v2 §2.3</span></div>
+    <table class="blotter"><tbody id="blot">
+      <tr><td>14:31:07</td><td class="act">SELL</td><td>2,400 XLE proxy basket · HH-0112<small>harvest ST loss 18.2K · replacement security substituted, §1091 window clear</small></td><td class="r">r.3.2 / QLS-12</td></tr>
+      <tr><td>14:29:44</td><td class="act">BUY</td><td>NPC pay-leg reset · sleeve B<small>quality L/S signal Δ +0.8σ · pre-tax rationale logged</small></td><td class="r">r.4.0 / QLS-12</td></tr>
+      <tr><td>14:28:03</td><td class="act block">HOLD</td><td>NPC ordinary-loss attribution · sleeve B<small>pending admin package tying current deduction to offsetting accrual / approved accounting method</small></td><td class="r">r.4.1 / accrual</td></tr>
+      <tr><td>14:26:12</td><td class="act block">BLOCK</td><td>840 MRV·A · HH-0290<small>§461(l) budget exhausted — loss-crystallizing order suppressed</small></td><td class="r">r.3.7 / throttle</td></tr>
+      <tr><td>14:22:58</td><td class="act">SWAP</td><td>Trend roll Z6→H7 futures · TREND-02<small>momentum persistence · CPO exemption 4.13(a)(3) noted</small></td><td class="r">r.2.1 / TRD-02</td></tr>
+      <tr><td>14:19:31</td><td class="act">SELL</td><td>1,150 KRE basket · HH-0175<small>harvest ST loss 9.7K · straddle check clean, §1092</small></td><td class="r">r.2.9 / QLS-12</td></tr>
+      <tr><td>14:11:47</td><td class="act block">BLOCK</td><td>Dividend swap · TREND-02<small>new NPC subtype — held at listed-transaction perimeter, routed to counsel</small></td><td class="r">r.1.1 / perim</td></tr>
+    </tbody></table>
+  </section>
+
+  <!-- ITEM 5 -->
+  <section class="item" id="i5">
+    <div class="item-head"><h2><b>ITEM 5.</b>&nbsp;&nbsp;ATTRIBUTION ACCOUNT — YTD, % OF CAPITAL</h2><span class="xref">§461(l)-ADJUSTED · PLAN v2 §2.4</span></div>
+    <div class="table-scroll account">
+    <table class="acct">
+      <tbody>
+        <tr><td class="desc">Pre-tax economic return, all sleeves</td><td class="dots"></td><td class="mono r">8.10</td></tr>
+        <tr><td class="desc">Management and performance fees</td><td class="dots"></td><td class="mono r"><span class="neg">1.60</span></td></tr>
+        <tr><td class="desc">Financing, borrow, and swap spreads</td><td class="dots"></td><td class="mono r"><span class="neg">0.90</span></td></tr>
+        <tr class="sub"><td class="desc">Net economic return</td><td></td><td class="mono r">5.60</td></tr>
+        <tr><td class="desc">Tax attributes generated, valued at household rates</td><td class="dots"></td><td class="mono r">4.20</td></tr>
+        <tr><td class="desc">Less: attributes pending NPC accrual-match support</td><td class="dots"></td><td class="mono r">—</td></tr>
+        <tr><td class="desc">Less: attributes stranded by §461(l) caps (2 households)</td><td class="dots"></td><td class="mono r"><span class="neg">0.40</span></td></tr>
+        <tr class="tot"><td class="desc">Net after-tax return to households, as delivered</td><td></td><td class="mono r">9.40</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="redline-note" style="font-family:var(--mono);font-size:10.5px;margin-top:14px;color:var(--ink-3)">THE GENERATED / ACCOUNTING-SUPPORTED / HOUSEHOLD-USABLE GAP IS REPORTED TO THE IC MONTHLY AND TO EACH AFFECTED HOUSEHOLD'S ADVISER AT OCCURRENCE.</p>
+  </section>
+
+  <!-- ITEM 6 -->
+  <section class="item" id="i6">
+    <div class="item-head"><h2><b>ITEM 6.</b>&nbsp;&nbsp;EXCEPTIONS REQUIRING ADVISER INITIALS — 3 OPEN</h2><span class="xref">HUMAN ACTION REQUIRED</span></div>
+
+    <div class="exception">
+      <div class="mark">✗</div>
+      <div>
+        <h3>TAX-IMPACT OUTLIER <span>LOGGED 14:07 ET</span></h3>
+        <p>HH-0347: proposed NPC payment-leg reset crystallizes an $84,000 ordinary deduction with the household at 88% of its §461(l) budget. Engine memorandum recommends deferral to January or sleeve-size reduction. Signal rationale on file (QLS rebalance, model v12).</p>
+        <div class="memo"><a>APPROVE REROUTE</a><a>DEFER TO JANUARY</a><a>READ MEMORANDUM →</a></div>
+      </div>
+      <div class="initials"><span>ADVISER INITIALS / DATE</span></div>
+    </div>
+
+    <div class="exception">
+      <div class="mark">✗</div>
+      <div>
+        <h3>NEW INSTRUMENT TYPE <span>LOGGED 11:52 ET</span></h3>
+        <p>Sub-adviser TREND-02 proposes a dividend swap, a notional-principal-contract subtype not previously approved. Held at the listed-transaction perimeter pending counsel sign-off; no order was generated.</p>
+        <div class="memo"><a>ROUTE TO COUNSEL</a><a>REJECT</a></div>
+      </div>
+      <div class="initials"><span>ADVISER INITIALS / DATE</span></div>
+    </div>
+
+    <div class="exception">
+      <div class="mark">✗</div>
+      <div>
+        <h3>ACCRUAL SUPPORT REQUIRED <span>LOGGED 10:38 ET</span></h3>
+        <p>Sleeve B ordinary-loss package is held outside household usable-value calculations until fund admin and tax counsel confirm matched deduction/accrual treatment or approved mark-to-market/amortization. No portfolio action is requested; this is an accounting-evidence gate.</p>
+        <div class="memo"><a>ROUTE TO FUND ADMIN</a><a>ROUTE TO TAX COUNSEL</a><a>READ GATE SPEC →</a></div>
+      </div>
+      <div class="initials"><span>ADMIN / COUNSEL INITIALS</span></div>
+    </div>
+
+    <p class="redline-note">Standing red-line: tax benefits account for <span class="fig">39%</span> of client outcome against an IC ceiling of 50%. Economic alpha leads, as required. The program remains an investment operation that is tax-intelligent — not the reverse.</p>
+  </section>
+
+  <!-- ITEM 7 -->
+  <section class="item" id="i7">
+    <div class="item-head"><h2><b>ITEM 7.</b>&nbsp;&nbsp;PHASE RECORD</h2><span class="xref">CROSS-REF: PLAN v2 §8</span></div>
+    <table class="phases">
+      <tbody>
+        <tr><td>PHASE 0</td><td class="tick done mono"></td><td>Economics underwritten; usable after-everything alpha confirmed on ten households</td><td class="mono r">CLOSED MAR 2026</td></tr>
+        <tr><td>PHASE 1</td><td class="tick done mono"></td><td>Layer built; simulated and modeled tax outcomes reconciled in paper trading</td><td class="mono r">CLOSED</td></tr>
+        <tr><td>PHASE 2</td><td class="tick done mono"></td><td>Insider capital; realized capture 0.93 against model through year-end cycle</td><td class="mono r">CLOSED</td></tr>
+        <tr class="cur"><td>PHASE 3</td><td class="tick live mono"></td><td>Client SMAs live under allocation caps; trader-fund LP in formation</td><td class="mono r">OPEN</td></tr>
+        <tr><td>PHASE 4</td><td class="tick mono"></td><td>Trader-fund launch to qualified purchasers, subscriptions sized to §461(l) budgets</td><td class="mono r">GATED</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FOOTNOTES -->
+  <hr class="hair" style="margin-top:26px">
+  <div class="footnotes">
+    <p><sup>1</sup>Reference strategy: AQR TA Delphi Plus, per Bloomberg reporting of 22 Nov 2024; ordinary losses of 31% of invested capital and a 12.2% pre-tax return in 2023.</p>
+    <p><sup>2</sup>§461(l) limits excess business losses for noncorporate taxpayers (indexed; $256,000 single / $512,000 joint for tax years beginning in 2026). Amounts above the cap convert to NOL carryforwards.</p>
+    <p><sup>3</sup>Trader-status determination is a facts-and-circumstances test. This record is generated as evidence of frequency, continuity, and regularity, with per-order non-tax rationale, in support of that determination and of economic-substance requirements.</p>
+    <p><sup>4</sup>Headroom equals the household's business income available for netting plus the §461(l) allowance: business losses offset business income without limitation before the cap applies to non-business income. Loss budgets are additionally floored at the 32% marginal bracket so deductions are not burned down into low-rate income. Deductions reduce income tax only; Medicare surtaxes on wages are unaffected. Worked computations at Schedule SC-1.</p>
+    <p><sup>5</sup>Item 2A absorption is computed, not recorded: current-year losses (capped under §461(l)) reduce taxable income first; the NOL deduction then absorbs up to 80% of the remainder per §172(a)(2), is not re-tested under §461(l), and carries forward indefinitely. Projections assume level household income and current ruleset. The PV haircut discounts projected tax savings at 6% against the face value of an immediate deduction — the price of deferral, reported rather than hidden.</p>
+    <p><sup>6</sup>Capture is computed, not recorded: click any Item 2 account to open its workpaper. Value delivered = federal savings valued through marginal bracket bands (MFJ approximation) + state savings limited by conformity + present value at 6% of any excess routed through the Item 2A drain engine. Potential = attributes generated × the household's full combined top rate. Capture is their ratio; a ratio below one is value delayed or degraded, not destroyed, and the workpaper shows which.</p>
+  </div>
+
+  <!-- ATTESTATION -->
+  <hr class="dbl" style="margin-top:34px">
+  <div class="attest">
+    <p class="decl">Machine-attested: every figure in this record is bound to an order-level evidence entry in the store cited above. No figure herein is computed outside the versioned ruleset. Simulated data; concept document only — not an offer of securities.</p>
+    <div class="sig">
+      <span class="hand">PAX Engine</span><br>
+      SYSTEMATIC EXECUTION AGENT OF RECORD<br>
+      COUNTERSIGN: ______________ , CIO
+    </div>
+  </div>
+
+  <div class="pageno"><span>PA PARTNERS · CONFIDENTIAL</span><span>PAGE 1 OF 1 · RECORD Nº 0187</span></div>
+</div>
+
+<script>
+/* live clock in masthead */
+const clock=document.getElementById('clock');
+setInterval(()=>{clock.textContent=new Date().toTimeString().slice(0,8)},1000);
+
+/* ---------- Item 2: household register + workpapers ----------
+   Every register figure is computed from the workpaper inputs below.
+   Valuation: federal savings are bracket-band valued (marginal-band
+   approximation, MFJ); state savings = used × state rate × conformity;
+   excess losses are PV'd through the Item 2A drain engine at 6%.
+   capture = value delivered ÷ (attributes generated × full combined rate). */
+const DISC=0.06, BASE_YEAR=2026;
+const fmt=n=>Math.round(n).toLocaleString('en-US');
+const pct=n=>(n*100).toFixed(2)+'%';
+const FED_BANDS=[[24800,.10],[100800,.12],[211400,.22],[403550,.24],[512450,.32],[768700,.35],[Infinity,.37]];
+function fedTax(x){let t=0,lo=0;for(const[hi,r]of FED_BANDS){if(x<=lo)break;t+=(Math.min(x,hi)-lo)*r;lo=hi;}return t;}
+const LOSS_RATE=.30, FEE_RATE=.034, ALLOWANCE=512000, FLOOR=403550;
+const NET_ECONOMIC_RETURN=.056, DIRECT_INDEX_BENCHMARK=.1591;
+/* PRODUCTION NOTE — this prototype assumes generated NPC ordinary losses are already
+   tax-accounting supported. Production must insert the `npc_accrual_match_gate`
+   before `gen` is computed from fund attributes. If the fund/admin package is
+   pending or failed, put the amount in an unsupported bucket and exclude it from
+   `used`, `fedNow`, `stNow`, `nolPV`, and `capture`. Do not infer support from
+   trade text; require fund admin/tax counsel evidence per
+   dashboard/NPC_ACCRUAL_MATCH_GUARDRAIL_PLAN.md. */
+/* PRODUCTION NOTE — state conformity (`cf`) is a scalar stand-in and `sr` a flat top rate.
+   Do NOT extend these. Production replaces both with the versioned per-state, per-provision
+   rules matrix specified in dashboard/STATE_RULES_SPEC.md, fed by the client intake flow
+   (household state + residency dates); the factor becomes a derived output, and an unknown
+   state or provision fails closed to the advisor queue. HH-0403's cf=.5 is a residency-timing
+   proxy, not conformity — production separates the two per the spec. */
+const hhBook=[
+  {id:'HH-0112', nm:'K.R.',       st:'TX',    sr:0,     cf:1,   w2:4000000, biz:0,       sub:1715000, prior:0,      note:''},
+  {id:'HH-0347', nm:'M.&L.T.',    st:'CA',    sr:.103,  cf:.55, w2:1600000, biz:0,       sub:612000,  prior:246000, note:'watch'},
+  {id:'HH-0058', nm:'D.P.',       st:'FL',    sr:0,     cf:1,   w2:1900000, biz:250000,  sub:900000,  prior:0,      note:''},
+  {id:'HH-0290', nm:'S.F. Trust', st:'NY',    sr:.0685, cf:.5,  w2:0, biz:0, inc:480000, sub:0, prior:0, carry:1410000, note:'halted'},
+  {id:'HH-0175', nm:'A.&J.W.',    st:'PA',    sr:.0307, cf:.8,  w2:1500000, biz:0,       sub:750000,  prior:0,      note:''},
+  {id:'HH-0403', nm:'R.B.',       st:'NJ→FL', sr:.1075, cf:.5,  w2:2400000, biz:0,       sub:1100000, prior:0,      note:'drift'},
+  {id:'HH-0521', nm:'B.&C.M.',    st:'NY',    sr:.0685, cf:1,   w2:1000000, biz:2000000, sub:6000000, prior:0,      note:'k1'},
+];
+function valueHousehold(h){
+  const income=h.inc??(h.w2+h.biz);
+  const headroom=h.biz+ALLOWANCE;
+  const budget=Math.min(headroom,Math.max(income-FLOOR,0));
+  if(h.carry){ // halted: no new generation; capture prices the carried NOL
+    const sched=drainSchedule({opening:h.carry,income,curUse:0});
+    const pvf=sched.rows.reduce((s,r,i)=>s+r.abs/Math.pow(1+DISC,i),0)/h.carry;
+    const legacyValue=h.carry*pvf*(.37+h.sr*h.cf);
+    const cap=(pvf*(.37+h.sr*h.cf))/(.37+h.sr);
+    return {income,headroom:0,budget,gen:0,used:0,excess:0,fedNow:0,stNow:0,nolPV:0,
+            currentValue:0,deferredValue:0,legacyValue,delivered:legacyValue,
+            potential:h.carry*(.37+h.sr),capture:cap,pct:100,pvf};
+  }
+  const gen=Math.round(h.sub*(LOSS_RATE+FEE_RATE));
+  const remaining=Math.max(budget-h.prior,0);
+  const used=Math.min(gen,remaining);
+  const excess=gen-used;
+  const fedNow=fedTax(income)-fedTax(income-used);
+  const stNow=used*h.sr*h.cf;
+  let nolPV=0,pvf=0;
+  if(excess>0){
+    const sched=drainSchedule({opening:excess,income,curUse:used});
+    pvf=sched.rows.reduce((s,r,i)=>s+r.abs/Math.pow(1+DISC,i+1),0)/excess;
+    nolPV=excess*(.37+h.sr*h.cf)*pvf;
+  }
+  const potential=gen*(.37+h.sr);
+  const currentValue=fedNow+stNow;
+  const delivered=currentValue+nolPV;
+  return {income,headroom,budget,gen,used,excess,fedNow,stNow,nolPV,potential,
+          currentValue,deferredValue:nolPV,legacyValue:0,delivered,
+          capture:delivered/potential,pct:Math.min(Math.round((h.prior+used)/budget*100),100),pvf};
+}
+const capFmt=c=>(Math.floor(c*100)/100).toFixed(2); /* truncated, not rounded — conservatism */
+function wpHTML(h,v){
+  const L=(a,b,ind)=>`<div class="wp-line${ind?' indent':''}"><span>${a}</span><span>${b}</span></div>`;
+  let s=`<div class="wp-sheet"><h4><b>WORKPAPER ${h.id}</b> · ${h.nm} — CAPTURE DERIVATION · SIMULATED INPUTS</h4>`;
+  s+=L('W-2 / BUSINESS (K-1) INCOME',`${fmt(h.w2??0)} / ${fmt(h.biz??0)}${h.inc?` · TRUST INCOME ${fmt(h.inc)}`:''}`);
+  s+=L(`STATE ${h.st} — RATE / CONFORMITY`,`${(h.sr*100).toFixed(2)}% / ${(h.cf*100).toFixed(0)}%`);
+  if(h.carry){
+    s+=L('CARRIED NOL (NO NEW GENERATION — HALTED)',fmt(h.carry));
+    s+=L('PV FACTOR OF DRAIN, PER ITEM 2A @6%',v.pvf.toFixed(3),1);
+    s+=L('POTENTIAL AT FULL COMBINED RATE',fmt(v.potential),1);
+    s+=`<div class="wp-total"><span>CAPTURE = PV-WEIGHTED VALUE ÷ POTENTIAL</span><span>${capFmt(v.capture)}</span></div>`;
+    s+=`<div class="wp-note">✗ GENERATION HALTED UNTIL CARRYFORWARD DRAINS — SEE ITEM 2A SCHEDULE.</div>`;
+    return s+'</div>';
+  }
+  s+=L('SUBSCRIPTION · PRIOR YTD BUDGET USE',`${fmt(h.sub)} · ${fmt(h.prior)}`);
+  s+=L('HEADROOM = BUSINESS INCOME + §461(l) ALLOWANCE',`${fmt(h.biz)} + ${fmt(ALLOWANCE)} = ${fmt(v.headroom)}`);
+  s+=L('BUDGET AFTER 32%-BRACKET RATE FLOOR',fmt(v.budget),1);
+  s+=L(`GENERATED = NPC LOSSES ${(LOSS_RATE*100)}% + FEE DEDUCTIONS`,fmt(v.gen));
+  s+=L('— USED CURRENTLY',fmt(v.used),1);
+  s+=L('— EXCESS TO NOL',v.excess?fmt(v.excess):'—',1);
+  s+=L('POTENTIAL = GENERATED × FULL COMBINED RATE',fmt(Math.round(v.potential)));
+  s+=L('FEDERAL DELIVERED, BRACKET-BAND VALUED',fmt(Math.round(v.fedNow)),1);
+  s+=L('STATE DELIVERED, CONFORMITY-LIMITED',v.stNow?fmt(Math.round(v.stNow)):'—',1);
+  s+=L(`NOL PRESENT VALUE @6%${v.excess?` (FACTOR ${v.pvf.toFixed(3)})`:''}`,v.nolPV?fmt(Math.round(v.nolPV)):'—',1);
+  const delivered=v.fedNow+v.stNow+v.nolPV;
+  s+=`<div class="wp-total"><span>CAPTURE = ${fmt(Math.round(delivered))} ÷ ${fmt(Math.round(v.potential))}</span><span>${capFmt(v.capture)}</span></div>`;
+  if(h.note==='watch')s+=`<div class="wp-note">✗ §461(l) WATCHLIST AT ${v.pct}% OF BUDGET — NEW ORDINARY-LOSS ORDERS ROUTE TO ADVISER QUEUE BEFORE CONSUMING REMAINING HEADROOM.</div>`;
+  if(h.note==='throttled')s+=`<div class="wp-note">✗ §461(l) THROTTLE ACTIVE AT ${v.pct}% OF BUDGET — LOSS-CRYSTALLIZING ORDERS SUPPRESSED ABOVE REMAINING HEADROOM.</div>`;
+  if(h.note==='drift')s+=`<div class="wp-note">✗ RESIDENCY DRIFT ${h.st}: STATE LAYER RE-PRICED AT 50% CONFORMITY PENDING DOMICILE CONFIRMATION.</div>`;
+  return s+'</div>';
+}
+(function renderHH(){
+  const tb=document.getElementById('hhreg');
+  hhBook.forEach(h=>{
+    const v=valueHousehold(h);
+    const warn=v.pct>=85?' warn':'';
+    const disp=h.carry?`<span class="red">halted — NOL c/f, <a href="#i2a" style="color:var(--red)">see 2A</a></span>`
+      :h.note==='watch'?`<span class="red">watchlist — ${v.pct}% of budget</span>`
+      :h.note==='throttled'?`<span class="red">throttled — ${v.pct}% of budget</span>`
+      :h.note==='drift'?`<span class="red">residency drift — re-priced</span>`
+      :h.note==='k1'?'on plan — K-1 netting, uncapped':'on plan';
+    tb.insertAdjacentHTML('beforeend',
+      `<tr class="hh-row"><td class="mono"><span class="car">▶</span>${h.id} · ${h.nm}</td><td class="mono">${h.st}</td>
+       <td class="mono r${v.headroom?'':' red'}">${v.headroom?fmt(v.headroom):'0'}</td>
+       <td><span class="budget${warn}" data-pct="${v.pct}"></span></td>
+       <td class="mono r">${capFmt(v.capture)}</td><td class="mono">${disp}</td></tr>
+       <tr class="wp"><td colspan="6">${wpHTML(h,v)}</td></tr>`);
+  });
+  tb.addEventListener('click',e=>{
+    const row=e.target.closest('tr.hh-row'); if(!row||e.target.closest('a'))return;
+    row.classList.toggle('open'); row.nextElementSibling.classList.toggle('open');
+  });
+})();
+
+/* typographic budget bars: ▮ used / ▯ free — set in ink, not pixels */
+document.querySelectorAll('.budget').forEach(el=>{
+  const pct=+el.dataset.pct, cells=20, used=Math.round(pct/100*cells);
+  el.innerHTML=`<span class="used">${'▮'.repeat(used)}</span><span class="free">${'▯'.repeat(cells-used)}</span> <span style="color:var(--ink-3)">${pct}%</span>`;
+});
+
+/* ---------- Item 2A: NOL carryforward engine ----------
+   Per household: current-year losses (capped) reduce taxable income first;
+   the NOL then absorbs up to 80% of the remainder (§172(a)(2)), is never
+   re-tested under §461(l), and carries forward indefinitely. Haircut is
+   1 − PV(projected tax savings @6%) ÷ face value of immediate deduction. */
+const NOL_RATE=0.37;
+const nolBook=[
+  {acct:'HH-0112 · K.R.',      origin:'SIZING TOLERANCE — 2026 SPILLOVER', opening:  61000, income:4000000, curUse:512000, bucket:'current-deferred',
+   source:'TRACES TO ITEM 2: GENERATED 572,810; USED 512,000; ROUNDED EXCESS ENTERS ITEM 2A.',
+   control:'DOCUMENTED SIZING TOLERANCE — NO POLICY BYPASS; FUTURE GENERATION REMAINS THROTTLED BY ITEM 2 BUDGET.'},
+  {acct:'HH-0290 · S.F. Trust',origin:'EXCESS BUSINESS LOSS — 2024/25',    opening:1410000, income: 480000, curUse:     0, bucket:'legacy-carry',
+   source:'TRACES TO ITEM 2 HALTED WORKPAPER: IMPORTED 2024/25 EBL CARRYFORWARD; NO NEW 2026 GENERATION.',
+   control:'GENERATION HALTED UNTIL CARRYFORWARD DRAINS; ITEM 2 HEADROOM DISPLAYED AS ZERO FOR ACTIVE SIZING.'},
+  {acct:'HH-0088 · T.&V.D.',   origin:'LEGACY — PRIOR-ADVISER OVERSIZING', opening:2828000, income:4000000, curUse:512000, bucket:'legacy-carry',
+   source:'LEGACY IMPORT ONLY: NOT SHOWN IN ACTIVE ITEM 2 REGISTER BECAUSE THE BALANCE PRE-DATES ENGINE SIZING.',
+   control:'NO NEW ORDINARY-LOSS ROUTING FROM THIS LEGACY BALANCE; TRACKED HERE SO DEFERRED VALUE AND HAIRCUT STAY AUDITABLE.'},
+];
+function drainSchedule(h){
+  const rows=[]; let bal=h.opening, y=BASE_YEAR;
+  while(bal>0 && y<BASE_YEAR+20){
+    const cap=0.8*Math.max(h.income-h.curUse,0);
+    if(cap<=0)break;
+    const abs=Math.min(bal,cap);
+    rows.push({y,abs}); bal-=abs; y++;
+  }
+  return {rows,stranded:bal};
+}
+function pvHaircut(sched,opening){
+  const face=opening*NOL_RATE;
+  const pv=sched.rows.reduce((s,r,i)=>s+r.abs*NOL_RATE/Math.pow(1+DISC,i),0);
+  return face>0?1-pv/face:0;
+}
+function nolWPHTML(h,sched,hair,yr1,closing,cap80){
+  const L=(a,b,ind,wrap)=>`<div class="wp-line${ind?' indent':''}${wrap?' wrap':''}"><span>${a}</span><span>${b}</span></div>`;
+  const face=h.opening*NOL_RATE;
+  const pv=sched.rows.reduce((s,r,i)=>s+r.abs*NOL_RATE/Math.pow(1+DISC,i),0);
+  const future=sched.rows.slice(1);
+  const exhaust=sched.rows.length?sched.rows[sched.rows.length-1].y:'—';
+  const drain=future.length
+    ? future.map(r=>`${r.y} ${fmt(r.abs)}`).join(' · ')+` → EXHAUSTED ${exhaust}`
+    : `EXHAUSTED ${exhaust}`;
+  let s=`<div class="wp-sheet"><h4><b>WORKPAPER ${h.acct.split(' · ')[0]}</b> · NOL SOURCE AND DRAIN · SIMULATED INPUTS</h4>`;
+  s+=L('SOURCE / USE CASE',h.source,0,1);
+  s+=L('CONTROL DISPOSITION',h.control,0,1);
+  s+=L('OPENING NOL',fmt(h.opening));
+  s+=L('MODELED INCOME · CURRENT-YEAR LOSS USE',`${fmt(h.income)} · ${fmt(h.curUse)}`);
+  s+=L('§172 ABSORPTION CAP = 80% × POST-CURRENT-LOSS INCOME',`80% × ${fmt(Math.max(h.income-h.curUse,0))} = ${fmt(cap80)}`,1);
+  s+=L('ABSORBED 2026 · CLOSING NOL',`${fmt(yr1.abs)} · ${closing>0?fmt(closing):'—'}`,1);
+  s+=L('PROJECTED FUTURE DRAIN',drain,1,1);
+  s+=L('FACE FEDERAL VALUE @37%',fmt(Math.round(face)));
+  s+=L('PV FEDERAL VALUE @6%',fmt(Math.round(pv)),1);
+  s+=`<div class="wp-total"><span>PV HAIRCUT = 1 − PV ÷ FACE</span><span>${hair<0.001?'&lt;0.1%':(hair*100).toFixed(1)+'%'}</span></div>`;
+  return s+'</div>';
+}
+(function renderNOL(){
+  const tb=document.getElementById('nolreg');
+  let totOpen=0, totClose=0, wHair=0, currentOpen=0, legacyOpen=0;
+  nolBook.forEach(h=>{
+    const sched=drainSchedule(h);
+    const yr1=sched.rows[0]||{abs:0};
+    const closing=h.opening-yr1.abs;
+    const future=sched.rows.slice(1);
+    const exhaust=sched.rows.length?sched.rows[sched.rows.length-1].y:'—';
+    const hair=pvHaircut(sched,h.opening);
+    totOpen+=h.opening; totClose+=closing; wHair+=hair*h.opening;
+    if(h.bucket==='current-deferred') currentOpen+=h.opening;
+    if(h.bucket==='legacy-carry') legacyOpen+=h.opening;
+    const drainTxt=future.length
+      ? future.map(r=>`${r.y} ${fmt(r.abs)}`).join(' · ')+` → <b>EXHAUSTED ${exhaust}</b>`
+      : `<b>EXHAUSTED ${exhaust}</b>`;
+    const cap80=0.8*Math.max(h.income-h.curUse,0);
+    const hairTxt=hair<0.001?'&lt;0.1%':(hair*100).toFixed(1)+'%';
+    tb.insertAdjacentHTML('beforeend',
+      `<tr class="nol-row">
+        <td class="mono"><span class="car">▶</span>${h.acct}</td>
+        <td class="mono" style="font-size:10px;color:var(--ink-3)">${h.origin}</td>
+        <td class="mono r">${fmt(h.opening)}</td>
+        <td class="mono r">${fmt(yr1.abs)}<small style="display:block;font-size:9px;color:var(--ink-3)">80% CAP ${fmt(cap80)}</small></td>
+        <td class="mono r">${closing>0?fmt(closing):'—'}</td>
+        <td class="mono" style="font-size:10px;line-height:1.8">${drainTxt}</td>
+        <td class="mono r ${hair>=0.05?'red':''}">${hairTxt}</td>
+      </tr>
+      <tr class="wp"><td colspan="7">${nolWPHTML(h,sched,hair,yr1,closing,cap80)}</td></tr>`);
+  });
+  tb.addEventListener('click',e=>{
+    const row=e.target.closest('tr.nol-row'); if(!row)return;
+    row.classList.toggle('open'); row.nextElementSibling.classList.toggle('open');
+  });
+  document.getElementById('nolsum').innerHTML=
+    `AGGREGATE DEFERRED ATTRIBUTES: OPENING ${fmt(totOpen)} → CLOSING ${fmt(totClose)} · `+
+    `OPENING RECONCILES TO ${fmt(currentOpen)} CURRENT-YEAR SPILLOVER + ${fmt(legacyOpen)} LEGACY/IMPORTED · `+
+    `CAPITAL-WEIGHTED PV HAIRCUT ${(wHair/totOpen*100).toFixed(1)}% · `+
+    `NO BALANCE REFLECTS AN UNAPPROVED POLICY BYPASS.`;
+})();
+
+/* ---------- Item 1 determinant bridge ----------
+   Item 1 counts only current-year value from newly generated losses.
+   Current-year excess is bifurcated into Item 2A, and legacy/imported
+   carryforwards are shown for audit context but excluded from YTD alpha. */
+function item1Model(){
+  const m={capital:0,gen:0,used:0,potential:0,currentValue:0,deferredFace:0,deferredPV:0,
+           currentDeferredRegisterFace:0,legacyFace:0,legacyAbsorbed:0,totalNolRegisterFace:0};
+  hhBook.forEach(h=>{
+    const v=valueHousehold(h);
+    if(h.carry)return;
+    m.capital+=h.sub;
+    m.gen+=v.gen;
+    m.used+=v.used;
+    m.potential+=v.potential;
+    m.currentValue+=v.currentValue;
+    m.deferredFace+=v.excess;
+    m.deferredPV+=v.deferredValue;
+  });
+  nolBook.forEach(h=>{
+    m.totalNolRegisterFace+=h.opening;
+    if(h.bucket==='current-deferred') m.currentDeferredRegisterFace+=h.opening;
+  });
+  nolBook.filter(h=>h.bucket==='legacy-carry').forEach(h=>{
+    const sched=drainSchedule(h), yr1=sched.rows[0]||{abs:0};
+    m.legacyFace+=h.opening;
+    m.legacyAbsorbed+=yr1.abs;
+  });
+  m.netEconomicValue=m.capital*NET_ECONOMIC_RETURN;
+  m.currentTaxYield=m.currentValue/m.capital;
+  m.grossAfterTax=NET_ECONOMIC_RETURN+m.currentTaxYield;
+  m.alpha=m.grossAfterTax-DIRECT_INDEX_BENCHMARK;
+  m.currentCapture=m.currentValue/m.potential;
+  return m;
+}
+function detRow(label,source,value,pctText,cls=''){
+  return `<tr class="${cls}"><td>${label}</td><td>${source}</td><td class="r">${value}</td><td class="r">${pctText}</td></tr>`;
+}
+function renderItem1(){
+  const m=item1Model();
+  document.getElementById('usableAlpha').dataset.count=(m.alpha*100).toFixed(2);
+  document.getElementById('usableAlphaNote').textContent=
+    `${pct(NET_ECONOMIC_RETURN)} net economic + ${pct(m.currentTaxYield)} Item 2 tax value − ${pct(DIRECT_INDEX_BENCHMARK)} benchmark`;
+  document.getElementById('captureRatio').dataset.count=m.currentCapture.toFixed(2);
+  document.getElementById('captureNote').textContent=
+    `${fmt(Math.round(m.currentValue))} current value ÷ ${fmt(Math.round(m.potential))} full-rate potential`;
+  document.getElementById('alphaDet').innerHTML=[
+    detRow('ACTIVE ITEM 2 CAPITAL','current-generation households only',fmt(m.capital),'basis'),
+    detRow('NET ECONOMIC RETURN, NET FEES','Item 5 input carried into Item 1',fmt(m.netEconomicValue),pct(NET_ECONOMIC_RETURN)),
+    detRow('CURRENT-YEAR USABLE TAX VALUE','Item 2 federal + state value on losses used now',fmt(m.currentValue),pct(m.currentTaxYield)),
+    detRow('DIRECT-INDEX BENCHMARK','external benchmark feed in production',`(${fmt(m.capital*DIRECT_INDEX_BENCHMARK)})`,`(${pct(DIRECT_INDEX_BENCHMARK)})`),
+    detRow('USABLE AFTER-TAX ALPHA','computed Item 1 determinant',fmt(m.capital*m.alpha),pct(m.alpha),'tot'),
+    detRow('CURRENT-YEAR EXCESS TO ITEM 2A',`current-deferred bucket; rounded from ${fmt(m.deferredFace)} computed excess`,`${fmt(m.currentDeferredRegisterFace)} face / ${fmt(m.deferredPV)} PV`,'excluded','exclude'),
+    detRow('LEGACY CARRYFORWARD DRAIN','imported or halted balances in Item 2A',`${fmt(m.legacyFace)} face / ${fmt(m.legacyAbsorbed)} absorbed 2026`,'excluded','exclude'),
+    detRow('TOTAL ITEM 2A OPENING NOL','current-year spillover + legacy/imported balances',`${fmt(m.totalNolRegisterFace)} face`,'excluded','exclude')
+  ].join('');
+}
+renderItem1();
+
+/* item 1 count-up, once, after computed values are written */
+document.querySelectorAll('.sum-val[data-count]').forEach(el=>{
+  const target=+el.dataset.count, dec=+el.dataset.dec, keep=el.querySelector('small');
+  const suffix=keep?keep.outerHTML:'';
+  const t0=performance.now(),dur=900;
+  (function tick(t){
+    const p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);
+    el.innerHTML=(target*e).toFixed(dec)+suffix;
+    if(p<1)requestAnimationFrame(tick);
+  })(t0);
+});
+
+/* blotter: append a line every ~9s, top of book */
+const blot=document.getElementById('blot');
+const synth=[
+  ['SELL','Harvest candidate lot · HH-0058','ST loss captured · §1091 window verified','r.3.2 / QLS-12'],
+  ['BUY','Replacement basket rebalance · HH-0112','tracking re-established post-harvest · TE 0.4%','r.3.2 / QLS-12'],
+  ['HOLD','NPC ordinary-loss attribution · sleeve B','pending accrual-match package · admin/counsel queue','r.4.1 / accrual'],
+  ['SELL','1,900 IWM proxy · HH-0175','harvest sized to residual budget · straddle check clean','r.2.9 / QLS-12'],
+  ['BUY','Trend add · H7 rates complex','TREND-02 momentum persistence · rationale logged','r.2.1 / TRD-02'],
+];
+let si=0;
+setInterval(()=>{
+  const[a,d,s,r]=synth[si++%synth.length];
+  const tr=document.createElement('tr');tr.className='new';
+  const actClass=a==='HOLD'?'act block':'act';
+  tr.innerHTML=`<td>${new Date().toTimeString().slice(0,8)}</td><td class="${actClass}">${a}</td><td>${d}<small>${s}</small></td><td class="r">${r}</td>`;
+  blot.prepend(tr);
+  if(blot.children.length>9)blot.lastElementChild.remove();
+},9000);
+</script>
+</body>
+</html>
