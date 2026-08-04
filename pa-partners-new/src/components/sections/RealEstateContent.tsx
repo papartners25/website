@@ -40,11 +40,11 @@ export default function RealEstateContent() {
               strategy, capital planning, partner coordination, and execution readiness.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <CTAButton href="/development-consulting" variant="primary">
-                Development Consulting
-              </CTAButton>
-              <CTAButton href="/contact" variant="secondary">
+              <CTAButton href="/contact" variant="primary">
                 Discuss a Site
+              </CTAButton>
+              <CTAButton href="/development-consulting" variant="secondary">
+                Development Consulting
               </CTAButton>
             </div>
           </div>
