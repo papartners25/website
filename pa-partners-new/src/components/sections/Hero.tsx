@@ -7,7 +7,7 @@ import CTAButton from "@/components/common/CTAButton";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[82svh] overflow-hidden pt-16 pb-14 md:pt-24 md:pb-20">
+    <section className="relative min-h-[82svh] overflow-hidden pt-12 pb-12 md:pt-14 md:pb-16">
       <CapitalStackScene />
       <div className="hero-field absolute inset-0 pointer-events-none" />
       <Container className="relative z-10 grid min-h-[68svh] items-center gap-10 lg:grid-cols-[1fr_0.78fr]">
@@ -25,12 +25,11 @@ export default function Hero() {
             className="h-24 w-auto opacity-95 md:h-32"
             priority
           />
-          <div className="mt-6 flex flex-wrap gap-2 text-[0.7rem] font-medium uppercase tracking-[0.22em] text-slate-300">
+          <div className="mt-4 flex flex-wrap gap-2 text-[0.7rem] font-medium uppercase tracking-[0.22em] text-slate-300">
             <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1">Development Consulting</span>
             <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1">Capital Stack Architecture</span>
-            <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1">Internal Development</span>
           </div>
-          <h1 className="mt-5 max-w-4xl text-4xl font-medium leading-[0.98] tracking-tight text-white md:text-6xl">
+          <h1 className="mt-3 max-w-4xl text-4xl font-medium leading-[0.98] tracking-tight text-white md:text-6xl">
             Development capital, structured with discipline.
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">
@@ -74,4 +73,3 @@ export default function Hero() {
     </section>
   );
 }
-

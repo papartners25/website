@@ -17,6 +17,18 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/:path*",
+        has: [{ type: "host", value: "frunkvault.com" }],
+        destination: "https://shop.frunkvault.com/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.frunkvault.com" }],
+        destination: "https://shop.frunkvault.com/:path*",
+        permanent: true,
+      },
+      {
         source: "/services",
         destination: "/development-consulting",
         permanent: false,
