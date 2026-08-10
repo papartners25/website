@@ -7,7 +7,7 @@ const items = [
   {
     title: "Multifamily Development",
     caption: "Internal development and repositioning work in cash-flowing residential assets.",
-    src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop",
+    src: "/portfolio/multifamily-repositioning.png",
   },
   {
     title: "Mixed-Use Planning",
@@ -42,6 +42,16 @@ export default function PortfolioGrid({ withHeader = true }: { withHeader?: bool
               <figcaption className="p-4">
                 <p className="text-sm font-medium text-white">{it.title}</p>
                 <p className="mt-1 text-xs leading-relaxed text-slate-400">{it.caption}</p>
+                {it.title === "FrunkVault" && (
+                  <a
+                    href="https://shop.frunkvault.com/?utm_source=pa_partners&utm_medium=referral&utm_campaign=frunkvault&utm_content=homepage_selected_work"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex text-xs font-medium text-amber-300 transition-colors hover:text-amber-200"
+                  >
+                    Explore FrunkVault ↗
+                  </a>
+                )}
               </figcaption>
             </figure>
           ))}
@@ -50,4 +60,3 @@ export default function PortfolioGrid({ withHeader = true }: { withHeader?: bool
     </Section>
   );
 }
-
